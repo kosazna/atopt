@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+from typing import Union
 
-def time2minutes(_time):
+
+def time2minutes(_time: str) -> int:
     h, m = map(int, _time.split(':'))
 
     if not 0 <= h <= 23:
@@ -12,10 +14,15 @@ def time2minutes(_time):
     return int(h) * 60 + int(m)
 
 
-def minutes2time(_minutes):
-    if not 0 <= _minutes <= 1440:
+def minutes2time(_minutes: Union[int, str]) -> str:
+    if isinstance(_minutes, str):
+        _mins = int(_minutes)
+    else:
+        _mins = _minutes
+
+    if not 0 <= _mins <= 1440:
         raise ValueError("Minutes since midnight should be between 0 and 1440")
 
-    if _minutes == 1440:
+    if _mins == 1440:
         return "00:00"
-    return f"{_minutes // 60:02d}:{_minutes % 60:02d}"
+    return f"{_mins // 60:02d}:{_mins % 60:02d}"
