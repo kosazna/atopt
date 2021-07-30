@@ -12,8 +12,10 @@ class InitialSolution:
     def _create_duties(self) -> list:
         _duties = []
 
-        for st, et in zip(self.data[start_time], self.data[end_time]):
-            _duties.append(Duty(st, et))
+        for st, et, td in zip(self.data[start_time],
+                          self.data[end_time],
+                          self.data[trip_duration]):
+            _duties.append(Duty(st, et, td))
 
         return _duties
 

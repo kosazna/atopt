@@ -49,15 +49,18 @@ class DataProvider:
     def _preprocess(self):
         self.data[start_time] = self.data[time].apply(time2minutes)
         self.data[trip_duration] = self.data.apply(
-            lambda x: weighted_trip_duration(x[start_time], x[trip_duration]), axis=1)
+            lambda x: weighted_trip_duration(x[start_time], x[trip_duration]),
+            axis=1)
         self.data[end_time] = self.data.apply(
-            lambda x: calculate_trip_end_time(x[start_time], x[trip_duration]), axis=1)
+            lambda x: calculate_trip_end_time(x[start_time], x[trip_duration]),
+            axis=1)
 
 
 @dataclass
 class Duty:
     start_time: int
     end_time: int
+    duration: int
 
 
 @dataclass
@@ -74,8 +77,14 @@ class Shift:
     trips: tuple = ()
 
     def __post_init__(self):
-        self.max_end_time = self.start_time + self.constraints.shift_span
+        self.max_end_time = calculate_trip_end_time(self.start_time,
+                                                    self.constraints.shift_span)
 
     def can_add_duty(self, duty: Duty) -> bool:
         if duty.start_time >= self.max_end_time or duty.end_time >= self.max_end_time:
             return False
+
+        if self.working_time + trip_duration > self.constraints.max_total_driving_time:
+            return False
+
+        
