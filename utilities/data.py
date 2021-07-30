@@ -58,6 +58,8 @@ class DataProvider:
 
 @dataclass
 class Duty:
+    start_loc: str
+    end_loc: str
     start_time: int
     end_time: int
     duration: int
@@ -74,17 +76,30 @@ class Shift:
     rest_time: int = 0
     breaks: int = 0
     break_time: int = 0
+    overnight:bool = False
     trips: tuple = ()
 
     def __post_init__(self):
         self.max_end_time = calculate_trip_end_time(self.start_time,
                                                     self.constraints.shift_span)
+        if self.max_end_time < self.start_time:
+            self.overnight = True
 
     def can_add_duty(self, duty: Duty) -> bool:
-        if duty.start_time >= self.max_end_time or duty.end_time >= self.max_end_time:
-            return False
+        try:
+            last_duty = self.trips[-1]
+        except IndexError:
+            return True
 
-        if self.working_time + trip_duration > self.constraints.max_total_driving_time:
-            return False
 
-        
+        if last_duty.end_loc == duty.start_loc:
+            if duty.start_time >= self.max_end_time or duty.end_time >= self.max_end_time:
+                return False
+
+            if self.working_time + duty.trip_duration > self.constraints.max_total_driving_time:
+                return False
+
+            if self.working_time + duty.trip_duration > self.constraints.continuous_driving_time:
+                return False
+        else:
+            return False
