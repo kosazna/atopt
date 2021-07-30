@@ -12,10 +12,13 @@ class InitialSolution:
     def _create_duties(self) -> list:
         _duties = []
 
-        for st, et, td in zip(self.data[start_time],
-                          self.data[end_time],
-                          self.data[trip_duration]):
-            _duties.append(Duty(st, et, td))
+        for row in self.data.itertuples():
+
+            _duties.append(Duty(row.initial_depot,
+                                row.final_depot,
+                                row.start_time,
+                                row.end_time,
+                                row.trip_duration))
 
         return _duties
 
