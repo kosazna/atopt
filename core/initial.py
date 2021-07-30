@@ -14,7 +14,8 @@ class InitialSolution:
 
         for row in self.data.itertuples():
 
-            _duties.append(Duty(row.initial_depot,
+            _duties.append(Duty(str(row.Index),
+                                row.initial_depot,
                                 row.final_depot,
                                 row.start_time,
                                 row.end_time,

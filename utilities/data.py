@@ -58,6 +58,7 @@ class DataProvider:
 
 @dataclass
 class Duty:
+    ID: str
     start_loc: str
     end_loc: str
     start_time: int
@@ -76,7 +77,7 @@ class Shift:
     rest_time: int = 0
     breaks: int = 0
     break_time: int = 0
-    overnight:bool = False
+    overnight: bool = False
     trips: tuple = ()
 
     def __post_init__(self):
@@ -90,7 +91,6 @@ class Shift:
             last_duty = self.trips[-1]
         except IndexError:
             return True
-
 
         if last_duty.end_loc == duty.start_loc:
             if duty.start_time >= self.max_end_time or duty.end_time >= self.max_end_time:
