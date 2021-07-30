@@ -29,5 +29,5 @@ class InitialSolution:
             try:
                 shift = self.shifts[-1]
             except IndexError:
-                shift = Shift(self.constraints, duty.start_time)
+                shift = Shift('1', self.constraints, duty.start_time)
                 continue

@@ -33,8 +33,8 @@ class Contraints:
         self.min_rest_time = self.data.loc['rest time', 'min']
         self.max_rest_time = self.data.loc['rest time', 'max']
 
-        self.min_rest_time = self.data.loc['break time', 'min']
-        self.max_rest_time = self.data.loc['break time', 'max']
+        self.min_break_time = self.data.loc['break time', 'min']
+        self.max_break_time = self.data.loc['break time', 'max']
 
         self.shift_span = self.data.loc['shift span', 'min']
 
@@ -68,6 +68,7 @@ class Duty:
 
 @dataclass
 class Shift:
+    ID: str
     constraints: Contraints
     start_time: int
     end_time: int = 0
@@ -78,7 +79,7 @@ class Shift:
     breaks: int = 0
     break_time: int = 0
     overnight: bool = False
-    trips: tuple = ()
+    trips: list = []
 
     def __post_init__(self):
         self.max_end_time = calculate_trip_end_time(self.start_time,
