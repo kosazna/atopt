@@ -6,28 +6,39 @@ class InitialSolution:
     def __init__(self, data_provider: DataProvider) -> None:
         self.data = data_provider.data
         self.constraints = data_provider.constraints
-        self.duties = self._create_duties()
-        self.shifts: list = []
+        self.trips: List[Trip] = self._create_trips()
+        self.duties: List[Duty] = []
 
-    def _create_duties(self) -> list:
+    def _create_trips(self) -> list:
         _duties = []
+
+        _min = self.data[trip_duration].min()
 
         for row in self.data.itertuples():
 
-            _duties.append(Duty(str(row.Index),
+            _duties.append(Trip(str(row.Index),
                                 row.initial_depot,
                                 row.final_depot,
                                 row.start_time,
                                 row.end_time,
-                                row.trip_duration))
+                                row.trip_duration,
+                                _min,
+                                False))
 
         return _duties
 
     def solve(self):
-        for duty in self.duties:
+        max_insertions = len(self.trips)
+        c = 0
 
-            try:
-                shift = self.shifts[-1]
-            except IndexError:
-                shift = Shift('1', self.constraints, duty.start_time)
-                continue
+        while c < max_insertions:
+            next_id = c + 1
+            duty = Duty(str(next_id), self.constraints)
+
+            for trip in self.trips:
+                if not trip.is_in_duty and duty.can_add_trip(trip):
+                    duty.add_trip(trip)
+                    trip.is_in_duty = True
+                    c += 1
+
+            self.duties.append(duty)
