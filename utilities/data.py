@@ -66,7 +66,7 @@ class Trip:
     end_time: int
     duration: int
     min_duration: int
-    is_in_duty: bool
+    is_covered: bool
 
 
 class Duty:
@@ -95,7 +95,7 @@ class Duty:
         self.overnight: bool = False
         self.trips: List[Trip] = []
 
-        self._calc_max_end_time()
+        
 
     def __repr__(self) -> str:
         trips = '-'.join([t.ID for t in self.trips])
@@ -120,15 +120,13 @@ class Duty:
         if last_trip.end_loc == trip.start_loc:
             is_driving = trip.start_time < self.end_time
             is_on_break = trip.start_time < self.available_from
-            is_shift_ended = trip.start_time > self.max_end_time
-            is_trip_beyond_shift = trip.end_time > self.max_end_time
+            is_shift_ended = trip.end_time > self.max_end_time
             is_total_maxed = _total > self.constraints.max_total_driving_time
             is_continuous_maxed = _continuous > self.constraints.continuous_driving_time
 
             return not any([is_driving,
                             is_on_break,
                             is_shift_ended,
-                            is_trip_beyond_shift,
                             is_total_maxed,
                             is_continuous_maxed])
 
@@ -151,6 +149,7 @@ class Duty:
             self.continuous_driving_time += trip.duration
             self.driving_time += trip.duration
             self.working_time += trip.duration
+            self._calc_max_end_time()
 
         _driving_until_break = self.constraints.continuous_driving_time - \
             self.continuous_driving_time
@@ -161,3 +160,25 @@ class Duty:
             self.continuous_driving_time = 0
 
         self.trips.append(trip)
+
+
+class Model:
+    def __init__(self, data_provider: DataProvider) -> None:
+        self.data = data_provider.data
+        self.constraints = data_provider.constraints
+        self.trips: List[Trip] = []
+        self.duties: List[Duty] = []
+
+    def build_model(self) -> list:
+        _min = self.data[trip_duration].min()
+
+        for row in self.data.itertuples():
+
+            self.trips.append(Trip(str(row.Index),
+                                    row.initial_depot,
+                                    row.final_depot,
+                                    row.start_time,
+                                    row.end_time,
+                                    row.trip_duration,
+                                    _min,
+                                    False))
