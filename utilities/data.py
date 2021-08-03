@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import List
 
+import numpy as np
 import pandas as pd
 
 from .funcs import (calculate_trip_end_time, time2minutes,
@@ -19,32 +22,24 @@ start_time = 'start_time'
 end_time = 'end_time'
 
 
-class Contraints:
+class Constraints:
     def __init__(self, filepath) -> None:
         self.data = pd.read_excel(filepath,
                                   sheet_name='driver constraints').set_index('constraint')
         self._init_values()
 
     def _init_values(self):
-        self.min_total_driving_time = self.data.loc['total driving time', 'min']
-        self.max_total_driving_time = self.data.loc['total driving time', 'max']
-
-        self.continuous_driving_time = self.data.loc['continuous driving time', 'min']
-
-        self.min_rest_time = self.data.loc['rest time', 'min']
-        self.max_rest_time = self.data.loc['rest time', 'max']
-
-        self.min_break_time = self.data.loc['break time', 'min']
-        self.max_break_time = self.data.loc['break time', 'max']
-
-        self.shift_span = self.data.loc['shift span', 'min']
+        self.total_driving = self.data.loc['total driving time', 'value']
+        self.continuous_driving = self.data.loc['continuous driving time', 'value']
+        self.break_time = self.data.loc['break time', 'value']
+        self.shift_span = self.data.loc['shift span', 'value']
 
 
 class DataProvider:
     def __init__(self, filepath, route) -> None:
         self.filepath = filepath
         self.data = pd.read_excel(filepath, sheet_name=route).set_index(trip)
-        self.constraints = Contraints(filepath=filepath)
+        self.constraints = Constraints(filepath=filepath)
         self._preprocess()
 
     def _preprocess(self):
@@ -66,13 +61,14 @@ class Trip:
     end_time: int
     duration: int
     min_duration: int
-    is_covered: bool
+    is_covered: bool = False
+    duty: Duty = None
 
 
 class Duty:
     def __init__(self,
                  _id: str,
-                 constraints: Contraints) -> None:
+                 constraints: Constraints) -> None:
         self.constraints = constraints
 
         self.ID = _id
@@ -80,7 +76,7 @@ class Duty:
         self.end_time: int = 0
         self.max_end_time: int = 0
 
-        self.working_time: int = 0
+        self.shift_duration: int = 0
         self.driving_time: int = 0
         self.continuous_driving_time: int = 0
 
@@ -95,11 +91,9 @@ class Duty:
         self.overnight: bool = False
         self.trips: List[Trip] = []
 
-        
-
     def __repr__(self) -> str:
         trips = '-'.join([t.ID for t in self.trips])
-        return f"Duty(ID={self.ID}, start={self.start_time}, end={self.end_time}, trips={len(self.trips)}, driving_time={self.driving_time}, rests={self.rests} breaks={self.breaks}, trips={trips}"
+        return f"Duty(ID={self.ID}, start={self.start_time}, end={self.end_time}, driving_time={self.driving_time}, shift_duration={self.shift_duration}, rests={self.rests}, breaks={self.breaks}, ntrips={len(self.trips)}, trips={trips}"
 
     def _calc_max_end_time(self):
         self.max_end_time = calculate_trip_end_time(self.start_time,
@@ -113,16 +107,21 @@ class Duty:
         except IndexError:
             return True
 
-        _working = self.working_time + trip.duration
+        _rest = trip.start_time - last_trip.end_time
+        _working = self.shift_duration + _rest + trip.duration
         _total = self.driving_time + trip.duration
-        _continuous = self.continuous_driving_time + trip.duration
+
+        if _rest >= self.constraints.break_time:
+            _continuous = trip.duration
+        else:
+            _continuous = self.continuous_driving_time + trip.duration
 
         if last_trip.end_loc == trip.start_loc:
             is_driving = trip.start_time < self.end_time
             is_on_break = trip.start_time < self.available_from
-            is_shift_ended = trip.end_time > self.max_end_time
-            is_total_maxed = _total > self.constraints.max_total_driving_time
-            is_continuous_maxed = _continuous > self.constraints.continuous_driving_time
+            is_shift_ended = _working > self.constraints.shift_span
+            is_total_maxed = _total > self.constraints.total_driving
+            is_continuous_maxed = _continuous > self.constraints.continuous_driving
 
             return not any([is_driving,
                             is_on_break,
@@ -137,26 +136,32 @@ class Duty:
         if self.trips:
             last_trip = self.trips[-1]
             _rest = trip.start_time - last_trip.end_time
-            self.rest_time += _rest
-            self.rests += 1
+
+            if _rest >= self.constraints.break_time and self.available_from < last_trip.end_time:
+                self.break_time += self.constraints.break_time
+                self.breaks += 1
+                self.continuous_driving_time = 0
+            else:
+                self.rest_time += _rest
+                self.rests += 1
+
             self.end_time = trip.end_time
             self.continuous_driving_time += trip.duration
             self.driving_time += trip.duration
-            self.working_time += _rest + trip.duration
+            self.shift_duration += _rest + trip.duration
         else:
             self.start_time = trip.start_time
             self.end_time = trip.end_time
             self.continuous_driving_time += trip.duration
             self.driving_time += trip.duration
-            self.working_time += trip.duration
-            self._calc_max_end_time()
+            self.shift_duration += trip.duration
 
-        _driving_until_break = self.constraints.continuous_driving_time - \
+        _driving_until_break = self.constraints.continuous_driving - \
             self.continuous_driving_time
         if _driving_until_break < trip.min_duration:
             self.breaks += 1
-            self.break_time += self.constraints.min_break_time
-            self.available_from = trip.end_time + self.constraints.min_break_time
+            self.break_time += self.constraints.break_time
+            self.available_from = trip.end_time + self.constraints.break_time
             self.continuous_driving_time = 0
 
         self.trips.append(trip)
@@ -175,10 +180,30 @@ class Model:
         for row in self.data.itertuples():
 
             self.trips.append(Trip(str(row.Index),
-                                    row.initial_depot,
-                                    row.final_depot,
-                                    row.start_time,
-                                    row.end_time,
-                                    row.trip_duration,
-                                    _min,
-                                    False))
+                                   row.initial_depot,
+                                   row.final_depot,
+                                   row.start_time,
+                                   row.end_time,
+                                   row.trip_duration,
+                                   _min))
+
+
+class Solution:
+    def __init__(self,
+                 trips: List[Trip],
+                 duties: List[Duty],
+                 constraints: Constraints) -> None:
+        self.trips = trips
+        self.duties = duties
+        self.constraints = constraints
+        self.trip_duty_arr = self._create_arrays()
+
+    def _create_arrays(self):
+        _arr = np.zeros((len(self.trips), len(self.duties)), dtype=int)
+        for duty in self.duties:
+            for trip in self.trips:
+            
+                if trip.duty.ID == duty.ID:
+                    _arr[int(trip.ID)][int(duty.ID)] = 1
+        
+        return _arr
