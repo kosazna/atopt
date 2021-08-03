@@ -51,6 +51,8 @@ class DataProvider:
             lambda x: calculate_trip_end_time(x[start_time], x[trip_duration]),
             axis=1)
 
+        self.data = self.data.sort_values(start_time)
+
 
 @dataclass
 class Trip:
@@ -145,19 +147,19 @@ class Duty:
                 self.rest_time += _rest
                 self.rests += 1
 
-            self.end_time = trip.end_time
-            self.continuous_driving_time += trip.duration
-            self.driving_time += trip.duration
             self.shift_duration += _rest + trip.duration
         else:
             self.start_time = trip.start_time
-            self.end_time = trip.end_time
-            self.continuous_driving_time += trip.duration
-            self.driving_time += trip.duration
             self.shift_duration += trip.duration
+
+        self.end_time = trip.end_time
+        self.continuous_driving_time += trip.duration
+        self.driving_time += trip.duration
+        
 
         _driving_until_break = self.constraints.continuous_driving - \
             self.continuous_driving_time
+
         if _driving_until_break < trip.min_duration:
             self.breaks += 1
             self.break_time += self.constraints.break_time

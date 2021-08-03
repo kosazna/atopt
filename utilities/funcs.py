@@ -28,6 +28,10 @@ def time2minutes(_time: str) -> int:
     if not 0 <= m <= 59:
         raise ValueError("Minutes should be between 0 and 59")
 
+    _minutes = int(h) * 60 + int(m)
+
+    if _minutes == 0:
+        return 1440
     return int(h) * 60 + int(m)
 
 
@@ -58,6 +62,6 @@ def weighted_trip_duration(start_time, duration):
 
 def calculate_trip_end_time(start_time, duration):
     end_time = start_time + duration
-    if end_time >= 1440:
-        return end_time - 1440
+    # if end_time >= 1440:
+    #     return end_time - 1440
     return end_time

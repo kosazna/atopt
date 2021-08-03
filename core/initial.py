@@ -32,7 +32,7 @@ class Insertions:
 
 if __name__ == "__main__":
     datafile = "D:/Google Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
-    d = DataProvider(filepath=datafile, route='910')
+    d = DataProvider(filepath=datafile, route='A2')
     model = Model(d)
     model.build_model()
     sol = Insertions(model)
