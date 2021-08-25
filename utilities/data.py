@@ -95,7 +95,11 @@ class Duty:
 
     def __repr__(self) -> str:
         trips = '-'.join([t.ID for t in self.trips])
-        return f"Duty(ID={self.ID}, start={self.start_time}, end={self.end_time}, driving_time={self.driving_time}, shift_duration={self.shift_duration}, rests={self.rests}, breaks={self.breaks}, ntrips={len(self.trips)}, trips={trips}"
+        # return f"Duty(ID={self.ID}, start={self.start_time}, end={self.end_time}, driving_time={self.driving_time}, shift_duration={self.shift_duration}, rests={self.rests}, breaks={self.breaks}, ntrips={len(self.trips)}, trips={trips}"
+
+        _desc = f"Duty({self.ID}, {len(self.trips)}, {self.start_time}, {self.end_time}, {self.shift_duration}, {self.driving_time}, {self.rests}, {self.breaks}, {trips})"
+
+        return _desc
 
     def _calc_max_end_time(self):
         self.max_end_time = calculate_trip_end_time(self.start_time,
@@ -155,7 +159,6 @@ class Duty:
         self.end_time = trip.end_time
         self.continuous_driving_time += trip.duration
         self.driving_time += trip.duration
-        
 
         _driving_until_break = self.constraints.continuous_driving - \
             self.continuous_driving_time
@@ -198,14 +201,19 @@ class Solution:
         self.trips = trips
         self.duties = duties
         self.constraints = constraints
-        self.trip_duty_arr = self._create_arrays()
+        self._create_arrays()
 
     def _create_arrays(self):
         _arr = np.zeros((len(self.trips), len(self.duties)), dtype=int)
         for duty in self.duties:
             for trip in self.trips:
-            
+
                 if trip.duty.ID == duty.ID:
                     _arr[int(trip.ID)][int(duty.ID)] = 1
-        
-        return _arr
+
+        self.trip_duty_arr = _arr
+        self.start_loc_arr = np.array([t.start_loc for t in self.trips])
+        self.end_loc_arr = np.array([t.end_loc for t in self.trips])
+        self.start_time_arr = np.array([t.start_time for t in self.trips])
+        self.end_time_arr = np.array([t.end_time for t in self.trips])
+        self.duration_arr = np.array([t.duration for t in self.trips])

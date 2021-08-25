@@ -32,7 +32,7 @@ class Insertions:
 
 if __name__ == "__main__":
     datafile = "D:/Google Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
-    d = DataProvider(filepath=datafile, route='A2')
+    d = DataProvider(filepath=datafile, route='910')
     model = Model(d)
     model.build_model()
     sol = Insertions(model)
@@ -41,3 +41,8 @@ if __name__ == "__main__":
         print(duty)
 
     print(sol.sol.trip_duty_arr)
+    print(sol.sol.start_time_arr)
+    print(sol.sol.end_time_arr)
+    print(sol.sol.duration_arr)
+    print([trip.ID for trip in sol.sol.trips])
+    print(sol.sol.start_loc_arr)

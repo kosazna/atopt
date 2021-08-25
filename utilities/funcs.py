@@ -1,22 +1,6 @@
 # -*- coding: utf-8 -*-
 from typing import Union
-
-NO_TRAFFIC = 1
-NORMAL_TRAFFIC = 1.1
-LIGHT_TRAFFIC = 1.2
-HEAVY_TRAFFIC = 1.3
-
-traffic_timeslots = {
-    (0, 360): NO_TRAFFIC,
-    (360, 420): NORMAL_TRAFFIC,
-    (420, 480): LIGHT_TRAFFIC,
-    (480, 600): HEAVY_TRAFFIC,
-    (600, 840): NORMAL_TRAFFIC,
-    (840, 960): LIGHT_TRAFFIC,
-    (960, 1080): HEAVY_TRAFFIC,
-    (1080, 1260): NORMAL_TRAFFIC,
-    (1260, 1440): NO_TRAFFIC,
-}
+from atopt.config import traffic_timeslots
 
 
 def time2minutes(_time: str) -> int:
