@@ -35,14 +35,14 @@ if __name__ == "__main__":
     d = DataProvider(filepath=datafile, route='910')
     model = Model(d)
     model.build_model()
-    sol = Insertions(model)
-    sol.solve()
-    for duty in sol.duties:
+    initial = Insertions(model)
+    initial.solve()
+    for duty in initial.duties:
         print(duty)
 
-    print(sol.sol.trip_duty_arr)
-    print(sol.sol.start_time_arr)
-    print(sol.sol.end_time_arr)
-    print(sol.sol.duration_arr)
-    print([trip.ID for trip in sol.sol.trips])
-    print(sol.sol.start_loc_arr)
+    print(initial.sol.trip_duty_arr)
+    print(initial.sol.start_time_arr)
+    print(initial.sol.end_time_arr)
+    print(initial.sol.duration_arr)
+    print([trip.ID for trip in initial.sol.trips])
+    print(initial.sol.start_loc_arr)
