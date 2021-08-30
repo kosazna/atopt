@@ -56,7 +56,7 @@ class DataProvider:
 
 @dataclass
 class Trip:
-    ID: str
+    ID: int
     start_loc: str
     end_loc: str
     start_time: int
@@ -66,10 +66,19 @@ class Trip:
     is_covered: bool = False
     duty: Duty = None
 
+    def __repr__(self) -> str:
+        return f"Trip({self.ID}, {self.start_time}, {self.end_time}, {self.duration}, {self.is_covered})"
+
+    def __eq__(self, o: object) -> bool:
+        return self.ID == o.ID
+
+    def __hash__(self) -> int:
+        return hash((self.ID, self.start_time, self.end_time, self.start_loc, self.end_loc))
+
 
 class Duty:
     def __init__(self,
-                 _id: str,
+                 _id: int,
                  constraints: Constraints) -> None:
         self.constraints = constraints
 
@@ -94,8 +103,7 @@ class Duty:
         self.trips: List[Trip] = []
 
     def __repr__(self) -> str:
-        trips = '-'.join([t.ID for t in self.trips])
-        # return f"Duty(ID={self.ID}, start={self.start_time}, end={self.end_time}, driving_time={self.driving_time}, shift_duration={self.shift_duration}, rests={self.rests}, breaks={self.breaks}, ntrips={len(self.trips)}, trips={trips}"
+        trips = '-'.join([str(t.ID) for t in self.trips])
 
         _desc = f"Duty({self.ID}, {len(self.trips)}, {self.start_time}, {self.end_time}, {self.shift_duration}, {self.driving_time}, {self.rests}, {self.breaks}, {trips})"
 
@@ -172,7 +180,7 @@ class Duty:
         self.trips.append(trip)
 
 
-class Model:
+class CSPModel:
     def __init__(self, data_provider: DataProvider) -> None:
         self.data = data_provider.data
         self.constraints = data_provider.constraints
@@ -184,7 +192,7 @@ class Model:
 
         for row in self.data.itertuples():
 
-            self.trips.append(Trip(str(row.Index),
+            self.trips.append(Trip(row.Index,
                                    row.initial_depot,
                                    row.final_depot,
                                    row.start_time,
@@ -209,7 +217,7 @@ class Solution:
             for trip in self.trips:
 
                 if trip.duty.ID == duty.ID:
-                    _arr[int(trip.ID)][int(duty.ID)] = 1
+                    _arr[trip.ID][duty.ID] = 1
 
         self.trip_duty_arr = _arr
         self.start_loc_arr = np.array([t.start_loc for t in self.trips])

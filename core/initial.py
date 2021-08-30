@@ -3,7 +3,7 @@ from atopt.utilities.data import *
 
 
 class Insertions:
-    def __init__(self, model: Model) -> None:
+    def __init__(self, model: CSPModel) -> None:
         self.data = model.data
         self.constraints = model.constraints
         self.trips = model.trips
@@ -16,7 +16,7 @@ class Insertions:
 
         while c < max_insertions:
             next_id = len(self.duties)
-            duty = Duty(str(next_id), self.constraints)
+            duty = Duty(next_id, self.constraints)
 
             for trip in self.trips:
                 if not trip.is_covered and duty.can_add_trip(trip):
@@ -33,7 +33,7 @@ class Insertions:
 if __name__ == "__main__":
     datafile = "D:/Google Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
     d = DataProvider(filepath=datafile, route='910')
-    model = Model(d)
+    model = CSPModel(d)
     model.build_model()
     initial = Insertions(model)
     initial.solve()
