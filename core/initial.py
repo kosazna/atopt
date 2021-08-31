@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from atopt.utilities.data import *
+from copy import deepcopy
 
 
 class Insertions:
     def __init__(self, model: CSPModel) -> None:
-        self.data = model.data
+        self.data = model.data.copy()
         self.constraints = model.constraints
-        self.trips = model.trips
-        self.duties = model.duties
+        self.trips = deepcopy(model.trips)
+        self.duties = deepcopy(model.duties)
         self.sol = None
 
     def solve(self):

@@ -24,21 +24,22 @@ end_time = 'end_time'
 
 class Constraints:
     def __init__(self, filepath) -> None:
-        self.data = pd.read_excel(filepath,
-                                  sheet_name='driver constraints').set_index('constraint')
+        self.data: pd.DataFrame = pd.read_excel(filepath,
+                                                sheet_name='driver constraints').set_index('constraint')
         self._init_values()
 
     def _init_values(self):
-        self.total_driving = self.data.loc['total driving time', 'value']
-        self.continuous_driving = self.data.loc['continuous driving time', 'value']
-        self.break_time = self.data.loc['break time', 'value']
-        self.shift_span = self.data.loc['shift span', 'value']
+        self.total_driving: int = self.data.loc['total driving time', 'value']
+        self.continuous_driving: int = self.data.loc['continuous driving time', 'value']
+        self.break_time: int = self.data.loc['break time', 'value']
+        self.shift_span: int = self.data.loc['shift span', 'value']
 
 
 class DataProvider:
-    def __init__(self, filepath, route) -> None:
+    def __init__(self, filepath: str, route: str) -> None:
         self.filepath = filepath
-        self.data = pd.read_excel(filepath, sheet_name=route).set_index(trip)
+        self.data: pd.DataFrame = pd.read_excel(
+            filepath, sheet_name=route).set_index(trip)
         self.constraints = Constraints(filepath=filepath)
         self._preprocess()
 
