@@ -35,6 +35,7 @@ max_end = model.data[end_time].max()
 duties = [interval_var(start=(min_start, max_start),
                        end=(min_end, max_end),
                        size=model.constraints.shift_span,
+                       length=model.constraints.shift_span,
                        name=f"Duty_{i}",
                        optional=True)
           for i in range(nduties)]
@@ -49,9 +50,9 @@ trip2duty = integer_var_list(size=ntrips,
                              max=nduties,
                              name='Trip2Duty')
 
-start_time = [[integer_var(min=0,
-                           max=model.constraints.shift_span,
-                           name=f"StartTime-{i}-{j}")
+start_times = [[integer_var(min=0,
+                            max=model.constraints.shift_span,
+                            name=f"StartTime-{i}-{j}")
                for j in range(nduties)] for i in range(ntrips)]
 
 cdt = integer_var_list(size=nduties,
@@ -74,7 +75,6 @@ for i in range(ntrips):
         sub.add(sub.if_then(
             trip2trip[i] == j, model.end_loc_arr[i] <= model.start_loc_arr[j]))
 
-
 for i in range(ntrips):
     sub.add(trip2trip[i] != i)
 
@@ -83,13 +83,34 @@ for i in range(ntrips):
         sub.add(sub.if_then(trip2trip[i] == j, trip2duty[i] == trip2duty[j]))
 
 
+def report_solution(cpsol: CpoSolveResult):
+    trips_per_duty = {}
+    for i in range(ntrips):
+        _out = f"{i:>2} -> {cpsol[trip2trip[i]]} | Duty: {cpsol[trip2duty[i]]}"
+        print(_out)
+
+        duty_id = cpsol[trip2duty[i]]
+
+        if duty_id in trips_per_duty:
+            trips_per_duty[duty_id].append(i)
+        else:
+            trips_per_duty[duty_id] = []
+            trips_per_duty[duty_id].append(i)
+
+    print(f'\n\nTotal Duties: {len(trips_per_duty.keys())}')
+
+    for duty_id, duty_trips in trips_per_duty.items():
+        original_order = copy.copy(duty_trips)
+        df_trips = model.data.loc[duty_trips]
+
+        span = df_trips[end_time].max() - df_trips[start_time].min()
+
+        print(
+            f'\n\n>>> Duty {duty_id} - Trips: {len(duty_trips)} - Drive Time: {df_trips[trip_duration].sum()} - Shift Span: {span}\n')
+        print(df_trips)
+
+
 if __name__ == "__main__":
     msol = sub.solve()
 
-    sduties = []
-    for i in range(ntrips):
-        print(str(i)+" to "+str(msol[trip2trip[i]]) +
-              ' - ' + str(msol[trip2duty[i]]))
-        duties.append(str(msol[trip2duty[i]]))
-
-    print(set(sduties))
+    report_solution(msol)
