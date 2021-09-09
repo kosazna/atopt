@@ -35,7 +35,6 @@ max_end = model.data[end_time].max()
 duties = [interval_var(start=(min_start, max_start),
                        end=(min_end, max_end),
                        size=model.constraints.shift_span,
-                       length=model.constraints.shift_span,
                        name=f"Duty_{i}",
                        optional=True)
           for i in range(nduties)]
@@ -100,14 +99,13 @@ def report_solution(cpsol: CpoSolveResult):
     print(f'\n\nTotal Duties: {len(trips_per_duty.keys())}')
 
     for duty_id, duty_trips in trips_per_duty.items():
-        original_order = copy.copy(duty_trips)
         df_trips = model.data.loc[duty_trips]
 
         span = df_trips[end_time].max() - df_trips[start_time].min()
 
         print(
             f'\n\n>>> Duty {duty_id} - Trips: {len(duty_trips)} - Drive Time: {df_trips[trip_duration].sum()} - Shift Span: {span}\n')
-        print(df_trips)
+        print(df_trips.to_markdown())
 
 
 if __name__ == "__main__":
