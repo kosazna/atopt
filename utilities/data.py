@@ -188,11 +188,11 @@ class CSPModel:
         self.trips: List[Trip] = []
         self.duties: List[Duty] = []
 
-        self.start_time_arr = self.data[start_time].values
-        self.end_time_arr = self.data[end_time].values
-        self.start_loc_arr = self.data[initial_depot].to_list()
-        self.end_loc_arr = self.data[final_depot].to_list()
-        self.duration_arr = self.data[trip_duration].values
+        self.start_times = self.data[start_time].values
+        self.end_times = self.data[end_time].values
+        self.start_locs = self.data[initial_depot].to_list()
+        self.end_locs = self.data[final_depot].to_list()
+        self.durations = self.data[trip_duration].values
 
     def build_model(self) -> list:
         _min = self.data[trip_duration].min()

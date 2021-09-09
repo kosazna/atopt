@@ -67,12 +67,12 @@ tdt = integer_var_list(size=nduties,
 for i in range(ntrips):
     for j in range(ntrips):
         sub.add(sub.if_then(
-            trip2trip[i] == j, model.end_time_arr[i] <= model.start_time_arr[j]))
+            trip2trip[i] == j, model.end_times[i] <= model.start_times[j]))
 
 for i in range(ntrips):
     for j in range(ntrips):
         sub.add(sub.if_then(
-            trip2trip[i] == j, model.end_loc_arr[i] <= model.start_loc_arr[j]))
+            trip2trip[i] == j, model.end_locs[i] <= model.start_locs[j]))
 
 for i in range(ntrips):
     sub.add(trip2trip[i] != i)
