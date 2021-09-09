@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from utilities import *
-from core.initial import Insertions
+from atopt.utilities import *
+from atopt.core.initial import Insertions
 from docplex.cp.model import *
 
 datafile = "D:/Google Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
