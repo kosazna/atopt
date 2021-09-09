@@ -46,4 +46,3 @@ if __name__ == "__main__":
     print(initial.sol.end_time_arr)
     print(initial.sol.duration_arr)
     print([trip.ID for trip in initial.sol.trips])
-    print(initial.sol.start_loc_arr)
