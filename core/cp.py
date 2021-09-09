@@ -105,7 +105,7 @@ def report_solution(cpsol: CpoSolveResult):
 
         print(
             f'\n\n>>> Duty {duty_id} - Trips: {len(duty_trips)} - Drive Time: {df_trips[trip_duration].sum()} - Shift Span: {span}\n')
-        print(df_trips.to_markdown())
+        print(df_trips)
 
 
 if __name__ == "__main__":
