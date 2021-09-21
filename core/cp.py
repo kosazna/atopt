@@ -20,10 +20,10 @@ nduties = len(model.trips)
 
 sub = CpoModel(name="Pricing_Subproblem")
 
-# trips = [interval_var(start=trip.start_time,
-#                       end=trip.end_time,
-#                       size=trip.duration,
-#                       name=f'Trip_{idx}') for idx, trip in enumerate(model.trips)]
+trips = [interval_var(start=(trip.start_time, trip.start_time),
+                      end=(trip.end_time, trip.end_time),
+                      size=trip.duration,
+                      name=f'Trip_{idx}') for idx, trip in enumerate(model.trips)]
 
 
 # Duties
@@ -72,7 +72,7 @@ for i in range(ntrips):
 for i in range(ntrips):
     for j in range(ntrips):
         sub.add(sub.if_then(
-            trip2trip[i] == j, model.end_locs[i] <= model.start_locs[j]))
+            trip2trip[i] == j, model.end_locs[i] == model.start_locs[j]))
 
 for i in range(ntrips):
     sub.add(trip2trip[i] != i)
@@ -81,12 +81,20 @@ for i in range(ntrips):
     for j in range(ntrips):
         sub.add(sub.if_then(trip2trip[i] == j, trip2duty[i] == trip2duty[j]))
 
+# for i in range(ntrips-1):
+#     for j in range(i + 1, ntrips):
+#         sub.add(end_before_start(trips[i], trips[j]))
+
+# for i in range(ntrips):
+#     for j in range(ntrips):
+#         sub.if_then(trip2duty[i] == trip2duty[j], sub.add())
+
 
 def report_solution(cpsol: CpoSolveResult):
     trips_per_duty = {}
     for i in range(ntrips):
         _out = f"{i:>2} -> {cpsol[trip2trip[i]]} | Duty: {cpsol[trip2duty[i]]}"
-        print(_out)
+        # print(_out)
 
         duty_id = cpsol[trip2duty[i]]
 
