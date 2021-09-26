@@ -3,7 +3,7 @@ from atopt.utilities import *
 from atopt.core.initial import Insertions
 from docplex.cp.model import *
 
-datafile = "D:/Google Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
+datafile = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
 
 d = DataProvider(filepath=datafile, route='910')
 
@@ -117,6 +117,6 @@ def report_solution(cpsol: CpoSolveResult):
 
 
 if __name__ == "__main__":
-    msol = sub.solve()
+    cpsol = sub.solve()
 
-    report_solution(msol)
+    report_solution(cpsol)
