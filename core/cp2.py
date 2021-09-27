@@ -1,11 +1,21 @@
-from os import stat
+
 from atopt.utilities import *
 from atopt.core.initial import Insertions
 from docplex.cp.model import *
-from IPython.display import display
 from datetime import datetime
 from pathlib import Path
-import sys
+import argparse
+import docplex.cp.utils_visu as visu
+import matplotlib.pyplot as plt
+from pylab import rcParams
+
+rcParams['figure.figsize'] = 10, 4
+
+my_parser = argparse.ArgumentParser()
+my_parser.add_argument('-trips', action='store', type=int)
+my_parser.add_argument('-duties', action='store', type=int)
+
+args = my_parser.parse_args()
 
 datafile = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
 sol_folder = Path("D:/.temp/.dev/.aztool/atopt/sols")
@@ -18,17 +28,17 @@ model.build_model()
 # initial.solve()
 
 ########################################
-if len(sys.argv) > 1:
-    _trips = int(sys.argv[1])
-    _duties = int(sys.argv[2])
-
-    model.trips = model.trips[:_trips]
-
+if args.trips is None:
     NTRIPS = len(model.trips)
-    NDUTIES = _duties
 else:
+    model.trips = model.trips[:args.trips]
     NTRIPS = len(model.trips)
+
+if args.duties is None:
     NDUTIES = 10
+else:
+    NDUTIES = args.duties
+
 
 sub = CpoModel(name="Pricing_Subproblem")
 
@@ -61,7 +71,7 @@ for t, trip in enumerate(model.trips):
         trip2duty[(t, d)] = sub.interval_var(start=(trip.start_time, trip.start_time),
                                              end=(trip.end_time, trip.end_time),
                                              size=trip.duration,
-                                             name=f"Trip_{t:02}-Duty_{d:02}",
+                                             name=f"Trip_{t:02} | Duty_{d:02}",
                                              optional=True)
 
 ########################################
@@ -95,6 +105,7 @@ obj = sub.sum([sub.presence_of(duty) for duty in duties])
 sub.add(sub.minimize(obj))
 
 if __name__ == "__main__":
+
     cpsol = sub.solve()
     bounds = cpsol.get_objective_bounds()
     status = cpsol.get_solve_status()
@@ -107,8 +118,22 @@ if __name__ == "__main__":
     for d in range(NDUTIES):
         if cpsol[duties[d]]:
             print(f"\n> Duty {d} : {cpsol[duties[d]]}")
+            _tdt = 0
+            _ntrips = 0
             for t in range(NTRIPS):
                 if cpsol[trip2duty[(t, d)]]:
                     print(f"  - Trip {t} : {cpsol[trip2duty[(t, d)]]}")
-
+                    _tdt += model.durations[t]
+                    _ntrips += 1
+            print(f"\n  > Driving Time: {_tdt}, Trips: {_ntrips}")
     cpsol.write(str(out))
+
+
+    visu.timeline(f"{date_str}_{status}_{bounds[0]}", origin=min_start, horizon=max_end)
+    for d in range(NDUTIES):
+        if cpsol[duties[d]]:
+            visu.panel()
+            visu.sequence(name=duties[d].get_name(),
+                        intervals=[(cpsol.get_var_solution(trip2duty[(t, d)]), d, str(t)) for t in range(NTRIPS) if cpsol[trip2duty[(t, d)]]])
+
+    visu.show()
