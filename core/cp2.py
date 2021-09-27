@@ -5,6 +5,7 @@ from docplex.cp.model import *
 from IPython.display import display
 from datetime import datetime
 from pathlib import Path
+import sys
 
 datafile = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
 sol_folder = Path("D:/.temp/.dev/.aztool/atopt/sols")
@@ -17,9 +18,17 @@ model.build_model()
 # initial.solve()
 
 ########################################
+if len(sys.argv) > 1:
+    _trips = int(sys.argv[1])
+    _duties = int(sys.argv[2])
 
-NTRIPS = len(model.trips)
-NDUTIES = 10
+    model.trips = model.trips[:_trips]
+
+    NTRIPS = len(model.trips)
+    NDUTIES = _duties
+else:
+    NTRIPS = len(model.trips)
+    NDUTIES = 10
 
 sub = CpoModel(name="Pricing_Subproblem")
 
