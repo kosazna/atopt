@@ -19,7 +19,7 @@ args = my_parser.parse_args()
 
 datafile = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
 sol_folder = Path("D:/.temp/.dev/.aztool/atopt/sols")
-d = DataProvider(filepath=datafile, route='910')
+d = DataProvider(filepath=datafile, route='910', adjust_for_traffic=True)
 
 model = CSPModel(d)
 model.build_model()
@@ -118,6 +118,7 @@ if __name__ == "__main__":
     for d in range(NDUTIES):
         if cpsol[duties[d]]:
             print(f"\n> Duty {d} : {cpsol[duties[d]]}")
+            # print(cdt[d])
             _tdt = 0
             _ntrips = 0
             for t in range(NTRIPS):
@@ -130,6 +131,7 @@ if __name__ == "__main__":
 
 
     visu.timeline(f"{date_str}_{status}_{bounds[0]}", origin=min_start, horizon=max_end)
+
     for d in range(NDUTIES):
         if cpsol[duties[d]]:
             visu.panel()

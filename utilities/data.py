@@ -36,18 +36,26 @@ class Constraints:
 
 
 class DataProvider:
-    def __init__(self, filepath: str, route: str) -> None:
+    def __init__(self,
+                 filepath: str,
+                 route: str,
+                 adjust_for_traffic: bool = True) -> None:
         self.filepath = filepath
         self.data: pd.DataFrame = pd.read_excel(
             filepath, sheet_name=route).set_index(trip)
         self.constraints = Constraints(filepath=filepath)
+        self.traffic_adjusted = adjust_for_traffic
         self._preprocess()
 
     def _preprocess(self):
         self.data[start_time] = self.data[time].apply(time2minutes)
-        self.data[trip_duration] = self.data.apply(
-            lambda x: weighted_trip_duration(x[start_time], x[trip_duration]),
-            axis=1)
+
+        if self.traffic_adjusted:
+            self.data[trip_duration] = self.data.apply(
+                lambda x: weighted_trip_duration(
+                    x[start_time], x[trip_duration]),
+                axis=1)
+
         self.data[end_time] = self.data.apply(
             lambda x: calculate_trip_end_time(x[start_time], x[trip_duration]),
             axis=1)
