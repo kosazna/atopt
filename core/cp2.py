@@ -39,6 +39,9 @@ if args.duties is None:
 else:
     NDUTIES = args.duties
 
+# print(model.durations)
+# print(model.start_times)
+
 
 sub = CpoModel(name="Pricing_Subproblem")
 
@@ -86,17 +89,29 @@ for t in range(NTRIPS):
     sub.add(sub.sum([sub.presence_of(trip2duty[(t, d)])
             for d in range(NDUTIES)]) == 1)
 
+cdt  = {}
+
+for d in range(NDUTIES):
+    cdt[d] = step_at(0, 0)
+    for t in range(NTRIPS):
+        cdt[d] += sub.step_at(trip2duty[(t, d)].start[0], trip2duty[(t, d)].size[0])
+
+    sub.add(sub.cumul_range(cdt[d], 0, model.constraints.shift_span))
+        # if cdt[d] > model.constraints.continuous_driving:
+        #     sub.add(sub.start_of(breaks[(d)]) == sub.end_of_prev([trip2duty[(t, d)] for t in range(NTRIPS)], trip2duty[(t, d)]))
+        # print(cdt[d])
+    # sub.add(cdt[d] <= model.constraints.continuous_driving)
+
+
 
 # cdt = {}
 # tdt = {}
-
 # for d in range(NDUTIES):
 #     cdt[d] = sub.step_at(0, 0)
 #     tdt[d] = sub.step_at(0, 0)
 #     for t in range(NTRIPS):
 #         cdt[d] += sub.pulse(trip2duty[(t, d)], model.durations[t])
 #         tdt[d] += sub.pulse(trip2duty[(t, d)], model.durations[t])
-
 #     sub.add(cdt[d] <= model.constraints.continuous_driving)
 #     sub.add(tdt[d] <= model.constraints.total_driving)
 
@@ -127,6 +142,8 @@ if __name__ == "__main__":
                     _tdt += model.durations[t]
                     _ntrips += 1
             print(f"\n  > Driving Time: {_tdt}, Trips: {_ntrips}")
+
+            print(cdt[d])
     cpsol.write(str(out))
 
 
