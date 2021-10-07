@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Model constraints: 24, variables: integer: 0, interval: 96, sequence: 3
+Solve status: Infeasible
+Search status: SearchCompleted, stop cause: SearchHasNotBeenStopped
+Solve time: 2.09 sec
+-------------------------------------------------------------------------------
+Bounds: (1,)
