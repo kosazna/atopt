@@ -147,7 +147,7 @@ sub.add(sub.minimize(obj))
 
 if __name__ == "__main__":
 
-    cpsol = sub.solve()
+    cpsol = sub.solve(TimeLimit=60)
     bounds = cpsol.get_objective_bounds()
     status = cpsol.get_solve_status()
 
@@ -180,5 +180,6 @@ if __name__ == "__main__":
             visu.panel()
             visu.sequence(name=duties[d].get_name(),
                           intervals=[(cpsol.get_var_solution(trip2duty[(t, d)]), d, str(t)) for t in range(NTRIPS) if cpsol[trip2duty[(t, d)]]])
+            visu.interval(cpsol.get_var_solution(breaks[d]), 'red', 'B')
 
     visu.show()
