@@ -78,10 +78,6 @@ breaks = [interval_var(size=model.constraints.break_time,
                        optional=True)
           for i in range(NDUTIES)]
 
-end_dt = []
-for t in range(NTRIPS):
-	end_dt.append([sub.integer_var(0, model.constraints.shift_span, "edt_"+str(t)+","+str(d)) for d in range(NDUTIES)])
-
 trip2duty = {}
 for t, trip in enumerate(model.trips):
     for d in range(NDUTIES):
@@ -90,6 +86,12 @@ for t, trip in enumerate(model.trips):
                                              size=trip.duration,
                                              name=f"Trip_{t:02} | Duty_{d:02}",
                                              optional=True)
+
+end_dt = []
+for t in range(NTRIPS):
+    end_dt.append([sub.integer_var(min=0,
+                                   max=model.constraints.shift_span,
+                                   name=f"EDT_{t:02}_{d:02}") for d in range(NDUTIES)])
 
 ########################################
 
@@ -104,17 +106,20 @@ for t in range(NTRIPS):
             for d in range(NDUTIES)]) == 1)
 
 for t in range(NTRIPS):
-	previous_trips = []
-	for b in range(NTRIPS):
-		if model.end_times[b] <= model.start_times[t]:
-			previous_trips.append(b)
-	for d in range(NDUTIES):
-		sub.add(end_dt[t][d] == sum([(model.durations[b])*sub.presence_of(trip2duty[(b, d)]) for b in previous_trips]) + (model.durations[t]))
+    previous_trips = []
+    for b in range(NTRIPS):
+        if model.end_times[b] <= model.start_times[t]:
+            previous_trips.append(b)
+    for d in range(NDUTIES):
+        sub.add(end_dt[t][d] == sum([(model.durations[b])*sub.presence_of(trip2duty[(b, d)])
+                for b in previous_trips]) + (model.durations[t]))
 
 for t in range(NTRIPS):
-	for d in range(NDUTIES):
-		sub.add(sub.if_then(sub.logical_and((end_dt[t][d] <= model.constraints.continuous_driving), (sub.presence_of(trip2duty[(t, d)]))), (sub.end_of(trip2duty[(t, d)]) <= sub.start_of(breaks[(d)]))))
-		sub.add(sub.if_then(sub.logical_and((end_dt[t][d] > model.constraints.continuous_driving), (sub.presence_of(trip2duty[(t, d)]))), (sub.start_of(trip2duty[(t, d)]) >= sub.end_of(breaks[(d)]))))
+    for d in range(NDUTIES):
+        sub.add(sub.if_then(sub.logical_and((end_dt[t][d] <= model.constraints.continuous_driving), (sub.presence_of(
+            trip2duty[(t, d)]))), (sub.end_of(trip2duty[(t, d)]) <= sub.start_of(breaks[(d)]))))
+        sub.add(sub.if_then(sub.logical_and((end_dt[t][d] > model.constraints.continuous_driving), (sub.presence_of(
+            trip2duty[(t, d)]))), (sub.start_of(trip2duty[(t, d)]) >= sub.end_of(breaks[(d)]))))
 
 # cdt = {}
 
@@ -124,9 +129,9 @@ for t in range(NTRIPS):
 #         cdt[d] += sub.step_at_end(trip2duty[(t, d)], model.durations[t])
 
     # sub.add(sub.cumul_range(cdt[d], 0, model.constraints.shift_span))
-        # if cdt[d] > model.constraints.continuous_driving:
-        #     sub.add(sub.start_of(breaks[(d)]) == sub.end_of_prev([trip2duty[(t, d)] for t in range(NTRIPS)], trip2duty[(t, d)]))
-        # print(cdt[d])
+    # if cdt[d] > model.constraints.continuous_driving:
+    #     sub.add(sub.start_of(breaks[(d)]) == sub.end_of_prev([trip2duty[(t, d)] for t in range(NTRIPS)], trip2duty[(t, d)]))
+    # print(cdt[d])
     # sub.add(cdt[d] <= model.constraints.continuous_driving)
 
 
