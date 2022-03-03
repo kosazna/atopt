@@ -15,13 +15,15 @@ my_parser = argparse.ArgumentParser()
 my_parser.add_argument('-t', '--trips', action='store', type=int)
 my_parser.add_argument('-d', '--duties', action='store', type=int)
 my_parser.add_argument('-l', '--limit', action='store', type=int)
+my_parser.add_argument('-r', '--route', action='store', type=str, default='910')
 
 
 args = my_parser.parse_args()
+ROUTE = args.route
 
 datafile = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
 sol_folder = Path("D:/.temp/.dev/.aztool/atopt/sols")
-d = DataProvider(filepath=datafile, route='910', adjust_for_traffic=True)
+d = DataProvider(filepath=datafile, route=ROUTE, adjust_for_traffic=True)
 
 model = CSPModel(d)
 model.build_model()
