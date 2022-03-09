@@ -2,7 +2,7 @@
 Model constraints: 1818, variables: integer: 580, interval: 600, sequence: 10
 Solve status: Feasible
 Search status: SearchStopped, stop cause: SearchStoppedByLimit
-Solve time: 60.52 sec
+Solve time: 60.36 sec
 -------------------------------------------------------------------------------
 Objective values: (9,), bounds: (2,), gaps: (0.777778,)
 EDT_00_00=40

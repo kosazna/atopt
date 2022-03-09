@@ -172,21 +172,26 @@ if __name__ == "__main__":
 
     date_str = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     out = SAVELOC.joinpath(f"{date_str}_{status}_{bounds[0]}.txt")
+    sol_log = SAVELOC.joinpath(f"{date_str}_{status}_{bounds[0]}_SOLUTION.txt")
 
     cpsol.print_solution()
 
-    for d in range(NDUTIES):
-        if cpsol[duties[d]]:
-            print(f"\n> Duty {d} : {cpsol[duties[d]]}")
-            # print(cdt[d])
-            _tdt = 0
-            _ntrips = 0
-            for t in range(NTRIPS):
-                if cpsol[trip2duty[(t, d)]]:
-                    print(f"  - Trip {t} : {cpsol[trip2duty[(t, d)]]}")
-                    _tdt += model.durations[t]
-                    _ntrips += 1
-            print(f"\n  > Driving Time: {_tdt}, Trips: {_ntrips}")
+    with open(sol_log, 'w') as sol_log_file:
+        for d in range(NDUTIES):
+            if cpsol[duties[d]]:
+                print(f"\n> Duty {d} : {cpsol[duties[d]]}")
+                sol_log_file.write(f"\n> Duty {d} : {cpsol[duties[d]]}")
+                # print(cdt[d])
+                _tdt = 0
+                _ntrips = 0
+                for t in range(NTRIPS):
+                    if cpsol[trip2duty[(t, d)]]:
+                        print(f"  - Trip {t} : {cpsol[trip2duty[(t, d)]]}")
+                        sol_log_file.write(f"\n  - Trip {t} : {cpsol[trip2duty[(t, d)]]}")
+                        _tdt += model.durations[t]
+                        _ntrips += 1
+                print(f"\n  > Driving Time: {_tdt}, Trips: {_ntrips}")
+                sol_log_file.write(f"\n  > Driving Time: {_tdt}, Trips: {_ntrips}\n")
 
             # print(cdt[d])
     cpsol.write(str(out))
