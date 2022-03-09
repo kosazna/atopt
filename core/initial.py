@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from atopt.utilities.data import *
+from atopt.utilities import *
 from copy import deepcopy
 
 
@@ -32,7 +32,7 @@ class Insertions:
 
 
 if __name__ == "__main__":
-    datafile = "D:/Google Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
+    datafile = "C:/Users/aznavouridis.k/OneDrive/_Thesis_/Main Thesis/Model Data.xlsx"
     d = DataProvider(filepath=datafile, route='910')
     model = CSPModel(d)
     model.build_model()

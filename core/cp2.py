@@ -66,6 +66,8 @@ max_start = max(model.start_times)
 min_end = min(model.end_times)
 max_end = max(model.end_times)
 
+lower_bound = np.ceil(sum(model.durations) / model.constraints.shift_span)
+
 # trips = [interval_var(start=(trip.start_time, trip.start_time),
 #                       end=(trip.end_time, trip.end_time),
 #                       size=trip.duration,
@@ -117,7 +119,7 @@ for d in range(NDUTIES):
 
 for t in range(NTRIPS):
     sub.add(sub.sum([sub.presence_of(trip2duty[(t, d)])
-            for d in range(NDUTIES)]) == 1)
+            for d in range(NDUTIES)]) >= 1)
 
 for t in range(NTRIPS):
     previous_trips = []
@@ -162,6 +164,7 @@ for t in range(NTRIPS):
 
 
 obj = sub.sum([sub.presence_of(duty) for duty in duties])
+sub.add(obj >= lower_bound)
 sub.add(sub.minimize(obj))
 
 if __name__ == "__main__":
@@ -177,6 +180,7 @@ if __name__ == "__main__":
     cpsol.print_solution()
 
     with open(sol_log, 'w') as sol_log_file:
+        driving_times = []
         for d in range(NDUTIES):
             if cpsol[duties[d]]:
                 print(f"\n> Duty {d} : {cpsol[duties[d]]}")
@@ -192,6 +196,9 @@ if __name__ == "__main__":
                         _ntrips += 1
                 print(f"\n  > Driving Time: {_tdt}, Trips: {_ntrips}")
                 sol_log_file.write(f"\n  > Driving Time: {_tdt}, Trips: {_ntrips}\n")
+                driving_times.append(_tdt)
+            else:
+               driving_times.append(0)
 
             # print(cdt[d])
     cpsol.write(str(out))
@@ -202,7 +209,7 @@ if __name__ == "__main__":
     for d in range(NDUTIES):
         if cpsol[duties[d]]:
             visu.panel()
-            visu.sequence(name=duties[d].get_name(),
+            visu.sequence(name=f"{duties[d].get_name()} ({driving_times[d]})",
                           intervals=[(cpsol.get_var_solution(trip2duty[(t, d)]), d, str(t)) for t in range(NTRIPS) if cpsol[trip2duty[(t, d)]]])
             visu.interval(cpsol.get_var_solution(breaks[d]), 'red', 'B')
 
