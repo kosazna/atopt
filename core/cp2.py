@@ -82,7 +82,7 @@ max_end = max(model.end_times)
 
 duties = [interval_var(start=(min_start, max_start),
                        end=(min_end, max_end),
-                       size=(0, model.constraints.total_driving),
+                       size=(0, model.constraints.shift_span),
                        name=f"Duty_{i}",
                        optional=True)
           for i in range(NDUTIES)]
