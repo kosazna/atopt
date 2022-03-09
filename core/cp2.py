@@ -14,16 +14,21 @@ rcParams['figure.figsize'] = 10, 4
 my_parser = argparse.ArgumentParser()
 my_parser.add_argument('-t', '--trips', action='store', type=int)
 my_parser.add_argument('-d', '--duties', action='store', type=int)
-my_parser.add_argument('-l', '--limit', action='store', type=int)
+my_parser.add_argument('-l', '--limit', action='store', type=int, default=300)
 my_parser.add_argument('-r', '--route', action='store', type=str, default='910')
+my_parser.add_argument('-f', '--filepath', action='store',
+                       type=str, default='Model Data.xlsx')
+my_parser.add_argument('-s', '--save', action='store', type=str)
 
 
 args = my_parser.parse_args()
 ROUTE = args.route
+TIMELIMIT = args.limit
+DATAFILE = args.filepath
 
-datafile = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
-sol_folder = Path("D:/.temp/.dev/.aztool/atopt/sols")
-d = DataProvider(filepath=datafile, route=ROUTE, adjust_for_traffic=True)
+DATAFILE = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
+
+d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=True)
 
 model = CSPModel(d)
 model.build_model()
@@ -43,16 +48,23 @@ if args.duties is None:
 else:
     NDUTIES = args.duties
 
-# print(model.durations)
-# print(model.model.start_times)
+# if args.save is None:
+#     SAVELOC = Path.cwd().joinpath('sols')
+
+#     if not SAVELOC.exists():
+#         SAVELOC.mkdir(parents=True, exist_ok=True)
+# else:
+#     SAVELOC = Path(args.save)
+
+SAVELOC = Path("D:/.temp/.dev/.aztool/atopt/sols")
 
 
 sub = CpoModel(name="Pricing_Subproblem")
 
-min_start = model.data[start_time].min()
-max_start = model.data[start_time].max()
-min_end = model.data[end_time].min()
-max_end = model.data[end_time].max()
+min_start = min(model.start_times)
+max_start = max(model.start_times)
+min_end = min(model.end_times)
+max_end = max(model.end_times)
 
 # trips = [interval_var(start=(trip.start_time, trip.start_time),
 #                       end=(trip.end_time, trip.end_time),
@@ -154,12 +166,12 @@ sub.add(sub.minimize(obj))
 
 if __name__ == "__main__":
 
-    cpsol = sub.solve(TimeLimit=60)
+    cpsol = sub.solve(TimeLimit=TIMELIMIT)
     bounds = cpsol.get_objective_bounds()
     status = cpsol.get_solve_status()
 
     date_str = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    out = sol_folder.joinpath(f"{date_str}_{status}_{bounds[0]}.txt")
+    out = SAVELOC.joinpath(f"{date_str}_{status}_{bounds[0]}.txt")
 
     cpsol.print_solution()
 

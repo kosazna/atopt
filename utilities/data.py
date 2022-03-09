@@ -23,7 +23,7 @@ end_time = 'end_time'
 
 
 class Constraints:
-    def __init__(self, filepath) -> None:
+    def __init__(self, filepath: str) -> None:
         self.data: pd.DataFrame = pd.read_excel(filepath,
                                                 sheet_name='driver constraints').set_index('constraint')
         self._init_values()
