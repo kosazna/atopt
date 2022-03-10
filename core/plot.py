@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from pathlib import Path
-from typing import Union
+from typing import Optional, Union
 from docplex.cp.model import *
 import docplex.cp.utils_visu as visu
 import matplotlib.pyplot as plt
@@ -10,7 +10,8 @@ from pylab import rcParams
 
 def log_and_plot(sol: CpoSolveResult,
                  model_info: dict,
-                 save_folder: Union[str, Path]):
+                 save_folder: Union[str, Path],
+                 has_breaks: Optional[bool] = True):
     rcParams['figure.figsize'] = 10, 4
 
     model = model_info.get('model')
@@ -19,19 +20,28 @@ def log_and_plot(sol: CpoSolveResult,
     duties = model_info.get('duties')
     trip2duty = model_info.get('trip2duty')
     breaks = model_info.get('breaks')
+    nbuses = model_info.get('nbuses')
     min_start = model_info.get('min_start')
     max_end = model_info.get('max_end')
 
-    bounds = sol.get_objective_bounds()
     status = sol.get_solve_status()
 
     save_loc = Path(save_folder)
 
-    date_str = datetime.now().strftime('[%Y-%m-%d_%H-%M-%S]')
-    out = save_loc.joinpath(f"{date_str}_{status}_{bounds[0]}.txt")
-    sol_log = save_loc.joinpath(f"{date_str}_{status}_{bounds[0]}_SOLUTION.txt")
+    total_duties = 0
+    for d in range(nduties):
+        if sol[duties[d]]:
+            total_duties += 1
+
+    date_str = datetime.now().strftime('[%Y-%m-%d %H-%M]')
+    out = save_loc.joinpath(
+        f"{date_str}-R-{status}-{total_duties}-[Breaks={bool(breaks)}-Buses={nbuses}].txt")
+    sol_log = save_loc.joinpath(
+        f"{date_str}-S-{status}-{total_duties}-[Breaks={bool(breaks)}-Buses={nbuses}].txt")
 
     sol.print_solution()
+
+    buses = CpoStepFunction()
 
     with open(sol_log, 'w') as sol_log_file:
         driving_times = []
@@ -44,6 +54,8 @@ def log_and_plot(sol: CpoSolveResult,
                 _ntrips = 0
                 for t in range(ntrips):
                     if sol[trip2duty[(t, d)]]:
+                        bus_td = sol.get_var_solution(trip2duty[(t, d)])
+                        buses.add_value(bus_td.get_start(), bus_td.get_end(), 1)
                         print(f"  - Trip {t} : {sol[trip2duty[(t, d)]]}")
                         sol_log_file.write(
                             f"\n  - Trip {t} : {sol[trip2duty[(t, d)]]}")
@@ -59,14 +71,19 @@ def log_and_plot(sol: CpoSolveResult,
             # print(cdt[d])
     sol.write(str(out))
 
-    visu.timeline(
-        f"{date_str}_{status}_{bounds[0]}", origin=min_start, horizon=max_end)
+    visu.timeline(f"{date_str}-F-{status}-{total_duties}-[Breaks={bool(breaks)}-Buses={nbuses}]",
+                  origin=min_start,
+                  horizon=max_end)
 
     for d in range(nduties):
         if sol[duties[d]]:
             visu.panel()
             visu.sequence(name=f"{duties[d].get_name()} ({driving_times[d]})",
                           intervals=[(sol.get_var_solution(trip2duty[(t, d)]), d, str(t)) for t in range(ntrips) if sol[trip2duty[(t, d)]]])
-            visu.interval(sol.get_var_solution(breaks[d]), 'red', 'B')
+            if has_breaks:
+                visu.interval(sol.get_var_solution(breaks[d]), 'red', 'B')
+
+    visu.panel(name="Buses")
+    visu.function(segments=buses, style='area')
 
     visu.show()

@@ -7,7 +7,10 @@ from docplex.cp.model import *
 
 def simple_CSP(model: CSPModel,
                nduties: int,
-               ntrips: Optional[int] = None) -> CpoModel:
+               ntrips: Optional[int] = None,
+               add_breaks: Optional[bool] = True,
+               nbuses: Optional[int] = None,
+               objective: Optional[bool] = True) -> CpoModel:
 
     cp_model = CpoModel(name="CSP_Simple_Solution")
 
@@ -25,15 +28,12 @@ def simple_CSP(model: CSPModel,
 
     lower_bound = np.ceil(sum(model.durations) / model.constraints.shift_span)
 
+    breaks = None
+
     duties = [interval_var(start=(min_start, max_start),
                            end=(min_end, max_end),
                            size=(0, model.constraints.shift_span),
                            name=f"Duty_{i}",
-                           optional=True)
-              for i in range(NDUTIES)]
-
-    breaks = [interval_var(size=model.constraints.break_time,
-                           name=f"BreakTime_{i}",
                            optional=True)
               for i in range(NDUTIES)]
 
@@ -46,14 +46,6 @@ def simple_CSP(model: CSPModel,
                                              name=f"Trip_{t:02} | Duty_{d:02}",
                                              optional=True)
 
-    end_dt = []
-    for t in range(NTRIPS):
-        end_dt.append([integer_var(min=0,
-                                   max=model.constraints.shift_span,
-                                   name=f"EDT_{t:02}_{d:02}") for d in range(NDUTIES)])
-
-    ########################################
-
     for d in range(NDUTIES):
         cp_model.add(span(duties[d],
                           [trip2duty[(t, d)] for t in range(NTRIPS)]))
@@ -63,33 +55,54 @@ def simple_CSP(model: CSPModel,
 
     for t in range(NTRIPS):
         cp_model.add(cp_model.sum([presence_of(trip2duty[(t, d)])
-                                   for d in range(NDUTIES)]) >= 1)
+                                   for d in range(NDUTIES)]) == 1)
+    if add_breaks:
+        breaks = [interval_var(size=model.constraints.break_time,
+                               name=f"BreakTime_{i}",
+                               optional=True)
+                  for i in range(NDUTIES)]
 
-    for t in range(NTRIPS):
-        previous_trips = []
-        for b in range(NTRIPS):
-            if model.end_times[b] <= model.start_times[t]:
-                previous_trips.append(b)
-        for d in range(NDUTIES):
-            cp_model.add(end_dt[t][d] == sum([(model.durations[b])*presence_of(trip2duty[(b, d)])
-                                              for b in previous_trips]) + (model.durations[t]))
+        end_dt = []
+        for t in range(NTRIPS):
+            end_dt.append([integer_var(min=0,
+                                       max=model.constraints.shift_span,
+                                       name=f"EDT_{t:02}_{d:02}") for d in range(NDUTIES)])
 
-    for t in range(NTRIPS):
-        for d in range(NDUTIES):
-            cp_model.add(
-                if_then(
-                    logical_and((end_dt[t][d] <= model.constraints.continuous_driving),
-                                (presence_of(trip2duty[(t, d)]))),
-                    (end_of(trip2duty[(t, d)]) <= start_of(breaks[(d)]))))
-            cp_model.add(
-                if_then(
-                    logical_and((end_dt[t][d] > model.constraints.continuous_driving),
-                                (presence_of(trip2duty[(t, d)]))),
-                    (start_of(trip2duty[(t, d)]) >= end_of(breaks[(d)]))))
+        for t in range(NTRIPS):
+            previous_trips = []
+            for b in range(NTRIPS):
+                if model.end_times[b] <= model.start_times[t]:
+                    previous_trips.append(b)
+            for d in range(NDUTIES):
+                cp_model.add(end_dt[t][d]
+                             == sum([(model.durations[b]) * presence_of(trip2duty[(b, d)]) for b in previous_trips])
+                             + (model.durations[t]))
 
-    obj = cp_model.sum([presence_of(duty) for duty in duties])
-    cp_model.add(obj >= lower_bound)
-    cp_model.add(cp_model.minimize(obj))
+        for t in range(NTRIPS):
+            for d in range(NDUTIES):
+                cp_model.add(
+                    if_then(
+                        logical_and((end_dt[t][d] <= model.constraints.continuous_driving),
+                                    (presence_of(trip2duty[(t, d)]))),
+                        (end_of(trip2duty[(t, d)]) <= start_of(breaks[(d)]))))
+                cp_model.add(
+                    if_then(
+                        logical_and((end_dt[t][d] > model.constraints.continuous_driving),
+                                    (presence_of(trip2duty[(t, d)]))),
+                        (start_of(trip2duty[(t, d)]) >= end_of(breaks[(d)]))))
+
+    if nbuses is not None:
+        bus_usage = step_at(0, 0)
+        for t in range(NTRIPS):
+            for d in range(NDUTIES):
+                bus_usage += pulse(trip2duty[(t, d)], 1)
+
+        cp_model.add(bus_usage <= nbuses)
+
+    if objective:
+        obj = cp_model.sum([presence_of(duty) for duty in duties])
+        cp_model.add(obj >= lower_bound)
+        cp_model.add(cp_model.minimize(obj))
 
     model_info = {
         'model': model,
@@ -98,6 +111,7 @@ def simple_CSP(model: CSPModel,
         'duties': duties,
         'trip2duty': trip2duty,
         'breaks': breaks,
+        'nbuses': nbuses,
         'min_start': min_start,
         'max_end': max_end
     }
@@ -110,13 +124,23 @@ if __name__ == "__main__":
     DATAFILE = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
     ROUTE = '910'
+    BREAKS = True
 
-    d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=True)
+    d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=False)
 
     model = CSPModel(d)
     model.build_model()
 
-    cp_model, model_info = simple_CSP(model=model, nduties=10)
-    cpsol = cp_model.solve(TimeLimit=30)
+    cp_model, model_info = simple_CSP(model=model,
+                                      nduties=30,
+                                      ntrips=None,
+                                      add_breaks=BREAKS,
+                                      nbuses=3,
+                                      objective=True)
 
-    log_and_plot(sol=cpsol, model_info=model_info, save_folder=SAVELOC)
+    cpsol = cp_model.solve(TimeLimit=180)
+
+    log_and_plot(sol=cpsol,
+                 model_info=model_info,
+                 save_folder=SAVELOC,
+                 has_breaks=BREAKS)

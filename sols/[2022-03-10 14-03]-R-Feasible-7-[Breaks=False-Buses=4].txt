@@ -1,0 +1,597 @@
+-------------------------------------------------------------------------------
+Model constraints: 80, variables: integer: 0, interval: 590, sequence: 10
+Solve status: Feasible
+Search status: SearchStopped, stop cause: SearchStoppedByLimit
+Solve time: 60.08 sec
+-------------------------------------------------------------------------------
+Objective values: (7,), bounds: (5,), gaps: (0.285714,)
+Duty_0: absent
+Duty_1: (start=300, end=769, size=469, length=469)
+Duty_2: (start=645, end=1234, size=589, length=589)
+Duty_3: absent
+Duty_4: (start=380, end=943, size=563, length=563)
+Duty_5: absent
+Duty_6: (start=860, end=1460, size=600, length=600)
+Duty_7: (start=465, end=1062, size=597, length=597)
+Duty_8: (start=320, end=869, size=549, length=549)
+Duty_9: (start=845, end=1425, size=580, length=580)
+Trip_00 | Duty_00: absent
+Trip_00 | Duty_01: (start=300, end=340, size=40, length=40)
+Trip_00 | Duty_02: absent
+Trip_00 | Duty_03: absent
+Trip_00 | Duty_04: absent
+Trip_00 | Duty_05: absent
+Trip_00 | Duty_06: absent
+Trip_00 | Duty_07: absent
+Trip_00 | Duty_08: absent
+Trip_00 | Duty_09: absent
+Trip_01 | Duty_00: absent
+Trip_01 | Duty_01: absent
+Trip_01 | Duty_02: absent
+Trip_01 | Duty_03: absent
+Trip_01 | Duty_04: absent
+Trip_01 | Duty_05: absent
+Trip_01 | Duty_06: absent
+Trip_01 | Duty_07: absent
+Trip_01 | Duty_08: (start=320, end=360, size=40, length=40)
+Trip_01 | Duty_09: absent
+Trip_02 | Duty_00: absent
+Trip_02 | Duty_01: (start=355, end=395, size=40, length=40)
+Trip_02 | Duty_02: absent
+Trip_02 | Duty_03: absent
+Trip_02 | Duty_04: absent
+Trip_02 | Duty_05: absent
+Trip_02 | Duty_06: absent
+Trip_02 | Duty_07: absent
+Trip_02 | Duty_08: absent
+Trip_02 | Duty_09: absent
+Trip_03 | Duty_00: absent
+Trip_03 | Duty_01: absent
+Trip_03 | Duty_02: absent
+Trip_03 | Duty_03: absent
+Trip_03 | Duty_04: (start=380, end=424, size=44, length=44)
+Trip_03 | Duty_05: absent
+Trip_03 | Duty_06: absent
+Trip_03 | Duty_07: absent
+Trip_03 | Duty_08: absent
+Trip_03 | Duty_09: absent
+Trip_04 | Duty_00: absent
+Trip_04 | Duty_01: absent
+Trip_04 | Duty_02: absent
+Trip_04 | Duty_03: absent
+Trip_04 | Duty_04: absent
+Trip_04 | Duty_05: absent
+Trip_04 | Duty_06: absent
+Trip_04 | Duty_07: absent
+Trip_04 | Duty_08: (start=400, end=444, size=44, length=44)
+Trip_04 | Duty_09: absent
+Trip_05 | Duty_00: absent
+Trip_05 | Duty_01: (start=420, end=468, size=48, length=48)
+Trip_05 | Duty_02: absent
+Trip_05 | Duty_03: absent
+Trip_05 | Duty_04: absent
+Trip_05 | Duty_05: absent
+Trip_05 | Duty_06: absent
+Trip_05 | Duty_07: absent
+Trip_05 | Duty_08: absent
+Trip_05 | Duty_09: absent
+Trip_06 | Duty_00: absent
+Trip_06 | Duty_01: absent
+Trip_06 | Duty_02: absent
+Trip_06 | Duty_03: absent
+Trip_06 | Duty_04: (start=435, end=483, size=48, length=48)
+Trip_06 | Duty_05: absent
+Trip_06 | Duty_06: absent
+Trip_06 | Duty_07: absent
+Trip_06 | Duty_08: absent
+Trip_06 | Duty_09: absent
+Trip_07 | Duty_00: absent
+Trip_07 | Duty_01: absent
+Trip_07 | Duty_02: absent
+Trip_07 | Duty_03: absent
+Trip_07 | Duty_04: absent
+Trip_07 | Duty_05: absent
+Trip_07 | Duty_06: absent
+Trip_07 | Duty_07: absent
+Trip_07 | Duty_08: (start=450, end=498, size=48, length=48)
+Trip_07 | Duty_09: absent
+Trip_08 | Duty_00: absent
+Trip_08 | Duty_01: absent
+Trip_08 | Duty_02: absent
+Trip_08 | Duty_03: absent
+Trip_08 | Duty_04: absent
+Trip_08 | Duty_05: absent
+Trip_08 | Duty_06: absent
+Trip_08 | Duty_07: (start=465, end=513, size=48, length=48)
+Trip_08 | Duty_08: absent
+Trip_08 | Duty_09: absent
+Trip_09 | Duty_00: absent
+Trip_09 | Duty_01: (start=480, end=532, size=52, length=52)
+Trip_09 | Duty_02: absent
+Trip_09 | Duty_03: absent
+Trip_09 | Duty_04: absent
+Trip_09 | Duty_05: absent
+Trip_09 | Duty_06: absent
+Trip_09 | Duty_07: absent
+Trip_09 | Duty_08: absent
+Trip_09 | Duty_09: absent
+Trip_10 | Duty_00: absent
+Trip_10 | Duty_01: absent
+Trip_10 | Duty_02: absent
+Trip_10 | Duty_03: absent
+Trip_10 | Duty_04: (start=495, end=547, size=52, length=52)
+Trip_10 | Duty_05: absent
+Trip_10 | Duty_06: absent
+Trip_10 | Duty_07: absent
+Trip_10 | Duty_08: absent
+Trip_10 | Duty_09: absent
+Trip_11 | Duty_00: absent
+Trip_11 | Duty_01: absent
+Trip_11 | Duty_02: absent
+Trip_11 | Duty_03: absent
+Trip_11 | Duty_04: absent
+Trip_11 | Duty_05: absent
+Trip_11 | Duty_06: absent
+Trip_11 | Duty_07: (start=515, end=567, size=52, length=52)
+Trip_11 | Duty_08: absent
+Trip_11 | Duty_09: absent
+Trip_12 | Duty_00: absent
+Trip_12 | Duty_01: absent
+Trip_12 | Duty_02: absent
+Trip_12 | Duty_03: absent
+Trip_12 | Duty_04: absent
+Trip_12 | Duty_05: absent
+Trip_12 | Duty_06: absent
+Trip_12 | Duty_07: absent
+Trip_12 | Duty_08: (start=530, end=582, size=52, length=52)
+Trip_12 | Duty_09: absent
+Trip_13 | Duty_00: absent
+Trip_13 | Duty_01: (start=545, end=597, size=52, length=52)
+Trip_13 | Duty_02: absent
+Trip_13 | Duty_03: absent
+Trip_13 | Duty_04: absent
+Trip_13 | Duty_05: absent
+Trip_13 | Duty_06: absent
+Trip_13 | Duty_07: absent
+Trip_13 | Duty_08: absent
+Trip_13 | Duty_09: absent
+Trip_14 | Duty_00: absent
+Trip_14 | Duty_01: absent
+Trip_14 | Duty_02: absent
+Trip_14 | Duty_03: absent
+Trip_14 | Duty_04: (start=565, end=617, size=52, length=52)
+Trip_14 | Duty_05: absent
+Trip_14 | Duty_06: absent
+Trip_14 | Duty_07: absent
+Trip_14 | Duty_08: absent
+Trip_14 | Duty_09: absent
+Trip_15 | Duty_00: absent
+Trip_15 | Duty_01: absent
+Trip_15 | Duty_02: absent
+Trip_15 | Duty_03: absent
+Trip_15 | Duty_04: absent
+Trip_15 | Duty_05: absent
+Trip_15 | Duty_06: absent
+Trip_15 | Duty_07: (start=580, end=632, size=52, length=52)
+Trip_15 | Duty_08: absent
+Trip_15 | Duty_09: absent
+Trip_16 | Duty_00: absent
+Trip_16 | Duty_01: absent
+Trip_16 | Duty_02: absent
+Trip_16 | Duty_03: absent
+Trip_16 | Duty_04: absent
+Trip_16 | Duty_05: absent
+Trip_16 | Duty_06: absent
+Trip_16 | Duty_07: absent
+Trip_16 | Duty_08: (start=595, end=647, size=52, length=52)
+Trip_16 | Duty_09: absent
+Trip_17 | Duty_00: absent
+Trip_17 | Duty_01: (start=610, end=654, size=44, length=44)
+Trip_17 | Duty_02: absent
+Trip_17 | Duty_03: absent
+Trip_17 | Duty_04: absent
+Trip_17 | Duty_05: absent
+Trip_17 | Duty_06: absent
+Trip_17 | Duty_07: absent
+Trip_17 | Duty_08: absent
+Trip_17 | Duty_09: absent
+Trip_18 | Duty_00: absent
+Trip_18 | Duty_01: absent
+Trip_18 | Duty_02: absent
+Trip_18 | Duty_03: absent
+Trip_18 | Duty_04: (start=625, end=669, size=44, length=44)
+Trip_18 | Duty_05: absent
+Trip_18 | Duty_06: absent
+Trip_18 | Duty_07: absent
+Trip_18 | Duty_08: absent
+Trip_18 | Duty_09: absent
+Trip_19 | Duty_00: absent
+Trip_19 | Duty_01: absent
+Trip_19 | Duty_02: (start=645, end=689, size=44, length=44)
+Trip_19 | Duty_03: absent
+Trip_19 | Duty_04: absent
+Trip_19 | Duty_05: absent
+Trip_19 | Duty_06: absent
+Trip_19 | Duty_07: absent
+Trip_19 | Duty_08: absent
+Trip_19 | Duty_09: absent
+Trip_20 | Duty_00: absent
+Trip_20 | Duty_01: absent
+Trip_20 | Duty_02: absent
+Trip_20 | Duty_03: absent
+Trip_20 | Duty_04: absent
+Trip_20 | Duty_05: absent
+Trip_20 | Duty_06: absent
+Trip_20 | Duty_07: (start=660, end=704, size=44, length=44)
+Trip_20 | Duty_08: absent
+Trip_20 | Duty_09: absent
+Trip_21 | Duty_00: absent
+Trip_21 | Duty_01: absent
+Trip_21 | Duty_02: absent
+Trip_21 | Duty_03: absent
+Trip_21 | Duty_04: (start=675, end=719, size=44, length=44)
+Trip_21 | Duty_05: absent
+Trip_21 | Duty_06: absent
+Trip_21 | Duty_07: absent
+Trip_21 | Duty_08: absent
+Trip_21 | Duty_09: absent
+Trip_22 | Duty_00: absent
+Trip_22 | Duty_01: absent
+Trip_22 | Duty_02: (start=695, end=739, size=44, length=44)
+Trip_22 | Duty_03: absent
+Trip_22 | Duty_04: absent
+Trip_22 | Duty_05: absent
+Trip_22 | Duty_06: absent
+Trip_22 | Duty_07: absent
+Trip_22 | Duty_08: absent
+Trip_22 | Duty_09: absent
+Trip_23 | Duty_00: absent
+Trip_23 | Duty_01: absent
+Trip_23 | Duty_02: absent
+Trip_23 | Duty_03: absent
+Trip_23 | Duty_04: absent
+Trip_23 | Duty_05: absent
+Trip_23 | Duty_06: absent
+Trip_23 | Duty_07: absent
+Trip_23 | Duty_08: (start=710, end=754, size=44, length=44)
+Trip_23 | Duty_09: absent
+Trip_24 | Duty_00: absent
+Trip_24 | Duty_01: (start=725, end=769, size=44, length=44)
+Trip_24 | Duty_02: absent
+Trip_24 | Duty_03: absent
+Trip_24 | Duty_04: absent
+Trip_24 | Duty_05: absent
+Trip_24 | Duty_06: absent
+Trip_24 | Duty_07: absent
+Trip_24 | Duty_08: absent
+Trip_24 | Duty_09: absent
+Trip_25 | Duty_00: absent
+Trip_25 | Duty_01: absent
+Trip_25 | Duty_02: absent
+Trip_25 | Duty_03: absent
+Trip_25 | Duty_04: (start=745, end=789, size=44, length=44)
+Trip_25 | Duty_05: absent
+Trip_25 | Duty_06: absent
+Trip_25 | Duty_07: absent
+Trip_25 | Duty_08: absent
+Trip_25 | Duty_09: absent
+Trip_26 | Duty_00: absent
+Trip_26 | Duty_01: absent
+Trip_26 | Duty_02: (start=760, end=804, size=44, length=44)
+Trip_26 | Duty_03: absent
+Trip_26 | Duty_04: absent
+Trip_26 | Duty_05: absent
+Trip_26 | Duty_06: absent
+Trip_26 | Duty_07: absent
+Trip_26 | Duty_08: absent
+Trip_26 | Duty_09: absent
+Trip_27 | Duty_00: absent
+Trip_27 | Duty_01: absent
+Trip_27 | Duty_02: absent
+Trip_27 | Duty_03: absent
+Trip_27 | Duty_04: absent
+Trip_27 | Duty_05: absent
+Trip_27 | Duty_06: absent
+Trip_27 | Duty_07: absent
+Trip_27 | Duty_08: (start=775, end=819, size=44, length=44)
+Trip_27 | Duty_09: absent
+Trip_28 | Duty_00: absent
+Trip_28 | Duty_01: absent
+Trip_28 | Duty_02: absent
+Trip_28 | Duty_03: absent
+Trip_28 | Duty_04: absent
+Trip_28 | Duty_05: absent
+Trip_28 | Duty_06: absent
+Trip_28 | Duty_07: (start=795, end=839, size=44, length=44)
+Trip_28 | Duty_08: absent
+Trip_28 | Duty_09: absent
+Trip_29 | Duty_00: absent
+Trip_29 | Duty_01: absent
+Trip_29 | Duty_02: (start=810, end=854, size=44, length=44)
+Trip_29 | Duty_03: absent
+Trip_29 | Duty_04: absent
+Trip_29 | Duty_05: absent
+Trip_29 | Duty_06: absent
+Trip_29 | Duty_07: absent
+Trip_29 | Duty_08: absent
+Trip_29 | Duty_09: absent
+Trip_30 | Duty_00: absent
+Trip_30 | Duty_01: absent
+Trip_30 | Duty_02: absent
+Trip_30 | Duty_03: absent
+Trip_30 | Duty_04: absent
+Trip_30 | Duty_05: absent
+Trip_30 | Duty_06: absent
+Trip_30 | Duty_07: absent
+Trip_30 | Duty_08: (start=825, end=869, size=44, length=44)
+Trip_30 | Duty_09: absent
+Trip_31 | Duty_00: absent
+Trip_31 | Duty_01: absent
+Trip_31 | Duty_02: absent
+Trip_31 | Duty_03: absent
+Trip_31 | Duty_04: absent
+Trip_31 | Duty_05: absent
+Trip_31 | Duty_06: absent
+Trip_31 | Duty_07: absent
+Trip_31 | Duty_08: absent
+Trip_31 | Duty_09: (start=845, end=893, size=48, length=48)
+Trip_32 | Duty_00: absent
+Trip_32 | Duty_01: absent
+Trip_32 | Duty_02: absent
+Trip_32 | Duty_03: absent
+Trip_32 | Duty_04: absent
+Trip_32 | Duty_05: absent
+Trip_32 | Duty_06: (start=860, end=908, size=48, length=48)
+Trip_32 | Duty_07: absent
+Trip_32 | Duty_08: absent
+Trip_32 | Duty_09: absent
+Trip_33 | Duty_00: absent
+Trip_33 | Duty_01: absent
+Trip_33 | Duty_02: absent
+Trip_33 | Duty_03: absent
+Trip_33 | Duty_04: absent
+Trip_33 | Duty_05: absent
+Trip_33 | Duty_06: absent
+Trip_33 | Duty_07: (start=875, end=923, size=48, length=48)
+Trip_33 | Duty_08: absent
+Trip_33 | Duty_09: absent
+Trip_34 | Duty_00: absent
+Trip_34 | Duty_01: absent
+Trip_34 | Duty_02: absent
+Trip_34 | Duty_03: absent
+Trip_34 | Duty_04: (start=895, end=943, size=48, length=48)
+Trip_34 | Duty_05: absent
+Trip_34 | Duty_06: absent
+Trip_34 | Duty_07: absent
+Trip_34 | Duty_08: absent
+Trip_34 | Duty_09: absent
+Trip_35 | Duty_00: absent
+Trip_35 | Duty_01: absent
+Trip_35 | Duty_02: (start=910, end=958, size=48, length=48)
+Trip_35 | Duty_03: absent
+Trip_35 | Duty_04: absent
+Trip_35 | Duty_05: absent
+Trip_35 | Duty_06: absent
+Trip_35 | Duty_07: absent
+Trip_35 | Duty_08: absent
+Trip_35 | Duty_09: absent
+Trip_36 | Duty_00: absent
+Trip_36 | Duty_01: absent
+Trip_36 | Duty_02: absent
+Trip_36 | Duty_03: absent
+Trip_36 | Duty_04: absent
+Trip_36 | Duty_05: absent
+Trip_36 | Duty_06: absent
+Trip_36 | Duty_07: absent
+Trip_36 | Duty_08: absent
+Trip_36 | Duty_09: (start=925, end=973, size=48, length=48)
+Trip_37 | Duty_00: absent
+Trip_37 | Duty_01: absent
+Trip_37 | Duty_02: absent
+Trip_37 | Duty_03: absent
+Trip_37 | Duty_04: absent
+Trip_37 | Duty_05: absent
+Trip_37 | Duty_06: absent
+Trip_37 | Duty_07: (start=945, end=993, size=48, length=48)
+Trip_37 | Duty_08: absent
+Trip_37 | Duty_09: absent
+Trip_38 | Duty_00: absent
+Trip_38 | Duty_01: absent
+Trip_38 | Duty_02: (start=960, end=1012, size=52, length=52)
+Trip_38 | Duty_03: absent
+Trip_38 | Duty_04: absent
+Trip_38 | Duty_05: absent
+Trip_38 | Duty_06: absent
+Trip_38 | Duty_07: absent
+Trip_38 | Duty_08: absent
+Trip_38 | Duty_09: absent
+Trip_39 | Duty_00: absent
+Trip_39 | Duty_01: absent
+Trip_39 | Duty_02: absent
+Trip_39 | Duty_03: absent
+Trip_39 | Duty_04: absent
+Trip_39 | Duty_05: absent
+Trip_39 | Duty_06: (start=975, end=1027, size=52, length=52)
+Trip_39 | Duty_07: absent
+Trip_39 | Duty_08: absent
+Trip_39 | Duty_09: absent
+Trip_40 | Duty_00: absent
+Trip_40 | Duty_01: absent
+Trip_40 | Duty_02: absent
+Trip_40 | Duty_03: absent
+Trip_40 | Duty_04: absent
+Trip_40 | Duty_05: absent
+Trip_40 | Duty_06: absent
+Trip_40 | Duty_07: absent
+Trip_40 | Duty_08: absent
+Trip_40 | Duty_09: (start=995, end=1047, size=52, length=52)
+Trip_41 | Duty_00: absent
+Trip_41 | Duty_01: absent
+Trip_41 | Duty_02: absent
+Trip_41 | Duty_03: absent
+Trip_41 | Duty_04: absent
+Trip_41 | Duty_05: absent
+Trip_41 | Duty_06: absent
+Trip_41 | Duty_07: (start=1010, end=1062, size=52, length=52)
+Trip_41 | Duty_08: absent
+Trip_41 | Duty_09: absent
+Trip_42 | Duty_00: absent
+Trip_42 | Duty_01: absent
+Trip_42 | Duty_02: (start=1025, end=1077, size=52, length=52)
+Trip_42 | Duty_03: absent
+Trip_42 | Duty_04: absent
+Trip_42 | Duty_05: absent
+Trip_42 | Duty_06: absent
+Trip_42 | Duty_07: absent
+Trip_42 | Duty_08: absent
+Trip_42 | Duty_09: absent
+Trip_43 | Duty_00: absent
+Trip_43 | Duty_01: absent
+Trip_43 | Duty_02: absent
+Trip_43 | Duty_03: absent
+Trip_43 | Duty_04: absent
+Trip_43 | Duty_05: absent
+Trip_43 | Duty_06: (start=1045, end=1097, size=52, length=52)
+Trip_43 | Duty_07: absent
+Trip_43 | Duty_08: absent
+Trip_43 | Duty_09: absent
+Trip_44 | Duty_00: absent
+Trip_44 | Duty_01: absent
+Trip_44 | Duty_02: absent
+Trip_44 | Duty_03: absent
+Trip_44 | Duty_04: absent
+Trip_44 | Duty_05: absent
+Trip_44 | Duty_06: absent
+Trip_44 | Duty_07: absent
+Trip_44 | Duty_08: absent
+Trip_44 | Duty_09: (start=1060, end=1112, size=52, length=52)
+Trip_45 | Duty_00: absent
+Trip_45 | Duty_01: absent
+Trip_45 | Duty_02: (start=1080, end=1124, size=44, length=44)
+Trip_45 | Duty_03: absent
+Trip_45 | Duty_04: absent
+Trip_45 | Duty_05: absent
+Trip_45 | Duty_06: absent
+Trip_45 | Duty_07: absent
+Trip_45 | Duty_08: absent
+Trip_45 | Duty_09: absent
+Trip_46 | Duty_00: absent
+Trip_46 | Duty_01: absent
+Trip_46 | Duty_02: absent
+Trip_46 | Duty_03: absent
+Trip_46 | Duty_04: absent
+Trip_46 | Duty_05: absent
+Trip_46 | Duty_06: (start=1105, end=1149, size=44, length=44)
+Trip_46 | Duty_07: absent
+Trip_46 | Duty_08: absent
+Trip_46 | Duty_09: absent
+Trip_47 | Duty_00: absent
+Trip_47 | Duty_01: absent
+Trip_47 | Duty_02: (start=1130, end=1174, size=44, length=44)
+Trip_47 | Duty_03: absent
+Trip_47 | Duty_04: absent
+Trip_47 | Duty_05: absent
+Trip_47 | Duty_06: absent
+Trip_47 | Duty_07: absent
+Trip_47 | Duty_08: absent
+Trip_47 | Duty_09: absent
+Trip_48 | Duty_00: absent
+Trip_48 | Duty_01: absent
+Trip_48 | Duty_02: absent
+Trip_48 | Duty_03: absent
+Trip_48 | Duty_04: absent
+Trip_48 | Duty_05: absent
+Trip_48 | Duty_06: absent
+Trip_48 | Duty_07: absent
+Trip_48 | Duty_08: absent
+Trip_48 | Duty_09: (start=1150, end=1194, size=44, length=44)
+Trip_49 | Duty_00: absent
+Trip_49 | Duty_01: absent
+Trip_49 | Duty_02: absent
+Trip_49 | Duty_03: absent
+Trip_49 | Duty_04: absent
+Trip_49 | Duty_05: absent
+Trip_49 | Duty_06: (start=1170, end=1214, size=44, length=44)
+Trip_49 | Duty_07: absent
+Trip_49 | Duty_08: absent
+Trip_49 | Duty_09: absent
+Trip_50 | Duty_00: absent
+Trip_50 | Duty_01: absent
+Trip_50 | Duty_02: (start=1190, end=1234, size=44, length=44)
+Trip_50 | Duty_03: absent
+Trip_50 | Duty_04: absent
+Trip_50 | Duty_05: absent
+Trip_50 | Duty_06: absent
+Trip_50 | Duty_07: absent
+Trip_50 | Duty_08: absent
+Trip_50 | Duty_09: absent
+Trip_51 | Duty_00: absent
+Trip_51 | Duty_01: absent
+Trip_51 | Duty_02: absent
+Trip_51 | Duty_03: absent
+Trip_51 | Duty_04: absent
+Trip_51 | Duty_05: absent
+Trip_51 | Duty_06: (start=1215, end=1259, size=44, length=44)
+Trip_51 | Duty_07: absent
+Trip_51 | Duty_08: absent
+Trip_51 | Duty_09: absent
+Trip_52 | Duty_00: absent
+Trip_52 | Duty_01: absent
+Trip_52 | Duty_02: absent
+Trip_52 | Duty_03: absent
+Trip_52 | Duty_04: absent
+Trip_52 | Duty_05: absent
+Trip_52 | Duty_06: absent
+Trip_52 | Duty_07: absent
+Trip_52 | Duty_08: absent
+Trip_52 | Duty_09: (start=1240, end=1284, size=44, length=44)
+Trip_53 | Duty_00: absent
+Trip_53 | Duty_01: absent
+Trip_53 | Duty_02: absent
+Trip_53 | Duty_03: absent
+Trip_53 | Duty_04: absent
+Trip_53 | Duty_05: absent
+Trip_53 | Duty_06: (start=1270, end=1310, size=40, length=40)
+Trip_53 | Duty_07: absent
+Trip_53 | Duty_08: absent
+Trip_53 | Duty_09: absent
+Trip_54 | Duty_00: absent
+Trip_54 | Duty_01: absent
+Trip_54 | Duty_02: absent
+Trip_54 | Duty_03: absent
+Trip_54 | Duty_04: absent
+Trip_54 | Duty_05: absent
+Trip_54 | Duty_06: absent
+Trip_54 | Duty_07: absent
+Trip_54 | Duty_08: absent
+Trip_54 | Duty_09: (start=1305, end=1345, size=40, length=40)
+Trip_55 | Duty_00: absent
+Trip_55 | Duty_01: absent
+Trip_55 | Duty_02: absent
+Trip_55 | Duty_03: absent
+Trip_55 | Duty_04: absent
+Trip_55 | Duty_05: absent
+Trip_55 | Duty_06: absent
+Trip_55 | Duty_07: absent
+Trip_55 | Duty_08: absent
+Trip_55 | Duty_09: (start=1345, end=1385, size=40, length=40)
+Trip_56 | Duty_00: absent
+Trip_56 | Duty_01: absent
+Trip_56 | Duty_02: absent
+Trip_56 | Duty_03: absent
+Trip_56 | Duty_04: absent
+Trip_56 | Duty_05: absent
+Trip_56 | Duty_06: absent
+Trip_56 | Duty_07: absent
+Trip_56 | Duty_08: absent
+Trip_56 | Duty_09: (start=1385, end=1425, size=40, length=40)
+Trip_57 | Duty_00: absent
+Trip_57 | Duty_01: absent
+Trip_57 | Duty_02: absent
+Trip_57 | Duty_03: absent
+Trip_57 | Duty_04: absent
+Trip_57 | Duty_05: absent
+Trip_57 | Duty_06: (start=1420, end=1460, size=40, length=40)
+Trip_57 | Duty_07: absent
+Trip_57 | Duty_08: absent
+Trip_57 | Duty_09: absent
