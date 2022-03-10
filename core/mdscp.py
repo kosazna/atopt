@@ -125,7 +125,7 @@ if __name__ == "__main__":
 
     DATAFILE = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
-    ROUTE = '910'
+    ROUTE = 'A2'
     BREAKS = False
     TRAFFIC = False
     TIMELIMIT = 60

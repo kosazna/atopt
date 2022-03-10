@@ -58,6 +58,9 @@ def single_depot_CSP(model: CSPModel,
     for t in range(NTRIPS):
         cp_model.add(cp_model.sum([presence_of(trip2duty[(t, d)])
                                    for d in range(NDUTIES)]) == 1)
+
+    # If the model is to be solved considering breaks then
+    # the following variables and constraints are added
     if add_breaks:
         breaks = [interval_var(size=model.constraints.break_time,
                                name=f"BreakTime_{i}",
@@ -93,6 +96,8 @@ def single_depot_CSP(model: CSPModel,
                                     (presence_of(trip2duty[(t, d)]))),
                         (start_of(trip2duty[(t, d)]) >= end_of(breaks[(d)]))))
 
+    # If the model is to be solved considering vehicle limit then
+    # the following variable and constraint are added
     if nbuses is not None:
         bus_usage = step_at(0, 0)
         for t in range(NTRIPS):
@@ -101,6 +106,9 @@ def single_depot_CSP(model: CSPModel,
 
         cp_model.add(bus_usage <= nbuses)
 
+    # If the model is to be solved as a constraint optimization problem
+    # instead of constraint satisfaction problem then
+    # the following obective is added
     if objective:
         obj = cp_model.sum([presence_of(duty) for duty in duties])
         cp_model.add(obj >= lower_bound)
@@ -126,8 +134,8 @@ if __name__ == "__main__":
     DATAFILE = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
     ROUTE = '910'
-    BREAKS = False
-    TRAFFIC = False
+    BREAKS = True
+    TRAFFIC = True
     TIMELIMIT = 60
     NDUTIES = 10
 
