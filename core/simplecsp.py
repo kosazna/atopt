@@ -126,6 +126,8 @@ if __name__ == "__main__":
     ROUTE = '910'
     BREAKS = True
     TRAFFIC = True
+    TIMELIMIT = 60
+    NDUTIES = 10
 
     d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
 
@@ -133,13 +135,13 @@ if __name__ == "__main__":
     model.build_model()
 
     cp_model, model_info = simple_CSP(model=model,
-                                      nduties=30,
+                                      nduties=NDUTIES,
                                       ntrips=None,
                                       add_breaks=BREAKS,
                                       nbuses=None,
                                       objective=True)
 
-    cpsol = cp_model.solve(TimeLimit=60)
+    cpsol = cp_model.solve(TimeLimit=TIMELIMIT)
 
     log_and_plot(sol=cpsol,
                  model_info=model_info,
