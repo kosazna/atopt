@@ -14,6 +14,12 @@ def single_depot_CSP(model: CSPModel,
                      nbuses: Optional[int] = None,
                      objective: Optional[bool] = True) -> CpoModel:
 
+    min_buses = model.vehicles_boundaries()[1]
+
+    if nbuses is not None and nbuses < min_buses:
+        raise ValueError(
+            f"Model can't be solved with less than {min_buses} vehicles")
+
     cp_model = CpoModel(name="CSP_Single_Depot")
 
     NDUTIES = nduties
@@ -23,17 +29,10 @@ def single_depot_CSP(model: CSPModel,
     else:
         NTRIPS = ntrips
 
-    min_start = min(model.start_times)
-    max_start = max(model.start_times)
-    min_end = min(model.end_times)
-    max_end = max(model.end_times)
-
-    lower_bound = np.ceil(sum(model.durations) / model.constraints.shift_span)
-
     breaks = None
 
-    duties = [interval_var(start=(min_start, max_start),
-                           end=(min_end, max_end),
+    duties = [interval_var(start=(model.min_start, model.max_start),
+                           end=(model.min_end, model.max_end),
                            size=(0, model.constraints.shift_span),
                            name=f"Duty_{i}",
                            optional=True)
@@ -111,7 +110,7 @@ def single_depot_CSP(model: CSPModel,
     # the following obective is added
     if objective:
         obj = cp_model.sum([presence_of(duty) for duty in duties])
-        cp_model.add(obj >= lower_bound)
+        cp_model.add(obj >= model.minimum_duties)
         cp_model.add(cp_model.minimize(obj))
 
     model_info = {
@@ -122,8 +121,8 @@ def single_depot_CSP(model: CSPModel,
         'trip2duty': trip2duty,
         'breaks': breaks,
         'nbuses': nbuses,
-        'min_start': min_start,
-        'max_end': max_end
+        'min_start': model.min_start,
+        'max_end': model.max_end
     }
 
     return cp_model, model_info
@@ -133,7 +132,7 @@ if __name__ == "__main__":
 
     DATAFILE = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
-    ROUTE = '910'
+    ROUTE = 'A2'
     BREAKS = True
     TRAFFIC = True
     TIMELIMIT = 60

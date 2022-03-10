@@ -202,6 +202,14 @@ class CSPModel:
         self.end_locs = self.data[final_depot].to_list()
         self.durations = self.data[trip_duration].values
 
+        self.min_start = min(self.start_times)
+        self.max_start = max(self.start_times)
+        self.min_end = min(self.end_times)
+        self.max_end = max(self.end_times)
+
+        self.minimum_duties = np.ceil(
+            sum(self.durations) / self.constraints.shift_span)
+
     def build_model(self) -> list:
         _min = self.data[trip_duration].min()
 
@@ -214,6 +222,17 @@ class CSPModel:
                                    row.end_time,
                                    row.trip_duration,
                                    _min))
+
+    def vehicles_boundaries(self):
+        vehicles_per_minute = []
+        for minute in range(self.min_start, self.max_start + 1):
+            nvehicles = 0
+            for trip_start, trip_end in zip(self.start_times, self.end_times):
+                if trip_start <= minute <= trip_end:
+                    nvehicles += 1
+            vehicles_per_minute.append(nvehicles)
+
+        return min(vehicles_per_minute), max(vehicles_per_minute)
 
 
 class Solution:
