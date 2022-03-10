@@ -125,8 +125,9 @@ if __name__ == "__main__":
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
     ROUTE = '910'
     BREAKS = True
+    TRAFFIC = True
 
-    d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=False)
+    d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
 
     model = CSPModel(d)
     model.build_model()
@@ -135,10 +136,10 @@ if __name__ == "__main__":
                                       nduties=30,
                                       ntrips=None,
                                       add_breaks=BREAKS,
-                                      nbuses=3,
+                                      nbuses=None,
                                       objective=True)
 
-    cpsol = cp_model.solve(TimeLimit=180)
+    cpsol = cp_model.solve(TimeLimit=120)
 
     log_and_plot(sol=cpsol,
                  model_info=model_info,

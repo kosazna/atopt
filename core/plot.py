@@ -11,7 +11,8 @@ from pylab import rcParams
 def log_and_plot(sol: CpoSolveResult,
                  model_info: dict,
                  save_folder: Union[str, Path],
-                 has_breaks: Optional[bool] = True):
+                 has_breaks: Optional[bool] = True,
+                 has_traffic: Optional[bool] = True):
     rcParams['figure.figsize'] = 10, 4
 
     model = model_info.get('model')
@@ -35,9 +36,9 @@ def log_and_plot(sol: CpoSolveResult,
 
     date_str = datetime.now().strftime('[%Y-%m-%d %H-%M]')
     out = save_loc.joinpath(
-        f"{date_str}-R-{status}-{total_duties}-[Breaks={bool(breaks)}-Buses={nbuses}].txt")
+        f"{date_str}-R-{status}-{total_duties}-[Breaks={bool(breaks)}-Traffic={has_traffic}-Buses={nbuses}].txt")
     sol_log = save_loc.joinpath(
-        f"{date_str}-S-{status}-{total_duties}-[Breaks={bool(breaks)}-Buses={nbuses}].txt")
+        f"{date_str}-S-{status}-{total_duties}-[Breaks={bool(breaks)}-Traffic={has_traffic}-Buses={nbuses}].txt")
 
     sol.print_solution()
 
@@ -71,7 +72,7 @@ def log_and_plot(sol: CpoSolveResult,
             # print(cdt[d])
     sol.write(str(out))
 
-    visu.timeline(f"{date_str}-F-{status}-{total_duties}-[Breaks={bool(breaks)}-Buses={nbuses}]",
+    visu.timeline(f"{date_str}-F-{status}-{total_duties}-[Breaks={bool(breaks)}-Traffic={has_traffic}-Buses={nbuses}]",
                   origin=min_start,
                   horizon=max_end)
 
