@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from atopt.utilities import *
 from atopt.core.initial import Insertions
-from atopt.core.simplecsp import simple_CSP
+from atopt.core.sdcsp import single_depot_CSP
 from atopt.core.plot import log_and_plot
 from docplex.cp.model import *
 from pathlib import Path
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     else:
         SAVELOC = Path(args.save)
 
-    cp_model, model_info = simple_CSP(model=model, nduties=NDUTIES)
+    cp_model, model_info = single_depot_CSP(model=model, nduties=NDUTIES)
     cpsol = cp_model.solve(TimeLimit=TIMELIMIT)
 
     log_and_plot(sol=cpsol, model_info=model_info, save_folder=SAVELOC)

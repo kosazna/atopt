@@ -5,12 +5,12 @@ from atopt.core.plot import log_and_plot
 from docplex.cp.model import *
 
 
-def simple_CSP(model: CSPModel,
-               nduties: int,
-               ntrips: Optional[int] = None,
-               add_breaks: Optional[bool] = True,
-               nbuses: Optional[int] = None,
-               objective: Optional[bool] = True) -> CpoModel:
+def single_depot_CSP(model: CSPModel,
+                     nduties: int,
+                     ntrips: Optional[int] = None,
+                     add_breaks: Optional[bool] = True,
+                     nbuses: Optional[int] = None,
+                     objective: Optional[bool] = True) -> CpoModel:
 
     cp_model = CpoModel(name="CSP_Simple_Solution")
 
@@ -134,16 +134,16 @@ if __name__ == "__main__":
     model = CSPModel(d)
     model.build_model()
 
-    cp_model, model_info = simple_CSP(model=model,
-                                      nduties=NDUTIES,
-                                      ntrips=None,
-                                      add_breaks=BREAKS,
-                                      nbuses=None,
-                                      objective=True)
+    cp_model, model_info = single_depot_CSP(model=model,
+                                            nduties=NDUTIES,
+                                            ntrips=None,
+                                            add_breaks=BREAKS,
+                                            nbuses=None,
+                                            objective=True)
 
-    cpsol = cp_model.solve(TimeLimit=TIMELIMIT)
+    cp_sol = cp_model.solve(TimeLimit=TIMELIMIT)
 
-    log_and_plot(sol=cpsol,
+    log_and_plot(sol=cp_sol,
                  model_info=model_info,
                  save_folder=SAVELOC,
                  has_breaks=BREAKS,
