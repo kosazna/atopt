@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from typing import Optional
 
+import numpy as np
 from atopt.core.plot import log_and_plot
-from atopt.utilities import *
+from atopt.utilities import CSPModel, DataProvider
 from docplex.cp.model import *
 
 
@@ -136,11 +137,11 @@ if __name__ == "__main__":
     model.build_model()
 
     cp_model, model_info = multi_depot_CSP(model=model,
-                                            nduties=NDUTIES,
-                                            ntrips=None,
-                                            add_breaks=BREAKS,
-                                            nbuses=None,
-                                            objective=True)
+                                           nduties=NDUTIES,
+                                           ntrips=None,
+                                           add_breaks=BREAKS,
+                                           nbuses=None,
+                                           objective=True)
 
     cp_sol = cp_model.solve(TimeLimit=TIMELIMIT)
 

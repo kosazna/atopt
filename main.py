@@ -4,17 +4,16 @@ from pathlib import Path
 
 from docplex.cp.model import *
 
-from atopt.core.initial import Insertions
 from atopt.core.plot import log_and_plot
 from atopt.core.sdcsp import single_depot_CSP
-from atopt.utilities import *
+from atopt.utilities import CSPModel, DataProvider
 
 my_parser = argparse.ArgumentParser()
+my_parser.add_argument('-r', '--route', action='store', type=str, default='910')
+my_parser.add_argument('-d', '--duties', action='store', type=int, default=10)
 my_parser.add_argument('-t', '--trips', action='store', type=int)
-my_parser.add_argument('-d', '--duties', action='store', type=int)
 my_parser.add_argument('-l', '--limit', action='store', type=int, default=120)
 my_parser.add_argument('-v', '--vehicles', action='store', type=int)
-my_parser.add_argument('-r', '--route', action='store', type=str, default='910')
 my_parser.add_argument('-s', '--save', action='store', type=str)
 my_parser.add_argument('-a', '--adjust', action='store', type=int, default=1)
 my_parser.add_argument('-b', '--breaks', action='store', type=int, default=1)
@@ -28,20 +27,19 @@ if __name__ == "__main__":
     args = my_parser.parse_args()
 
     ROUTE = args.route
+    NTRIPS = args.trips
     TIMELIMIT = args.limit
-    DATAFILE = args.filepath
+    BUSES = args.vehicles
     TRAFFIC = bool(args.adjust)
     BREAKS = bool(args.breaks)
-    NTRIPS = args.trips
-    BUSES = args.vehicles
+    DATAFILE = args.filepath
 
-    d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
+    d = DataProvider(filepath=DATAFILE,
+                     route=ROUTE,
+                     adjust_for_traffic=TRAFFIC)
 
     model = CSPModel(d)
     model.build_model()
-
-    # initial = Insertions(model)
-    # initial.solve()
 
     if args.duties is None:
         NDUTIES = 10

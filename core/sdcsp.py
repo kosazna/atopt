@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from typing import Optional
 
+import numpy as np
 from atopt.core.plot import log_and_plot
-from atopt.utilities import *
+from atopt.utilities import CSPModel, DataProvider
 from docplex.cp.model import *
 
 
