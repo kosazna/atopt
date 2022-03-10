@@ -7,12 +7,18 @@ from atopt.utilities import CSPModel, DataProvider
 from docplex.cp.model import *
 
 
-def multi_depot_CSP(model: CSPModel,
-                    nduties: int,
-                    ntrips: Optional[int] = None,
-                    add_breaks: Optional[bool] = True,
-                    nbuses: Optional[int] = None,
-                    objective: Optional[bool] = True) -> CpoModel:
+def multiple_depot_CSP(model: CSPModel,
+                       nduties: int,
+                       ntrips: Optional[int] = None,
+                       add_breaks: Optional[bool] = True,
+                       nbuses: Optional[int] = None,
+                       objective: Optional[bool] = True) -> CpoModel:
+
+    min_buses = model.vehicles_boundaries()[1]
+
+    if nbuses is not None and nbuses < min_buses:
+        raise ValueError(
+            f"Model can't be solved with less than {min_buses} vehicles")
 
     cp_model = CpoModel(name="CSP_Multiple_Depot")
 
@@ -23,17 +29,10 @@ def multi_depot_CSP(model: CSPModel,
     else:
         NTRIPS = ntrips
 
-    min_start = min(model.start_times)
-    max_start = max(model.start_times)
-    min_end = min(model.end_times)
-    max_end = max(model.end_times)
-
-    lower_bound = np.ceil(sum(model.durations) / model.constraints.shift_span)
-
     breaks = None
 
-    duties = [interval_var(start=(min_start, max_start),
-                           end=(min_end, max_end),
+    duties = [interval_var(start=(model.min_start, model.max_start),
+                           end=(model.min_end, model.max_end),
                            size=(0, model.constraints.shift_span),
                            name=f"Duty_{i}",
                            optional=True)
@@ -58,7 +57,9 @@ def multi_depot_CSP(model: CSPModel,
     for t in range(NTRIPS):
         cp_model.add(cp_model.sum([presence_of(trip2duty[(t, d)])
                                    for d in range(NDUTIES)]) == 1)
-                                   
+
+    # If the model is to be solved considering breaks then
+    # the following variables and constraints are added
     if add_breaks:
         breaks = [interval_var(size=model.constraints.break_time,
                                name=f"BreakTime_{i}",
@@ -94,6 +95,8 @@ def multi_depot_CSP(model: CSPModel,
                                     (presence_of(trip2duty[(t, d)]))),
                         (start_of(trip2duty[(t, d)]) >= end_of(breaks[(d)]))))
 
+    # If the model is to be solved considering vehicle limit then
+    # the following variable and constraint are added
     if nbuses is not None:
         bus_usage = step_at(0, 0)
         for t in range(NTRIPS):
@@ -102,9 +105,12 @@ def multi_depot_CSP(model: CSPModel,
 
         cp_model.add(bus_usage <= nbuses)
 
+    # If the model is to be solved as a constraint optimization problem
+    # instead of constraint satisfaction problem then
+    # the following obective is added
     if objective:
         obj = cp_model.sum([presence_of(duty) for duty in duties])
-        cp_model.add(obj >= lower_bound)
+        cp_model.add(obj >= model.minimum_duties)
         cp_model.add(cp_model.minimize(obj))
 
     model_info = {
@@ -115,8 +121,8 @@ def multi_depot_CSP(model: CSPModel,
         'trip2duty': trip2duty,
         'breaks': breaks,
         'nbuses': nbuses,
-        'min_start': min_start,
-        'max_end': max_end
+        'min_start': model.min_start,
+        'max_end': model.max_end
     }
 
     return cp_model, model_info
@@ -127,8 +133,8 @@ if __name__ == "__main__":
     DATAFILE = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
     ROUTE = 'A2'
-    BREAKS = False
-    TRAFFIC = False
+    BREAKS = True
+    TRAFFIC = True
     TIMELIMIT = 60
     NDUTIES = 10
 
@@ -137,12 +143,12 @@ if __name__ == "__main__":
     model = CSPModel(d)
     model.build_model()
 
-    cp_model, model_info = multi_depot_CSP(model=model,
-                                           nduties=NDUTIES,
-                                           ntrips=None,
-                                           add_breaks=BREAKS,
-                                           nbuses=None,
-                                           objective=True)
+    cp_model, model_info = multiple_depot_CSP(model=model,
+                                              nduties=NDUTIES,
+                                              ntrips=None,
+                                              add_breaks=BREAKS,
+                                              nbuses=None,
+                                              objective=True)
 
     cp_sol = cp_model.solve(TimeLimit=TIMELIMIT)
 
