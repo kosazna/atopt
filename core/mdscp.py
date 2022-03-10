@@ -58,6 +58,7 @@ def multi_depot_CSP(model: CSPModel,
     for t in range(NTRIPS):
         cp_model.add(cp_model.sum([presence_of(trip2duty[(t, d)])
                                    for d in range(NDUTIES)]) == 1)
+                                   
     if add_breaks:
         breaks = [interval_var(size=model.constraints.break_time,
                                name=f"BreakTime_{i}",
