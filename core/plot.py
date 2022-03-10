@@ -50,7 +50,6 @@ def log_and_plot(sol: CpoSolveResult,
             if sol[duties[d]]:
                 print(f"\n> Duty {d} : {sol[duties[d]]}")
                 sol_log_file.write(f"\n> Duty {d} : {sol[duties[d]]}")
-                # print(cdt[d])
                 _tdt = 0
                 _ntrips = 0
                 for t in range(ntrips):
@@ -69,7 +68,6 @@ def log_and_plot(sol: CpoSolveResult,
             else:
                 driving_times.append(0)
 
-            # print(cdt[d])
     sol.write(str(out))
 
     visu.timeline(f"{date_str}-F-{status}-{total_duties}-[Breaks={bool(breaks)}-Traffic={has_traffic}-Buses={nbuses}]",
