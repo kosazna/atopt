@@ -139,9 +139,10 @@ if __name__ == "__main__":
                                       nbuses=None,
                                       objective=True)
 
-    cpsol = cp_model.solve(TimeLimit=120)
+    cpsol = cp_model.solve(TimeLimit=60)
 
     log_and_plot(sol=cpsol,
                  model_info=model_info,
                  save_folder=SAVELOC,
-                 has_breaks=BREAKS)
+                 has_breaks=BREAKS,
+                 has_traffic=TRAFFIC)
