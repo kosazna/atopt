@@ -14,7 +14,7 @@ def multi_depot_CSP(model: CSPModel,
                     nbuses: Optional[int] = None,
                     objective: Optional[bool] = True) -> CpoModel:
 
-    cp_model = CpoModel(name="CSP_Simple_Solution")
+    cp_model = CpoModel(name="CSP_Multiple_Depot")
 
     NDUTIES = nduties
 
