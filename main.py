@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-from atopt.utilities import *
-from atopt.core.initial import Insertions
-from atopt.core.sdcsp import single_depot_CSP
-from atopt.core.plot import log_and_plot
-from docplex.cp.model import *
-from pathlib import Path
 import argparse
+from pathlib import Path
 
+from docplex.cp.model import *
+
+from atopt.core.initial import Insertions
+from atopt.core.plot import log_and_plot
+from atopt.core.sdcsp import single_depot_CSP
+from atopt.utilities import *
 
 my_parser = argparse.ArgumentParser()
 my_parser.add_argument('-t', '--trips', action='store', type=int)

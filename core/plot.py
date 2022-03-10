@@ -2,9 +2,10 @@
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Union
-from docplex.cp.model import *
+
 import docplex.cp.utils_visu as visu
 import matplotlib.pyplot as plt
+from docplex.cp.model import *
 from pylab import rcParams
 
 
