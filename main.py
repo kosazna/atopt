@@ -6,6 +6,7 @@ from docplex.cp.model import *
 
 from atopt.core.plot import log_and_plot
 from atopt.core.sdcsp import single_depot_CSP
+from atopt.core.mdcsp import multiple_depot_CSP
 from atopt.utilities import CSPModel, DataProvider
 
 my_parser = argparse.ArgumentParser()
