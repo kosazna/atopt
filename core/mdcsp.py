@@ -20,7 +20,7 @@ def multiple_depot_CSP(model: CSPModel,
         raise ValueError(
             f"Model can't be solved with less than {min_buses} vehicles")
 
-    cp_model = CpoModel(name="CSP_Multiple_Depot")
+    cp_model = CpoModel(name="CSP_Single_Depot")
 
     NDUTIES = nduties
 
@@ -54,12 +54,15 @@ def multiple_depot_CSP(model: CSPModel,
     for d in range(NDUTIES):
         cp_model.add(no_overlap([trip2duty[(t, d)] for t in range(NTRIPS)]))
 
-    for t in range(NDUTIES):
-        cp_model.add(sum([(model.durations[t]) * presence_of(trip2duty[(t, d)]) for t in range(NTRIPS)]) <= model.constraints.total_driving)
-
     for t in range(NTRIPS):
-        cp_model.add(cp_model.sum([presence_of(trip2duty[(t, d)])
-                                   for d in range(NDUTIES)]) == 1)
+        trip_coverage = cp_model.sum([presence_of(trip2duty[(t, d)])
+                                      for d in range(NDUTIES)])
+        cp_model.add(trip_coverage == 1)
+
+    for d in range(NDUTIES):
+        duty_driving_time = cp_model.sum([model.durations[t] * presence_of(trip2duty[(t, d)])
+                                          for t in range(NTRIPS)])
+        cp_model.add(duty_driving_time <= model.constraints.total_driving)
 
     # If the model is to be solved considering breaks then
     # the following variables and constraints are added
@@ -81,9 +84,9 @@ def multiple_depot_CSP(model: CSPModel,
                 if model.end_times[b] <= model.start_times[t]:
                     previous_trips.append(b)
             for d in range(NDUTIES):
-                cp_model.add(end_dt[t][d]
-                             == sum([(model.durations[b]) * presence_of(trip2duty[(b, d)]) for b in previous_trips])
-                             + (model.durations[t]))
+                trips_duration = sum([model.durations[b] * presence_of(trip2duty[(b, d)])
+                                     for b in previous_trips]) + (model.durations[t])
+                cp_model.add(end_dt[t][d] == trips_duration)
 
         for t in range(NTRIPS):
             for d in range(NDUTIES):
@@ -91,12 +94,18 @@ def multiple_depot_CSP(model: CSPModel,
                     if_then(
                         logical_and((end_dt[t][d] <= model.constraints.continuous_driving),
                                     (presence_of(trip2duty[(t, d)]))),
-                        (end_of(trip2duty[(t, d)]) <= start_of(breaks[(d)]))))
+                        (end_of(trip2duty[(t, d)]) <= start_of(breaks[d]))))
                 cp_model.add(
                     if_then(
                         logical_and((end_dt[t][d] > model.constraints.continuous_driving),
                                     (presence_of(trip2duty[(t, d)]))),
-                        (start_of(trip2duty[(t, d)]) >= end_of(breaks[(d)]))))
+                        (start_of(trip2duty[(t, d)]) >= end_of(breaks[d]))))
+
+        # for d in range(NDUTIES):
+        #     duty_driving_time = cp_model.sum([model.durations[t] * presence_of(trip2duty[(t, d)])
+        #                                       for t in range(NTRIPS)])
+        #     cp_model.add(if_then(duty_driving_time <= model.constraints.continuous_driving,
+        #                          presence_of(breaks[(d)]) == 0))
 
     # If the model is to be solved considering vehicle limit then
     # the following variable and constraint are added
