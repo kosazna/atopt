@@ -54,6 +54,9 @@ def multiple_depot_CSP(model: CSPModel,
     for d in range(NDUTIES):
         cp_model.add(no_overlap([trip2duty[(t, d)] for t in range(NTRIPS)]))
 
+    for t in range(NDUTIES):
+        cp_model.add(sum([(model.durations[t]) * presence_of(trip2duty[(t, d)]) for t in range(NTRIPS)]) <= model.constraints.total_driving)
+
     for t in range(NTRIPS):
         cp_model.add(cp_model.sum([presence_of(trip2duty[(t, d)])
                                    for d in range(NDUTIES)]) == 1)
@@ -133,10 +136,10 @@ if __name__ == "__main__":
     DATAFILE = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
     ROUTE = 'A2'
-    BREAKS = True
-    TRAFFIC = True
+    BREAKS = False
+    TRAFFIC = False
     TIMELIMIT = 60
-    NDUTIES = 10
+    NDUTIES = 30
 
     d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
 
