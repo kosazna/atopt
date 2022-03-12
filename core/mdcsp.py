@@ -64,6 +64,21 @@ def multiple_depot_CSP(model: CSPModel,
                                           for t in range(NTRIPS)])
         cp_model.add(duty_driving_time <= model.constraints.total_driving)
 
+    trip_allowed_sequence = []
+    for t1 in range(NTRIPS):
+        allowed_sequence = []
+        for t2 in range(NTRIPS):
+            if model.end_locs[t1] == model.start_locs[t2] and model.end_times[t1] <= model.start_times[t2]:
+                allowed_sequence.append(t2)
+        trip_allowed_sequence.append(allowed_sequence)
+
+    print(trip_allowed_sequence)
+
+    # for d in range(NDUTIES):
+    #     for t in range(NTRIPS):
+    #         cp_model.add(if_then(presence_of(trip2duty[(t, d)]), cp_model.sum([presence_of(trip2duty[nt, d]) for nt in trip_allowed_sequence[t]]))
+
+
     # If the model is to be solved considering breaks then
     # the following variables and constraints are added
     if add_breaks:
@@ -148,7 +163,7 @@ if __name__ == "__main__":
     BREAKS = False
     TRAFFIC = False
     TIMELIMIT = 60
-    NDUTIES = 30
+    NDUTIES = 50
 
     d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
 
@@ -160,12 +175,13 @@ if __name__ == "__main__":
                                               ntrips=None,
                                               add_breaks=BREAKS,
                                               nbuses=None,
-                                              objective=True)
+                                              objective=False)
 
     cp_sol = cp_model.solve(TimeLimit=TIMELIMIT)
-
-    log_and_plot(sol=cp_sol,
-                 model_info=model_info,
-                 save_folder=SAVELOC,
-                 has_breaks=BREAKS,
-                 has_traffic=TRAFFIC)
+    
+    cp_sol.print_solution()
+    # log_and_plot(sol=cp_sol,
+    #              model_info=model_info,
+    #              save_folder=SAVELOC,
+    #              has_breaks=BREAKS,
+    #              has_traffic=TRAFFIC)
