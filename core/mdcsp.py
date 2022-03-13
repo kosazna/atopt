@@ -71,32 +71,42 @@ def multiple_depot_CSP(model: CSPModel,
         for t2 in range(NTRIPS):
             if model.end_locs[t1] == model.start_locs[t2] and model.end_times[t1] <= model.start_times[t2]:
                 allowed_sequence.append(t2)
+                
         trip_allowed_sequence.append(allowed_sequence)
 
     trip_forbidden_sequence = []
     for t1 in range(NTRIPS):
         forbidden_sequence = []
         for t2 in range(NTRIPS):
-            if model.end_locs[t1] != model.start_locs[t2] or model.end_times[t1] >= model.start_times[t2]:
-                forbidden_sequence.append(t2)
+            if t1 != t2:
+                if model.end_locs[t1] != model.start_locs[t2]:
+                    forbidden_sequence.append(t2)
         trip_forbidden_sequence.append(forbidden_sequence)
+        print(f"\n{t1} - > {forbidden_sequence}")
+
+    
+    # for d in range(NDUTIES):
+    #     for t in range(NTRIPS):
+    #         # cp_model.add(alternative(trip2duty[(t, d)], [trip2duty[(at, d)] for at in trip_allowed_sequence[d]]))
+    #         cp_model.add(presence_of(trip2duty[(t, d)]) >= cp_model.sum([presence_of(trip2duty[at,d]) for at in trip_allowed_sequence[t]]))
 
     for d in range(NDUTIES):
         for t in range(NTRIPS):
-            # cp_model.add(alternative(trip2duty[(t, d)], [trip2duty[(at, d)] for at in trip_allowed_sequence[d]]))
-            cp_model.add(presence_of(trip2duty[(t, d)]) >= cp_model.sum([presence_of(trip2duty[at,d]) for at in trip_allowed_sequence[t]]))
+            cp_model.add(
+                if_then(
+                    presence_of(trip2duty[(t, d)]),
+                    cp_model.sum(
+                        [presence_of(trip2duty[(ft, d)]) for ft in trip_forbidden_sequence[t]]) == 0))
 
-    # for d in range(NDUTIES):
-    #     for t in range(NTRIPS):
-    #         # cp_model.add(if_then(presence_of(trip2duty[(t, d)]), cp_model.sum([presence_of(trip2duty[nt, d]) for nt in trip_forbidden_sequence[t]]) == 0))
-    #         # cp_model.add(diff(presence_of(trip2duty[(t, d)]), presence_of(trip2duty[(ft, d)])) for ft in trip_forbidden_sequence[t])
-    #         for ft in trip_forbidden_sequence[t]:
-    #             cp_model.add(
-    #                 if_then(
-    #                     presence_of(trip2duty[(t, d)]),
-    #                     forbid_start(trip2duty[(ft, d)])
-    #                 )
-    #             )
+            # cp_model.add(diff(presence_of(trip2duty[(t, d)]), presence_of(trip2duty[(ft, d)])) for ft in trip_forbidden_sequence[t])
+
+            # for ft in trip_forbidden_sequence[t]:
+            #     cp_model.add(
+            #         if_then(
+            #             presence_of(trip2duty[(t, d)]),
+            #             forbid_start(trip2duty[(ft, d)])
+            #         )
+            #     )
 
 #############################################################################################################
 
@@ -183,7 +193,7 @@ if __name__ == "__main__":
     ROUTE = 'A2'
     BREAKS = False
     TRAFFIC = False
-    TIMELIMIT = 60
+    TIMELIMIT = 120
     NDUTIES = 40
 
     d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
@@ -193,16 +203,18 @@ if __name__ == "__main__":
 
     cp_model, model_info = multiple_depot_CSP(model=model,
                                               nduties=NDUTIES,
-                                              ntrips=None,
+                                              ntrips=50,
                                               add_breaks=BREAKS,
                                               nbuses=None,
                                               objective=False)
 
+    print(model_info['model'].data)
+
     cp_sol = cp_model.solve(TimeLimit=TIMELIMIT)
 
-    cp_sol.print_solution()
-    log_and_plot(sol=cp_sol,
-                 model_info=model_info,
-                 save_folder=SAVELOC,
-                 has_breaks=BREAKS,
-                 has_traffic=TRAFFIC)
+    # cp_sol.print_solution()
+    # log_and_plot(sol=cp_sol,
+    #              model_info=model_info,
+    #              save_folder=SAVELOC,
+    #              has_breaks=BREAKS,
+    #              has_traffic=TRAFFIC)

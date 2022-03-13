@@ -60,7 +60,7 @@ class DataProvider:
             lambda x: calculate_trip_end_time(x[start_time], x[trip_duration]),
             axis=1)
 
-        # self.data = self.data.sort_values(start_time)
+        self.data = self.data.sort_values(start_time)
 
 
 @dataclass
