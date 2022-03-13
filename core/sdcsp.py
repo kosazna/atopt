@@ -142,7 +142,7 @@ def single_depot_CSP(model: CSPModel,
 
 if __name__ == "__main__":
 
-    DATAFILE = "C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/Model Data.xlsx"
+    DATAFILE = "C:/Users/aznavouridis.k/OneDrive/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
     ROUTE = '910'
     BREAKS = True

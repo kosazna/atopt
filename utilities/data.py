@@ -6,9 +6,10 @@ from typing import List
 
 import numpy as np
 import pandas as pd
+from pprint import pprint
 
-from .funcs import (calculate_trip_end_time, time2minutes,
-                    weighted_trip_duration)
+from atopt.utilities.funcs import (calculate_trip_end_time, time2minutes,
+                                   weighted_trip_duration)
 
 # Column names
 trip = 'trip'
@@ -60,7 +61,7 @@ class DataProvider:
             lambda x: calculate_trip_end_time(x[start_time], x[trip_duration]),
             axis=1)
 
-        self.data = self.data.sort_values(start_time)
+        self.data = self.data.sort_values([start_time, initial_depot])
 
 
 @dataclass
@@ -206,6 +207,7 @@ class CSPModel:
         self.max_start = max(self.start_times)
         self.min_end = min(self.end_times)
         self.max_end = max(self.end_times)
+        self.min_trip_duration = min(self.durations)
 
         self.minimum_duties = np.ceil(
             sum(self.durations) / self.constraints.shift_span)
@@ -234,6 +236,22 @@ class CSPModel:
 
         return min(vehicles_per_minute), max(vehicles_per_minute)
 
+    def forbidden_assignments(self):
+        forbidden_assignments_per_trip = []
+        ntrips = len(self.durations)
+
+        for t1 in range(ntrips):
+            forbidden_sequence = []
+            for t2 in range(t1 + 1, ntrips):
+                if self.end_locs[t1] != self.start_locs[t2] and self.start_times[t2] < self.end_times[t1] + self.min_trip_duration:
+                    forbidden_sequence.append(t2)
+            
+            if forbidden_sequence:
+                forbidden_assignments_per_trip.append(forbidden_sequence)
+                # print(f" {t1} -> {forbidden_sequence}")
+
+        return forbidden_assignments_per_trip
+
 
 class Solution:
     def __init__(self,
@@ -259,3 +277,19 @@ class Solution:
         self.start_time_arr = np.array([t.start_time for t in self.trips])
         self.end_time_arr = np.array([t.end_time for t in self.trips])
         self.duration_arr = np.array([t.duration for t in self.trips])
+
+
+if __name__ == "__main__":
+
+    DATAFILE = "C:/Users/aznavouridis.k/OneDrive/_Thesis_/Main Thesis/Model Data.xlsx"
+    SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
+    ROUTE = 'A2'
+    TRAFFIC = False
+
+    d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
+
+    model = CSPModel(d)
+    model.build_model()
+
+    # model.data.to_excel("C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/model_data_fixed.xlsx")
+    model.forbidden_assignments()

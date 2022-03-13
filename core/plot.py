@@ -42,10 +42,14 @@ def log_and_plot(sol: CpoSolveResult,
             f"{date_str}-R-{status}-{total_duties}-[Breaks={bool(breaks)}-Traffic={has_traffic}-Buses={nbuses}].txt")
         sol_log = save_loc.joinpath(
             f"{date_str}-S-{status}-{total_duties}-[Breaks={bool(breaks)}-Traffic={has_traffic}-Buses={nbuses}].txt")
+        sol_excel = save_loc.joinpath(
+            f"{date_str}-S-{status}-{total_duties}-[Breaks={bool(breaks)}-Traffic={has_traffic}-Buses={nbuses}].xlsx")
 
         sol.print_solution()
 
         buses = CpoStepFunction()
+
+        model.data['duty'] = ''
 
         with open(sol_log, 'w') as sol_log_file:
             driving_times = []
@@ -57,6 +61,7 @@ def log_and_plot(sol: CpoSolveResult,
                     _ntrips = 0
                     for t in range(ntrips):
                         if sol[trip2duty[(t, d)]]:
+                            model.data.loc[t, 'duty'] = d
                             bus_td = sol.get_var_solution(trip2duty[(t, d)])
                             buses.add_value(bus_td.get_start(), bus_td.get_end(), 1)
                             print(f"  - Trip {t} : {sol[trip2duty[(t, d)]]}")
@@ -71,6 +76,7 @@ def log_and_plot(sol: CpoSolveResult,
                 else:
                     driving_times.append(0)
 
+        model.data.to_excel(sol_excel)
         sol.write(str(out))
 
         visu.timeline(f"{date_str}-F-{status}-{total_duties}-[Breaks={bool(breaks)}-Traffic={has_traffic}-Buses={nbuses}]",
