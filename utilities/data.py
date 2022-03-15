@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
 import numpy as np
 import pandas as pd
@@ -191,8 +191,8 @@ class Duty:
 
 
 class CSPModel:
-    def __init__(self, data_provider: DataProvider) -> None:
-        self.data = data_provider.data
+    def __init__(self, data_provider: DataProvider, ntrips:Optional[int] = None) -> None:
+        self.data = data_provider.data if ntrips is None else data_provider.data.iloc[:ntrips]
         self.constraints = data_provider.constraints
         self.trips: List[Trip] = []
         self.duties: List[Duty] = []
@@ -252,6 +252,33 @@ class CSPModel:
 
         return forbidden_assignments_per_trip
 
+    def allowed_assignments(self):
+        allowed_assignments_per_trip = []
+        ntrips = len(self.durations)
+
+        for t1 in range(ntrips):
+            allowed_sequence = []
+            for t2 in range(t1 + 1, ntrips):
+                if self.end_locs[t1] == self.start_locs[t2] and self.start_times[t2] >= self.end_times[t1]:
+                    allowed_sequence.append(t2)
+            
+            if allowed_sequence:
+                allowed_assignments_per_trip.append(allowed_sequence)
+                # print(f" {t1} -> {allowed_sequence}")
+
+        return allowed_assignments_per_trip
+
+    def multiple_depot_specs(self):
+        unique_locs = sorted(self.data[initial_depot].unique())
+        unique_locs_mapping = {s:i for i,s in enumerate(unique_locs)}
+        ntrips = len(self.durations)
+
+        trip_state = []
+        for t in range(ntrips):
+            state = (t, self.end_locs[t])
+            trip_state.append(state)
+
+        return unique_locs, unique_locs_mapping, trip_state
 
 class Solution:
     def __init__(self,
@@ -292,4 +319,4 @@ if __name__ == "__main__":
     model.build_model()
 
     # model.data.to_excel("C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/model_data_fixed.xlsx")
-    model.forbidden_assignments()
+    print(model.multiple_depot_specs())

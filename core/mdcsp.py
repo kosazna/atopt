@@ -71,7 +71,7 @@ def multiple_depot_CSP(model: CSPModel,
     #     for t2 in range(NTRIPS):
     #         if model.end_locs[t1] == model.start_locs[t2] and model.end_times[t1] <= model.start_times[t2]:
     #             allowed_sequence.append(t2)
-                
+
     #     trip_allowed_sequence.append(allowed_sequence)
 
     # trip_forbidden_sequence = []
@@ -84,33 +84,67 @@ def multiple_depot_CSP(model: CSPModel,
     #     trip_forbidden_sequence.append(forbidden_sequence)
     #     print(f"\n{t1} - > {forbidden_sequence}")
 
-    
     # for d in range(NDUTIES):
     #     for t in range(NTRIPS):
     #         # cp_model.add(alternative(trip2duty[(t, d)], [trip2duty[(at, d)] for at in trip_allowed_sequence[d]]))
     #         cp_model.add(presence_of(trip2duty[(t, d)]) >= cp_model.sum([presence_of(trip2duty[at,d]) for at in trip_allowed_sequence[t]]))
 
-    trip_forbidden_sequence = model.forbidden_assignments()
+    # trip_forbidden_sequence = model.forbidden_assignments()
+    # for d in range(NDUTIES):
+    #     for t in range(NTRIPS):
+    #         try:
+    #             cp_model.add(
+    #                 if_then(
+    #                     presence_of(trip2duty[(t, d)]),
+    #                     cp_model.sum(
+    #                         [presence_of(trip2duty[(ft, d)]) for ft in trip_forbidden_sequence[t]]) == 0))
+    #         except IndexError:
+    #             pass
+
+        # cp_model.add(diff(presence_of(trip2duty[(t, d)]), presence_of(trip2duty[(ft, d)])) for ft in trip_forbidden_sequence[t])
+
+        # for ft in trip_forbidden_sequence[t]:
+        #     cp_model.add(
+        #         if_then(
+        #             presence_of(trip2duty[(t, d)]),
+        #             forbid_start(trip2duty[(ft, d)])
+        #         )
+        #     )
+
+    # trip_allowed_sequence = model.allowed_assignments()
+
+    # for d in range(NDUTIES):
+    #     duty_driving_time = cp_model.sum([model.durations[t] * presence_of(trip2duty[(t, d)])
+    #                                       for t in range(NTRIPS)])
+    #     for t in range(NTRIPS):
+    #         try:
+    #             cp_model.add(
+    #                 if_then(
+    #                     logical_and(
+    #                         presence_of(
+    #                             trip2duty[(t, d)]), duty_driving_time <= model.constraints.total_driving
+    #                     ), cp_model.sum([presence_of(trip2duty[(at, d)]) for at in trip_allowed_sequence[t]]) == 1)
+    #                 )
+    #         except IndexError:
+    #             pass
+    # depot, depot_mapping, depot_state = model.multiple_depot_specs()
+
+    # duty_state = {d: state_function([[0,0], [1,0]], name=f"Duty_{d}_State") for d in range(NDUTIES)}
+
+    # for d in range(NDUTIES):
+    #     for dt in depot_state:
+    #         cp_model.add(always_equal(duty_state[d], trip2duty[dt[0],d], depot_mapping[dt[1]]))
+
     for d in range(NDUTIES):
-        for t in range(NTRIPS):
-            try:
-                cp_model.add(
-                    if_then(
-                        presence_of(trip2duty[(t, d)]),
-                        cp_model.sum(
-                            [presence_of(trip2duty[(ft, d)]) for ft in trip_forbidden_sequence[t]]) == 0))
-            except IndexError:
-                pass
+        for t1 in range(NTRIPS):
+            for t2 in range(NTRIPS):
+                if model.start_times[t2] >= model.end_times[t1]:
+                    next_trips = []
+                    for t3 in range(NTRIPS):
+                        if model.start_times[t3] >= model.end_times[t1] and model.end_times[t3] <= model.start_times[t2]:
+                            next_trips.append(t3)
+                    cp_model.add(if_then(logical_and([presence_of(trip2duty[(t1, d)]), presence_of(trip2duty[(t2, d)]), (sum([presence_of(trip2duty[(t3, d)]) for t3 in next_trips]) == 0)]), (model.start_locs[t2] == model.end_locs[t1])))
 
-            # cp_model.add(diff(presence_of(trip2duty[(t, d)]), presence_of(trip2duty[(ft, d)])) for ft in trip_forbidden_sequence[t])
-
-            # for ft in trip_forbidden_sequence[t]:
-            #     cp_model.add(
-            #         if_then(
-            #             presence_of(trip2duty[(t, d)]),
-            #             forbid_start(trip2duty[(ft, d)])
-            #         )
-            #     )
 
 #############################################################################################################
 
@@ -197,20 +231,21 @@ if __name__ == "__main__":
     ROUTE = 'A2'
     BREAKS = False
     TRAFFIC = False
-    TIMELIMIT = 60
-    NDUTIES = 30
+    TIMELIMIT = 300
+    NDUTIES = 25
+    NTRIPS = None
 
     d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
 
-    model = CSPModel(d)
+    model = CSPModel(data_provider=d, ntrips=NTRIPS)
     model.build_model()
 
     cp_model, model_info = multiple_depot_CSP(model=model,
                                               nduties=NDUTIES,
-                                              ntrips=None,
+                                              ntrips=NTRIPS,
                                               add_breaks=BREAKS,
                                               nbuses=None,
-                                              objective=True)
+                                              objective=False)
 
     cp_sol = cp_model.solve(TimeLimit=TIMELIMIT)
 
