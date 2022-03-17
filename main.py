@@ -9,15 +9,17 @@ from atopt.core.plot import log_and_plot
 from atopt.utilities import CSPModel, DataProvider
 
 my_parser = argparse.ArgumentParser()
+
 my_parser.add_argument('-r', '--route', action='store', type=str, default='910')
 my_parser.add_argument('-d', '--duties', action='store', type=int, default=10)
 my_parser.add_argument('-t', '--trips', action='store', type=int)
 my_parser.add_argument('-l', '--limit', action='store', type=int, default=120)
 my_parser.add_argument('-v', '--vehicles', action='store', type=int)
-my_parser.add_argument('-s', '--save', action='store', type=str)
 my_parser.add_argument('-a', '--adjust', action='store', type=int, default=1)
 my_parser.add_argument('-b', '--breaks', action='store', type=int, default=1)
 my_parser.add_argument('-o', '--objective', action='store', type=int, default=1)
+
+my_parser.add_argument('-s', '--save', action='store', type=str)
 my_parser.add_argument('-f', '--filepath',
                        action='store',
                        type=str,
