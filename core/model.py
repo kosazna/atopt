@@ -7,20 +7,22 @@ from atopt.utilities import CSPModel, DataProvider
 from docplex.cp.model import *
 
 
-def single_depot_CSP(model: CSPModel,
-                     nduties: int,
-                     ntrips: Optional[int] = None,
-                     add_breaks: Optional[bool] = True,
-                     nbuses: Optional[int] = None,
-                     objective: Optional[bool] = True) -> CpoModel:
+def BusDriverCSP(model: CSPModel,
+                 nduties: int,
+                 ntrips: Optional[int] = None,
+                 add_breaks: Optional[bool] = True,
+                 nbuses: Optional[int] = None,
+                 objective: Optional[bool] = True) -> CpoModel:
 
-    min_buses = model.vehicles_boundaries()[1]
-
-    if nbuses is not None and nbuses < min_buses:
+    if nbuses is not None and nbuses < model.minimum_buses:
         raise ValueError(
-            f"Model can't be solved with less than {min_buses} vehicles")
+            f"Model can't be solved with less than {model.minimum_buses} vehicles")
 
-    cp_model = CpoModel(name="CSP_Single_Depot")
+    if nduties is not None and nduties < model.minimum_duties:
+        raise ValueError(
+            f"Model can't be solved with less than {model.minimum_duties} duties")
+
+    cp_model = CpoModel(name="Bus Driver Crew Scheduling Problem Model")
 
     NDUTIES = nduties
 
@@ -64,6 +66,23 @@ def single_depot_CSP(model: CSPModel,
                                           for t in range(NTRIPS)])
         cp_model.add(duty_driving_time <= model.constraints.total_driving)
 
+    if model.depot_type == "Multiple Depot":
+        for d in range(NDUTIES):
+            for t1 in range(NTRIPS):
+                for t2 in range(NTRIPS):
+                    if model.start_times[t2] >= model.end_times[t1]:
+                        next_trips = []
+                        for t3 in range(NTRIPS):
+                            if model.start_times[t3] >= model.end_times[t1] and model.end_times[t3] <= model.start_times[t2]:
+                                next_trips.append(t3)
+                        cp_model.add(
+                            if_then(
+                                logical_and([presence_of(trip2duty[(t1, d)]),
+                                             presence_of(trip2duty[(t2, d)]),
+                                             (sum([presence_of(trip2duty[(t3, d)]) for t3 in next_trips]) == 0)]),
+                                (model.start_locs[t2] == model.end_locs[t1]))
+                        )
+
     # If the model is to be solved considering breaks then
     # the following variables and constraints are added
     if add_breaks:
@@ -100,12 +119,6 @@ def single_depot_CSP(model: CSPModel,
                         logical_and((end_dt[t][d] > model.constraints.continuous_driving),
                                     (presence_of(trip2duty[(t, d)]))),
                         (start_of(trip2duty[(t, d)]) >= end_of(breaks[d]))))
-
-        # for d in range(NDUTIES):
-        #     duty_driving_time = cp_model.sum([model.durations[t] * presence_of(trip2duty[(t, d)])
-        #                                       for t in range(NTRIPS)])
-        #     cp_model.add(if_then(duty_driving_time <= model.constraints.continuous_driving,
-        #                          presence_of(breaks[(d)]) == 0))
 
     # If the model is to be solved considering vehicle limit then
     # the following variable and constraint are added
@@ -162,12 +175,12 @@ if __name__ == "__main__":
     model = CSPModel(data_provider=d, ntrips=NTRIPS)
     model.build_model()
 
-    cp_model, model_info = single_depot_CSP(model=model,
-                                            nduties=NDUTIES,
-                                            ntrips=NTRIPS,
-                                            add_breaks=BREAKS,
-                                            nbuses=NBUSES,
-                                            objective=OBJECTIVE)
+    cp_model, model_info = BusDriverCSP(model=model,
+                                        nduties=NDUTIES,
+                                        ntrips=NTRIPS,
+                                        add_breaks=BREAKS,
+                                        nbuses=NBUSES,
+                                        objective=OBJECTIVE)
 
     cp_sol = cp_model.solve(TimeLimit=TIMELIMIT)
 

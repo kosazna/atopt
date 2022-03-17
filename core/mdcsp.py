@@ -20,7 +20,7 @@ def multiple_depot_CSP(model: CSPModel,
         raise ValueError(
             f"Model can't be solved with less than {min_buses} vehicles")
 
-    cp_model = CpoModel(name="CSP_Single_Depot")
+    cp_model = CpoModel(name="CSP_Multiple_Depot")
 
     NDUTIES = nduties
 
@@ -64,77 +64,6 @@ def multiple_depot_CSP(model: CSPModel,
                                           for t in range(NTRIPS)])
         cp_model.add(duty_driving_time <= model.constraints.total_driving)
 
-#############################################################################################################
-    # trip_allowed_sequence = []
-    # for t1 in range(NTRIPS):
-    #     allowed_sequence = []
-    #     for t2 in range(NTRIPS):
-    #         if model.end_locs[t1] == model.start_locs[t2] and model.end_times[t1] <= model.start_times[t2]:
-    #             allowed_sequence.append(t2)
-
-    #     trip_allowed_sequence.append(allowed_sequence)
-
-    # trip_forbidden_sequence = []
-    # for t1 in range(NTRIPS):
-    #     forbidden_sequence = []
-    #     for t2 in range(NTRIPS):
-    #         if t1 != t2:
-    #             if model.end_locs[t1] != model.start_locs[t2]:
-    #                 forbidden_sequence.append(t2)
-    #     trip_forbidden_sequence.append(forbidden_sequence)
-    #     print(f"\n{t1} - > {forbidden_sequence}")
-
-    # for d in range(NDUTIES):
-    #     for t in range(NTRIPS):
-    #         # cp_model.add(alternative(trip2duty[(t, d)], [trip2duty[(at, d)] for at in trip_allowed_sequence[d]]))
-    #         cp_model.add(presence_of(trip2duty[(t, d)]) >= cp_model.sum([presence_of(trip2duty[at,d]) for at in trip_allowed_sequence[t]]))
-
-    # trip_forbidden_sequence = model.forbidden_assignments()
-    # for d in range(NDUTIES):
-    #     for t in range(NTRIPS):
-    #         try:
-    #             cp_model.add(
-    #                 if_then(
-    #                     presence_of(trip2duty[(t, d)]),
-    #                     cp_model.sum(
-    #                         [presence_of(trip2duty[(ft, d)]) for ft in trip_forbidden_sequence[t]]) == 0))
-    #         except IndexError:
-    #             pass
-
-        # cp_model.add(diff(presence_of(trip2duty[(t, d)]), presence_of(trip2duty[(ft, d)])) for ft in trip_forbidden_sequence[t])
-
-        # for ft in trip_forbidden_sequence[t]:
-        #     cp_model.add(
-        #         if_then(
-        #             presence_of(trip2duty[(t, d)]),
-        #             forbid_start(trip2duty[(ft, d)])
-        #         )
-        #     )
-
-    # trip_allowed_sequence = model.allowed_assignments()
-
-    # for d in range(NDUTIES):
-    #     duty_driving_time = cp_model.sum([model.durations[t] * presence_of(trip2duty[(t, d)])
-    #                                       for t in range(NTRIPS)])
-    #     for t in range(NTRIPS):
-    #         try:
-    #             cp_model.add(
-    #                 if_then(
-    #                     logical_and(
-    #                         presence_of(
-    #                             trip2duty[(t, d)]), duty_driving_time <= model.constraints.total_driving
-    #                     ), cp_model.sum([presence_of(trip2duty[(at, d)]) for at in trip_allowed_sequence[t]]) == 1)
-    #                 )
-    #         except IndexError:
-    #             pass
-    # depot, depot_mapping, depot_state = model.multiple_depot_specs()
-
-    # duty_state = {d: state_function([[0,0], [1,0]], name=f"Duty_{d}_State") for d in range(NDUTIES)}
-
-    # for d in range(NDUTIES):
-    #     for dt in depot_state:
-    #         cp_model.add(always_equal(duty_state[d], trip2duty[dt[0],d], depot_mapping[dt[1]]))
-
     for d in range(NDUTIES):
         for t1 in range(NTRIPS):
             for t2 in range(NTRIPS):
@@ -143,10 +72,13 @@ def multiple_depot_CSP(model: CSPModel,
                     for t3 in range(NTRIPS):
                         if model.start_times[t3] >= model.end_times[t1] and model.end_times[t3] <= model.start_times[t2]:
                             next_trips.append(t3)
-                    cp_model.add(if_then(logical_and([presence_of(trip2duty[(t1, d)]), presence_of(trip2duty[(t2, d)]), (sum([presence_of(trip2duty[(t3, d)]) for t3 in next_trips]) == 0)]), (model.start_locs[t2] == model.end_locs[t1])))
-
-
-#############################################################################################################
+                    cp_model.add(
+                        if_then(
+                            logical_and([presence_of(trip2duty[(t1, d)]),
+                                         presence_of(trip2duty[(t2, d)]),
+                                         (sum([presence_of(trip2duty[(t3, d)]) for t3 in next_trips]) == 0)]),
+                            (model.start_locs[t2] == model.end_locs[t1]))
+                    )
 
     # If the model is to be solved considering breaks then
     # the following variables and constraints are added
@@ -185,12 +117,6 @@ def multiple_depot_CSP(model: CSPModel,
                                     (presence_of(trip2duty[(t, d)]))),
                         (start_of(trip2duty[(t, d)]) >= end_of(breaks[d]))))
 
-        # for d in range(NDUTIES):
-        #     duty_driving_time = cp_model.sum([model.durations[t] * presence_of(trip2duty[(t, d)])
-        #                                       for t in range(NTRIPS)])
-        #     cp_model.add(if_then(duty_driving_time <= model.constraints.continuous_driving,
-        #                          presence_of(breaks[(d)]) == 0))
-
     # If the model is to be solved considering vehicle limit then
     # the following variable and constraint are added
     if nbuses is not None:
@@ -228,12 +154,18 @@ if __name__ == "__main__":
 
     DATAFILE = "C:/Users/aznavouridis.k/OneDrive/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
-    ROUTE = 'A2'
-    BREAKS = False
+
+    ROUTE = "A2"
+
+    OBJECTIVE = True
+    TIMELIMIT = 30
+
+    NDUTIES = 20
+    NTRIPS = 50
+
+    BREAKS = True
     TRAFFIC = False
-    TIMELIMIT = 300
-    NDUTIES = 25
-    NTRIPS = None
+    NBUSES = None
 
     d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
 
@@ -244,12 +176,11 @@ if __name__ == "__main__":
                                               nduties=NDUTIES,
                                               ntrips=NTRIPS,
                                               add_breaks=BREAKS,
-                                              nbuses=None,
-                                              objective=False)
+                                              nbuses=NBUSES,
+                                              objective=OBJECTIVE)
 
     cp_sol = cp_model.solve(TimeLimit=TIMELIMIT)
 
-    cp_sol.print_solution()
     log_and_plot(sol=cp_sol,
                  model_info=model_info,
                  save_folder=SAVELOC,

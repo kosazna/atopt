@@ -1,0 +1,2047 @@
+-------------------------------------------------------------------------------
+Model constraints: 20711, variables: integer: 1000, interval: 1040, sequence: 20
+Solve status: Feasible
+Search status: SearchStopped, stop cause: SearchStoppedByLimit
+Solve time: 32.61 sec
+-------------------------------------------------------------------------------
+Objective values: (13,), bounds: (5,), gaps: (0.615385,)
+EDT_00_00=54
+EDT_00_01=54
+EDT_00_02=54
+EDT_00_03=54
+EDT_00_04=54
+EDT_00_05=54
+EDT_00_06=54
+EDT_00_07=54
+EDT_00_08=54
+EDT_00_09=54
+EDT_00_10=54
+EDT_00_11=54
+EDT_00_12=54
+EDT_00_13=54
+EDT_00_14=54
+EDT_00_15=54
+EDT_00_16=54
+EDT_00_17=54
+EDT_00_18=54
+EDT_00_19=54
+EDT_01_00=54
+EDT_01_01=54
+EDT_01_02=54
+EDT_01_03=54
+EDT_01_04=54
+EDT_01_05=54
+EDT_01_06=54
+EDT_01_07=54
+EDT_01_08=54
+EDT_01_09=54
+EDT_01_10=54
+EDT_01_11=54
+EDT_01_12=54
+EDT_01_13=54
+EDT_01_14=54
+EDT_01_15=54
+EDT_01_16=54
+EDT_01_17=54
+EDT_01_18=54
+EDT_01_19=54
+EDT_02_00=54
+EDT_02_01=54
+EDT_02_02=54
+EDT_02_03=54
+EDT_02_04=54
+EDT_02_05=54
+EDT_02_06=54
+EDT_02_07=54
+EDT_02_08=54
+EDT_02_09=54
+EDT_02_10=54
+EDT_02_11=54
+EDT_02_12=54
+EDT_02_13=54
+EDT_02_14=54
+EDT_02_15=54
+EDT_02_16=54
+EDT_02_17=54
+EDT_02_18=54
+EDT_02_19=54
+EDT_03_00=54
+EDT_03_01=54
+EDT_03_02=54
+EDT_03_03=54
+EDT_03_04=54
+EDT_03_05=54
+EDT_03_06=54
+EDT_03_07=54
+EDT_03_08=54
+EDT_03_09=54
+EDT_03_10=54
+EDT_03_11=54
+EDT_03_12=54
+EDT_03_13=54
+EDT_03_14=54
+EDT_03_15=54
+EDT_03_16=54
+EDT_03_17=54
+EDT_03_18=54
+EDT_03_19=54
+EDT_04_00=54
+EDT_04_01=54
+EDT_04_02=54
+EDT_04_03=54
+EDT_04_04=54
+EDT_04_05=54
+EDT_04_06=54
+EDT_04_07=54
+EDT_04_08=54
+EDT_04_09=54
+EDT_04_10=54
+EDT_04_11=54
+EDT_04_12=54
+EDT_04_13=54
+EDT_04_14=54
+EDT_04_15=54
+EDT_04_16=54
+EDT_04_17=54
+EDT_04_18=54
+EDT_04_19=54
+EDT_05_00=54
+EDT_05_01=54
+EDT_05_02=54
+EDT_05_03=54
+EDT_05_04=54
+EDT_05_05=54
+EDT_05_06=54
+EDT_05_07=54
+EDT_05_08=54
+EDT_05_09=54
+EDT_05_10=54
+EDT_05_11=54
+EDT_05_12=54
+EDT_05_13=54
+EDT_05_14=54
+EDT_05_15=54
+EDT_05_16=54
+EDT_05_17=54
+EDT_05_18=54
+EDT_05_19=54
+EDT_06_00=54
+EDT_06_01=54
+EDT_06_02=54
+EDT_06_03=54
+EDT_06_04=54
+EDT_06_05=54
+EDT_06_06=108
+EDT_06_07=54
+EDT_06_08=54
+EDT_06_09=54
+EDT_06_10=54
+EDT_06_11=54
+EDT_06_12=54
+EDT_06_13=54
+EDT_06_14=54
+EDT_06_15=54
+EDT_06_16=54
+EDT_06_17=54
+EDT_06_18=54
+EDT_06_19=54
+EDT_07_00=54
+EDT_07_01=54
+EDT_07_02=54
+EDT_07_03=54
+EDT_07_04=54
+EDT_07_05=108
+EDT_07_06=108
+EDT_07_07=54
+EDT_07_08=54
+EDT_07_09=54
+EDT_07_10=54
+EDT_07_11=54
+EDT_07_12=54
+EDT_07_13=54
+EDT_07_14=54
+EDT_07_15=54
+EDT_07_16=54
+EDT_07_17=54
+EDT_07_18=54
+EDT_07_19=54
+EDT_08_00=54
+EDT_08_01=54
+EDT_08_02=54
+EDT_08_03=54
+EDT_08_04=54
+EDT_08_05=108
+EDT_08_06=108
+EDT_08_07=54
+EDT_08_08=54
+EDT_08_09=54
+EDT_08_10=54
+EDT_08_11=54
+EDT_08_12=108
+EDT_08_13=54
+EDT_08_14=54
+EDT_08_15=54
+EDT_08_16=54
+EDT_08_17=54
+EDT_08_18=108
+EDT_08_19=54
+EDT_09_00=54
+EDT_09_01=54
+EDT_09_02=54
+EDT_09_03=54
+EDT_09_04=54
+EDT_09_05=108
+EDT_09_06=108
+EDT_09_07=54
+EDT_09_08=54
+EDT_09_09=54
+EDT_09_10=54
+EDT_09_11=54
+EDT_09_12=108
+EDT_09_13=54
+EDT_09_14=54
+EDT_09_15=54
+EDT_09_16=54
+EDT_09_17=54
+EDT_09_18=108
+EDT_09_19=54
+EDT_10_00=54
+EDT_10_01=54
+EDT_10_02=54
+EDT_10_03=54
+EDT_10_04=54
+EDT_10_05=108
+EDT_10_06=108
+EDT_10_07=54
+EDT_10_08=54
+EDT_10_09=54
+EDT_10_10=54
+EDT_10_11=54
+EDT_10_12=108
+EDT_10_13=54
+EDT_10_14=54
+EDT_10_15=54
+EDT_10_16=54
+EDT_10_17=108
+EDT_10_18=108
+EDT_10_19=54
+EDT_11_00=54
+EDT_11_01=54
+EDT_11_02=54
+EDT_11_03=54
+EDT_11_04=54
+EDT_11_05=108
+EDT_11_06=108
+EDT_11_07=54
+EDT_11_08=54
+EDT_11_09=54
+EDT_11_10=54
+EDT_11_11=54
+EDT_11_12=108
+EDT_11_13=108
+EDT_11_14=54
+EDT_11_15=54
+EDT_11_16=54
+EDT_11_17=108
+EDT_11_18=108
+EDT_11_19=54
+EDT_12_00=54
+EDT_12_01=54
+EDT_12_02=54
+EDT_12_03=54
+EDT_12_04=108
+EDT_12_05=108
+EDT_12_06=108
+EDT_12_07=54
+EDT_12_08=54
+EDT_12_09=54
+EDT_12_10=54
+EDT_12_11=54
+EDT_12_12=108
+EDT_12_13=108
+EDT_12_14=54
+EDT_12_15=54
+EDT_12_16=54
+EDT_12_17=108
+EDT_12_18=108
+EDT_12_19=54
+EDT_13_00=54
+EDT_13_01=54
+EDT_13_02=54
+EDT_13_03=54
+EDT_13_04=108
+EDT_13_05=108
+EDT_13_06=108
+EDT_13_07=54
+EDT_13_08=54
+EDT_13_09=54
+EDT_13_10=54
+EDT_13_11=54
+EDT_13_12=108
+EDT_13_13=108
+EDT_13_14=54
+EDT_13_15=54
+EDT_13_16=54
+EDT_13_17=108
+EDT_13_18=108
+EDT_13_19=54
+EDT_14_00=54
+EDT_14_01=54
+EDT_14_02=54
+EDT_14_03=54
+EDT_14_04=108
+EDT_14_05=108
+EDT_14_06=108
+EDT_14_07=54
+EDT_14_08=54
+EDT_14_09=54
+EDT_14_10=54
+EDT_14_11=54
+EDT_14_12=108
+EDT_14_13=108
+EDT_14_14=54
+EDT_14_15=54
+EDT_14_16=108
+EDT_14_17=108
+EDT_14_18=108
+EDT_14_19=54
+EDT_15_00=54
+EDT_15_01=54
+EDT_15_02=54
+EDT_15_03=54
+EDT_15_04=108
+EDT_15_05=108
+EDT_15_06=108
+EDT_15_07=54
+EDT_15_08=54
+EDT_15_09=54
+EDT_15_10=54
+EDT_15_11=54
+EDT_15_12=108
+EDT_15_13=108
+EDT_15_14=54
+EDT_15_15=54
+EDT_15_16=108
+EDT_15_17=108
+EDT_15_18=162
+EDT_15_19=54
+EDT_16_00=54
+EDT_16_01=54
+EDT_16_02=54
+EDT_16_03=54
+EDT_16_04=108
+EDT_16_05=108
+EDT_16_06=108
+EDT_16_07=54
+EDT_16_08=54
+EDT_16_09=54
+EDT_16_10=54
+EDT_16_11=54
+EDT_16_12=108
+EDT_16_13=108
+EDT_16_14=54
+EDT_16_15=54
+EDT_16_16=108
+EDT_16_17=108
+EDT_16_18=162
+EDT_16_19=54
+EDT_17_00=54
+EDT_17_01=108
+EDT_17_02=54
+EDT_17_03=54
+EDT_17_04=108
+EDT_17_05=108
+EDT_17_06=108
+EDT_17_07=54
+EDT_17_08=54
+EDT_17_09=54
+EDT_17_10=54
+EDT_17_11=54
+EDT_17_12=108
+EDT_17_13=108
+EDT_17_14=54
+EDT_17_15=54
+EDT_17_16=108
+EDT_17_17=108
+EDT_17_18=162
+EDT_17_19=54
+EDT_18_00=54
+EDT_18_01=108
+EDT_18_02=54
+EDT_18_03=54
+EDT_18_04=108
+EDT_18_05=108
+EDT_18_06=108
+EDT_18_07=54
+EDT_18_08=54
+EDT_18_09=54
+EDT_18_10=54
+EDT_18_11=108
+EDT_18_12=108
+EDT_18_13=108
+EDT_18_14=54
+EDT_18_15=54
+EDT_18_16=108
+EDT_18_17=108
+EDT_18_18=162
+EDT_18_19=54
+EDT_19_00=54
+EDT_19_01=108
+EDT_19_02=54
+EDT_19_03=54
+EDT_19_04=108
+EDT_19_05=108
+EDT_19_06=108
+EDT_19_07=54
+EDT_19_08=54
+EDT_19_09=54
+EDT_19_10=54
+EDT_19_11=108
+EDT_19_12=108
+EDT_19_13=108
+EDT_19_14=54
+EDT_19_15=54
+EDT_19_16=108
+EDT_19_17=108
+EDT_19_18=162
+EDT_19_19=54
+EDT_20_00=54
+EDT_20_01=108
+EDT_20_02=108
+EDT_20_03=54
+EDT_20_04=108
+EDT_20_05=108
+EDT_20_06=108
+EDT_20_07=54
+EDT_20_08=54
+EDT_20_09=54
+EDT_20_10=54
+EDT_20_11=108
+EDT_20_12=108
+EDT_20_13=108
+EDT_20_14=54
+EDT_20_15=54
+EDT_20_16=108
+EDT_20_17=108
+EDT_20_18=162
+EDT_20_19=54
+EDT_21_00=54
+EDT_21_01=108
+EDT_21_02=108
+EDT_21_03=54
+EDT_21_04=108
+EDT_21_05=108
+EDT_21_06=108
+EDT_21_07=54
+EDT_21_08=54
+EDT_21_09=54
+EDT_21_10=54
+EDT_21_11=108
+EDT_21_12=162
+EDT_21_13=108
+EDT_21_14=54
+EDT_21_15=54
+EDT_21_16=108
+EDT_21_17=108
+EDT_21_18=162
+EDT_21_19=54
+EDT_22_00=54
+EDT_22_01=108
+EDT_22_02=108
+EDT_22_03=54
+EDT_22_04=108
+EDT_22_05=108
+EDT_22_06=108
+EDT_22_07=54
+EDT_22_08=54
+EDT_22_09=54
+EDT_22_10=54
+EDT_22_11=108
+EDT_22_12=162
+EDT_22_13=162
+EDT_22_14=54
+EDT_22_15=54
+EDT_22_16=108
+EDT_22_17=108
+EDT_22_18=162
+EDT_22_19=54
+EDT_23_00=54
+EDT_23_01=108
+EDT_23_02=108
+EDT_23_03=54
+EDT_23_04=108
+EDT_23_05=108
+EDT_23_06=108
+EDT_23_07=54
+EDT_23_08=54
+EDT_23_09=54
+EDT_23_10=54
+EDT_23_11=108
+EDT_23_12=162
+EDT_23_13=162
+EDT_23_14=108
+EDT_23_15=54
+EDT_23_16=108
+EDT_23_17=108
+EDT_23_18=162
+EDT_23_19=54
+EDT_24_00=54
+EDT_24_01=108
+EDT_24_02=108
+EDT_24_03=54
+EDT_24_04=108
+EDT_24_05=108
+EDT_24_06=108
+EDT_24_07=108
+EDT_24_08=54
+EDT_24_09=54
+EDT_24_10=54
+EDT_24_11=108
+EDT_24_12=162
+EDT_24_13=162
+EDT_24_14=108
+EDT_24_15=54
+EDT_24_16=162
+EDT_24_17=108
+EDT_24_18=162
+EDT_24_19=54
+EDT_25_00=54
+EDT_25_01=108
+EDT_25_02=108
+EDT_25_03=54
+EDT_25_04=108
+EDT_25_05=108
+EDT_25_06=108
+EDT_25_07=108
+EDT_25_08=54
+EDT_25_09=54
+EDT_25_10=54
+EDT_25_11=108
+EDT_25_12=162
+EDT_25_13=162
+EDT_25_14=108
+EDT_25_15=54
+EDT_25_16=162
+EDT_25_17=108
+EDT_25_18=162
+EDT_25_19=54
+EDT_26_00=54
+EDT_26_01=108
+EDT_26_02=108
+EDT_26_03=54
+EDT_26_04=108
+EDT_26_05=108
+EDT_26_06=108
+EDT_26_07=108
+EDT_26_08=54
+EDT_26_09=54
+EDT_26_10=54
+EDT_26_11=108
+EDT_26_12=162
+EDT_26_13=162
+EDT_26_14=108
+EDT_26_15=54
+EDT_26_16=162
+EDT_26_17=108
+EDT_26_18=216
+EDT_26_19=54
+EDT_27_00=54
+EDT_27_01=108
+EDT_27_02=108
+EDT_27_03=54
+EDT_27_04=108
+EDT_27_05=108
+EDT_27_06=108
+EDT_27_07=108
+EDT_27_08=54
+EDT_27_09=54
+EDT_27_10=54
+EDT_27_11=108
+EDT_27_12=162
+EDT_27_13=162
+EDT_27_14=108
+EDT_27_15=54
+EDT_27_16=162
+EDT_27_17=108
+EDT_27_18=216
+EDT_27_19=54
+EDT_28_00=54
+EDT_28_01=108
+EDT_28_02=108
+EDT_28_03=54
+EDT_28_04=162
+EDT_28_05=108
+EDT_28_06=108
+EDT_28_07=108
+EDT_28_08=54
+EDT_28_09=54
+EDT_28_10=54
+EDT_28_11=108
+EDT_28_12=162
+EDT_28_13=162
+EDT_28_14=108
+EDT_28_15=54
+EDT_28_16=162
+EDT_28_17=162
+EDT_28_18=216
+EDT_28_19=54
+EDT_29_00=54
+EDT_29_01=108
+EDT_29_02=108
+EDT_29_03=54
+EDT_29_04=162
+EDT_29_05=108
+EDT_29_06=108
+EDT_29_07=108
+EDT_29_08=54
+EDT_29_09=54
+EDT_29_10=54
+EDT_29_11=162
+EDT_29_12=162
+EDT_29_13=162
+EDT_29_14=108
+EDT_29_15=54
+EDT_29_16=162
+EDT_29_17=162
+EDT_29_18=216
+EDT_29_19=54
+EDT_30_00=54
+EDT_30_01=162
+EDT_30_02=108
+EDT_30_03=54
+EDT_30_04=162
+EDT_30_05=108
+EDT_30_06=108
+EDT_30_07=108
+EDT_30_08=54
+EDT_30_09=54
+EDT_30_10=54
+EDT_30_11=162
+EDT_30_12=162
+EDT_30_13=162
+EDT_30_14=108
+EDT_30_15=54
+EDT_30_16=162
+EDT_30_17=162
+EDT_30_18=216
+EDT_30_19=54
+EDT_31_00=54
+EDT_31_01=162
+EDT_31_02=108
+EDT_31_03=54
+EDT_31_04=162
+EDT_31_05=162
+EDT_31_06=108
+EDT_31_07=108
+EDT_31_08=54
+EDT_31_09=54
+EDT_31_10=54
+EDT_31_11=162
+EDT_31_12=162
+EDT_31_13=162
+EDT_31_14=108
+EDT_31_15=54
+EDT_31_16=162
+EDT_31_17=162
+EDT_31_18=216
+EDT_31_19=54
+EDT_32_00=54
+EDT_32_01=162
+EDT_32_02=108
+EDT_32_03=54
+EDT_32_04=162
+EDT_32_05=162
+EDT_32_06=108
+EDT_32_07=108
+EDT_32_08=54
+EDT_32_09=54
+EDT_32_10=54
+EDT_32_11=162
+EDT_32_12=162
+EDT_32_13=162
+EDT_32_14=162
+EDT_32_15=54
+EDT_32_16=162
+EDT_32_17=162
+EDT_32_18=216
+EDT_32_19=54
+EDT_33_00=54
+EDT_33_01=162
+EDT_33_02=108
+EDT_33_03=54
+EDT_33_04=162
+EDT_33_05=162
+EDT_33_06=108
+EDT_33_07=108
+EDT_33_08=54
+EDT_33_09=54
+EDT_33_10=54
+EDT_33_11=162
+EDT_33_12=162
+EDT_33_13=162
+EDT_33_14=162
+EDT_33_15=54
+EDT_33_16=162
+EDT_33_17=162
+EDT_33_18=216
+EDT_33_19=54
+EDT_34_00=54
+EDT_34_01=162
+EDT_34_02=108
+EDT_34_03=54
+EDT_34_04=162
+EDT_34_05=162
+EDT_34_06=162
+EDT_34_07=108
+EDT_34_08=54
+EDT_34_09=54
+EDT_34_10=54
+EDT_34_11=162
+EDT_34_12=162
+EDT_34_13=162
+EDT_34_14=162
+EDT_34_15=54
+EDT_34_16=216
+EDT_34_17=162
+EDT_34_18=216
+EDT_34_19=54
+EDT_35_00=54
+EDT_35_01=162
+EDT_35_02=108
+EDT_35_03=54
+EDT_35_04=162
+EDT_35_05=162
+EDT_35_06=162
+EDT_35_07=108
+EDT_35_08=54
+EDT_35_09=54
+EDT_35_10=54
+EDT_35_11=162
+EDT_35_12=162
+EDT_35_13=162
+EDT_35_14=162
+EDT_35_15=54
+EDT_35_16=216
+EDT_35_17=162
+EDT_35_18=216
+EDT_35_19=54
+EDT_36_00=54
+EDT_36_01=162
+EDT_36_02=162
+EDT_36_03=54
+EDT_36_04=162
+EDT_36_05=162
+EDT_36_06=162
+EDT_36_07=108
+EDT_36_08=54
+EDT_36_09=54
+EDT_36_10=54
+EDT_36_11=162
+EDT_36_12=162
+EDT_36_13=216
+EDT_36_14=162
+EDT_36_15=54
+EDT_36_16=216
+EDT_36_17=162
+EDT_36_18=216
+EDT_36_19=54
+EDT_37_00=54
+EDT_37_01=162
+EDT_37_02=162
+EDT_37_03=54
+EDT_37_04=162
+EDT_37_05=162
+EDT_37_06=162
+EDT_37_07=108
+EDT_37_08=54
+EDT_37_09=54
+EDT_37_10=54
+EDT_37_11=162
+EDT_37_12=162
+EDT_37_13=216
+EDT_37_14=162
+EDT_37_15=54
+EDT_37_16=216
+EDT_37_17=162
+EDT_37_18=216
+EDT_37_19=54
+EDT_38_00=54
+EDT_38_01=162
+EDT_38_02=162
+EDT_38_03=54
+EDT_38_04=216
+EDT_38_05=162
+EDT_38_06=162
+EDT_38_07=162
+EDT_38_08=54
+EDT_38_09=54
+EDT_38_10=54
+EDT_38_11=162
+EDT_38_12=162
+EDT_38_13=216
+EDT_38_14=162
+EDT_38_15=54
+EDT_38_16=216
+EDT_38_17=162
+EDT_38_18=216
+EDT_38_19=54
+EDT_39_00=54
+EDT_39_01=162
+EDT_39_02=162
+EDT_39_03=54
+EDT_39_04=216
+EDT_39_05=162
+EDT_39_06=162
+EDT_39_07=162
+EDT_39_08=54
+EDT_39_09=54
+EDT_39_10=54
+EDT_39_11=162
+EDT_39_12=162
+EDT_39_13=216
+EDT_39_14=162
+EDT_39_15=54
+EDT_39_16=216
+EDT_39_17=216
+EDT_39_18=216
+EDT_39_19=54
+EDT_40_00=54
+EDT_40_01=162
+EDT_40_02=162
+EDT_40_03=54
+EDT_40_04=216
+EDT_40_05=216
+EDT_40_06=162
+EDT_40_07=162
+EDT_40_08=54
+EDT_40_09=54
+EDT_40_10=54
+EDT_40_11=162
+EDT_40_12=162
+EDT_40_13=216
+EDT_40_14=162
+EDT_40_15=54
+EDT_40_16=216
+EDT_40_17=216
+EDT_40_18=216
+EDT_40_19=54
+EDT_41_00=54
+EDT_41_01=162
+EDT_41_02=162
+EDT_41_03=54
+EDT_41_04=216
+EDT_41_05=216
+EDT_41_06=162
+EDT_41_07=162
+EDT_41_08=54
+EDT_41_09=54
+EDT_41_10=54
+EDT_41_11=162
+EDT_41_12=162
+EDT_41_13=216
+EDT_41_14=162
+EDT_41_15=54
+EDT_41_16=216
+EDT_41_17=216
+EDT_41_18=216
+EDT_41_19=54
+EDT_42_00=54
+EDT_42_01=216
+EDT_42_02=162
+EDT_42_03=54
+EDT_42_04=216
+EDT_42_05=216
+EDT_42_06=162
+EDT_42_07=162
+EDT_42_08=54
+EDT_42_09=54
+EDT_42_10=54
+EDT_42_11=162
+EDT_42_12=162
+EDT_42_13=216
+EDT_42_14=162
+EDT_42_15=54
+EDT_42_16=216
+EDT_42_17=216
+EDT_42_18=270
+EDT_42_19=54
+EDT_43_00=54
+EDT_43_01=216
+EDT_43_02=162
+EDT_43_03=54
+EDT_43_04=216
+EDT_43_05=216
+EDT_43_06=162
+EDT_43_07=162
+EDT_43_08=54
+EDT_43_09=54
+EDT_43_10=54
+EDT_43_11=162
+EDT_43_12=162
+EDT_43_13=216
+EDT_43_14=162
+EDT_43_15=54
+EDT_43_16=216
+EDT_43_17=216
+EDT_43_18=270
+EDT_43_19=54
+EDT_44_00=54
+EDT_44_01=216
+EDT_44_02=162
+EDT_44_03=54
+EDT_44_04=216
+EDT_44_05=216
+EDT_44_06=216
+EDT_44_07=162
+EDT_44_08=54
+EDT_44_09=54
+EDT_44_10=54
+EDT_44_11=162
+EDT_44_12=162
+EDT_44_13=216
+EDT_44_14=162
+EDT_44_15=54
+EDT_44_16=270
+EDT_44_17=216
+EDT_44_18=270
+EDT_44_19=54
+EDT_45_00=54
+EDT_45_01=216
+EDT_45_02=162
+EDT_45_03=54
+EDT_45_04=216
+EDT_45_05=216
+EDT_45_06=216
+EDT_45_07=162
+EDT_45_08=54
+EDT_45_09=54
+EDT_45_10=54
+EDT_45_11=162
+EDT_45_12=162
+EDT_45_13=216
+EDT_45_14=162
+EDT_45_15=54
+EDT_45_16=270
+EDT_45_17=216
+EDT_45_18=270
+EDT_45_19=54
+EDT_46_00=54
+EDT_46_01=216
+EDT_46_02=162
+EDT_46_03=54
+EDT_46_04=216
+EDT_46_05=216
+EDT_46_06=216
+EDT_46_07=162
+EDT_46_08=54
+EDT_46_09=54
+EDT_46_10=54
+EDT_46_11=216
+EDT_46_12=162
+EDT_46_13=216
+EDT_46_14=216
+EDT_46_15=54
+EDT_46_16=270
+EDT_46_17=216
+EDT_46_18=270
+EDT_46_19=54
+EDT_47_00=54
+EDT_47_01=216
+EDT_47_02=162
+EDT_47_03=54
+EDT_47_04=216
+EDT_47_05=216
+EDT_47_06=216
+EDT_47_07=162
+EDT_47_08=54
+EDT_47_09=54
+EDT_47_10=54
+EDT_47_11=216
+EDT_47_12=162
+EDT_47_13=216
+EDT_47_14=216
+EDT_47_15=54
+EDT_47_16=270
+EDT_47_17=216
+EDT_47_18=270
+EDT_47_19=54
+EDT_48_00=54
+EDT_48_01=216
+EDT_48_02=162
+EDT_48_03=54
+EDT_48_04=216
+EDT_48_05=216
+EDT_48_06=216
+EDT_48_07=162
+EDT_48_08=54
+EDT_48_09=54
+EDT_48_10=54
+EDT_48_11=216
+EDT_48_12=162
+EDT_48_13=270
+EDT_48_14=216
+EDT_48_15=54
+EDT_48_16=270
+EDT_48_17=216
+EDT_48_18=270
+EDT_48_19=54
+EDT_49_00=54
+EDT_49_01=216
+EDT_49_02=162
+EDT_49_03=54
+EDT_49_04=216
+EDT_49_05=216
+EDT_49_06=216
+EDT_49_07=216
+EDT_49_08=54
+EDT_49_09=54
+EDT_49_10=54
+EDT_49_11=216
+EDT_49_12=162
+EDT_49_13=270
+EDT_49_14=216
+EDT_49_15=54
+EDT_49_16=270
+EDT_49_17=216
+EDT_49_18=270
+EDT_49_19=54
+BreakTime_0: (start=0, end=30, size=30, length=30)
+BreakTime_1: (start=689, end=719, size=30, length=30)
+BreakTime_2: (start=669, end=699, size=30, length=30)
+BreakTime_3: (start=0, end=30, size=30, length=30)
+BreakTime_4: (start=689, end=719, size=30, length=30)
+BreakTime_5: (start=679, end=709, size=30, length=30)
+BreakTime_6: (start=714, end=744, size=30, length=30)
+BreakTime_7: (start=659, end=689, size=30, length=30)
+BreakTime_8: (start=0, end=30, size=30, length=30)
+BreakTime_9: (start=0, end=30, size=30, length=30)
+BreakTime_10: (start=0, end=30, size=30, length=30)
+BreakTime_11: (start=699, end=729, size=30, length=30)
+BreakTime_12: (start=674, end=704, size=30, length=30)
+BreakTime_13: (start=654, end=684, size=30, length=30)
+BreakTime_14: (start=704, end=734, size=30, length=30)
+BreakTime_15: (start=0, end=30, size=30, length=30)
+BreakTime_16: (start=629, end=659, size=30, length=30)
+BreakTime_17: (start=664, end=694, size=30, length=30)
+BreakTime_18: (start=619, end=649, size=30, length=30)
+BreakTime_19: (start=0, end=30, size=30, length=30)
+Duty_0: absent
+Duty_1: (start=410, end=689, size=279, length=279)
+Duty_2: (start=435, end=669, size=234, length=234)
+Duty_3: absent
+Duty_4: (start=385, end=689, size=304, length=304)
+Duty_5: (start=335, end=679, size=344, length=344)
+Duty_6: (start=330, end=714, size=384, length=384)
+Duty_7: (start=460, end=659, size=199, length=199)
+Duty_8: absent
+Duty_9: absent
+Duty_10: absent
+Duty_11: (start=425, end=699, size=274, length=274)
+Duty_12: (start=350, end=674, size=324, length=324)
+Duty_13: (start=380, end=654, size=274, length=274)
+Duty_14: (start=450, end=704, size=254, length=254)
+Duty_15: absent
+Duty_16: (start=395, end=629, size=234, length=234)
+Duty_17: (start=365, end=664, size=299, length=299)
+Duty_18: (start=345, end=709, size=364, length=364)
+Duty_19: absent
+Trip_00 | Duty_00: absent
+Trip_00 | Duty_01: absent
+Trip_00 | Duty_02: absent
+Trip_00 | Duty_03: absent
+Trip_00 | Duty_04: absent
+Trip_00 | Duty_05: absent
+Trip_00 | Duty_06: (start=330, end=384, size=54, length=54)
+Trip_00 | Duty_07: absent
+Trip_00 | Duty_08: absent
+Trip_00 | Duty_09: absent
+Trip_00 | Duty_10: absent
+Trip_00 | Duty_11: absent
+Trip_00 | Duty_12: absent
+Trip_00 | Duty_13: absent
+Trip_00 | Duty_14: absent
+Trip_00 | Duty_15: absent
+Trip_00 | Duty_16: absent
+Trip_00 | Duty_17: absent
+Trip_00 | Duty_18: absent
+Trip_00 | Duty_19: absent
+Trip_01 | Duty_00: absent
+Trip_01 | Duty_01: absent
+Trip_01 | Duty_02: absent
+Trip_01 | Duty_03: absent
+Trip_01 | Duty_04: absent
+Trip_01 | Duty_05: (start=335, end=389, size=54, length=54)
+Trip_01 | Duty_06: absent
+Trip_01 | Duty_07: absent
+Trip_01 | Duty_08: absent
+Trip_01 | Duty_09: absent
+Trip_01 | Duty_10: absent
+Trip_01 | Duty_11: absent
+Trip_01 | Duty_12: absent
+Trip_01 | Duty_13: absent
+Trip_01 | Duty_14: absent
+Trip_01 | Duty_15: absent
+Trip_01 | Duty_16: absent
+Trip_01 | Duty_17: absent
+Trip_01 | Duty_18: absent
+Trip_01 | Duty_19: absent
+Trip_02 | Duty_00: absent
+Trip_02 | Duty_01: absent
+Trip_02 | Duty_02: absent
+Trip_02 | Duty_03: absent
+Trip_02 | Duty_04: absent
+Trip_02 | Duty_05: absent
+Trip_02 | Duty_06: absent
+Trip_02 | Duty_07: absent
+Trip_02 | Duty_08: absent
+Trip_02 | Duty_09: absent
+Trip_02 | Duty_10: absent
+Trip_02 | Duty_11: absent
+Trip_02 | Duty_12: absent
+Trip_02 | Duty_13: absent
+Trip_02 | Duty_14: absent
+Trip_02 | Duty_15: absent
+Trip_02 | Duty_16: absent
+Trip_02 | Duty_17: absent
+Trip_02 | Duty_18: (start=345, end=399, size=54, length=54)
+Trip_02 | Duty_19: absent
+Trip_03 | Duty_00: absent
+Trip_03 | Duty_01: absent
+Trip_03 | Duty_02: absent
+Trip_03 | Duty_03: absent
+Trip_03 | Duty_04: absent
+Trip_03 | Duty_05: absent
+Trip_03 | Duty_06: absent
+Trip_03 | Duty_07: absent
+Trip_03 | Duty_08: absent
+Trip_03 | Duty_09: absent
+Trip_03 | Duty_10: absent
+Trip_03 | Duty_11: absent
+Trip_03 | Duty_12: (start=350, end=404, size=54, length=54)
+Trip_03 | Duty_13: absent
+Trip_03 | Duty_14: absent
+Trip_03 | Duty_15: absent
+Trip_03 | Duty_16: absent
+Trip_03 | Duty_17: absent
+Trip_03 | Duty_18: absent
+Trip_03 | Duty_19: absent
+Trip_04 | Duty_00: absent
+Trip_04 | Duty_01: absent
+Trip_04 | Duty_02: absent
+Trip_04 | Duty_03: absent
+Trip_04 | Duty_04: absent
+Trip_04 | Duty_05: absent
+Trip_04 | Duty_06: absent
+Trip_04 | Duty_07: absent
+Trip_04 | Duty_08: absent
+Trip_04 | Duty_09: absent
+Trip_04 | Duty_10: absent
+Trip_04 | Duty_11: absent
+Trip_04 | Duty_12: absent
+Trip_04 | Duty_13: absent
+Trip_04 | Duty_14: absent
+Trip_04 | Duty_15: absent
+Trip_04 | Duty_16: absent
+Trip_04 | Duty_17: (start=365, end=419, size=54, length=54)
+Trip_04 | Duty_18: absent
+Trip_04 | Duty_19: absent
+Trip_05 | Duty_00: absent
+Trip_05 | Duty_01: absent
+Trip_05 | Duty_02: absent
+Trip_05 | Duty_03: absent
+Trip_05 | Duty_04: absent
+Trip_05 | Duty_05: absent
+Trip_05 | Duty_06: absent
+Trip_05 | Duty_07: absent
+Trip_05 | Duty_08: absent
+Trip_05 | Duty_09: absent
+Trip_05 | Duty_10: absent
+Trip_05 | Duty_11: absent
+Trip_05 | Duty_12: absent
+Trip_05 | Duty_13: (start=380, end=434, size=54, length=54)
+Trip_05 | Duty_14: absent
+Trip_05 | Duty_15: absent
+Trip_05 | Duty_16: absent
+Trip_05 | Duty_17: absent
+Trip_05 | Duty_18: absent
+Trip_05 | Duty_19: absent
+Trip_06 | Duty_00: absent
+Trip_06 | Duty_01: absent
+Trip_06 | Duty_02: absent
+Trip_06 | Duty_03: absent
+Trip_06 | Duty_04: (start=385, end=439, size=54, length=54)
+Trip_06 | Duty_05: absent
+Trip_06 | Duty_06: absent
+Trip_06 | Duty_07: absent
+Trip_06 | Duty_08: absent
+Trip_06 | Duty_09: absent
+Trip_06 | Duty_10: absent
+Trip_06 | Duty_11: absent
+Trip_06 | Duty_12: absent
+Trip_06 | Duty_13: absent
+Trip_06 | Duty_14: absent
+Trip_06 | Duty_15: absent
+Trip_06 | Duty_16: absent
+Trip_06 | Duty_17: absent
+Trip_06 | Duty_18: absent
+Trip_06 | Duty_19: absent
+Trip_07 | Duty_00: absent
+Trip_07 | Duty_01: absent
+Trip_07 | Duty_02: absent
+Trip_07 | Duty_03: absent
+Trip_07 | Duty_04: absent
+Trip_07 | Duty_05: absent
+Trip_07 | Duty_06: absent
+Trip_07 | Duty_07: absent
+Trip_07 | Duty_08: absent
+Trip_07 | Duty_09: absent
+Trip_07 | Duty_10: absent
+Trip_07 | Duty_11: absent
+Trip_07 | Duty_12: absent
+Trip_07 | Duty_13: absent
+Trip_07 | Duty_14: absent
+Trip_07 | Duty_15: absent
+Trip_07 | Duty_16: (start=395, end=449, size=54, length=54)
+Trip_07 | Duty_17: absent
+Trip_07 | Duty_18: absent
+Trip_07 | Duty_19: absent
+Trip_08 | Duty_00: absent
+Trip_08 | Duty_01: absent
+Trip_08 | Duty_02: absent
+Trip_08 | Duty_03: absent
+Trip_08 | Duty_04: absent
+Trip_08 | Duty_05: absent
+Trip_08 | Duty_06: absent
+Trip_08 | Duty_07: absent
+Trip_08 | Duty_08: absent
+Trip_08 | Duty_09: absent
+Trip_08 | Duty_10: absent
+Trip_08 | Duty_11: absent
+Trip_08 | Duty_12: absent
+Trip_08 | Duty_13: absent
+Trip_08 | Duty_14: absent
+Trip_08 | Duty_15: absent
+Trip_08 | Duty_16: absent
+Trip_08 | Duty_17: absent
+Trip_08 | Duty_18: (start=405, end=459, size=54, length=54)
+Trip_08 | Duty_19: absent
+Trip_09 | Duty_00: absent
+Trip_09 | Duty_01: (start=410, end=464, size=54, length=54)
+Trip_09 | Duty_02: absent
+Trip_09 | Duty_03: absent
+Trip_09 | Duty_04: absent
+Trip_09 | Duty_05: absent
+Trip_09 | Duty_06: absent
+Trip_09 | Duty_07: absent
+Trip_09 | Duty_08: absent
+Trip_09 | Duty_09: absent
+Trip_09 | Duty_10: absent
+Trip_09 | Duty_11: absent
+Trip_09 | Duty_12: absent
+Trip_09 | Duty_13: absent
+Trip_09 | Duty_14: absent
+Trip_09 | Duty_15: absent
+Trip_09 | Duty_16: absent
+Trip_09 | Duty_17: absent
+Trip_09 | Duty_18: absent
+Trip_09 | Duty_19: absent
+Trip_10 | Duty_00: absent
+Trip_10 | Duty_01: absent
+Trip_10 | Duty_02: absent
+Trip_10 | Duty_03: absent
+Trip_10 | Duty_04: absent
+Trip_10 | Duty_05: absent
+Trip_10 | Duty_06: absent
+Trip_10 | Duty_07: absent
+Trip_10 | Duty_08: absent
+Trip_10 | Duty_09: absent
+Trip_10 | Duty_10: absent
+Trip_10 | Duty_11: (start=425, end=479, size=54, length=54)
+Trip_10 | Duty_12: absent
+Trip_10 | Duty_13: absent
+Trip_10 | Duty_14: absent
+Trip_10 | Duty_15: absent
+Trip_10 | Duty_16: absent
+Trip_10 | Duty_17: absent
+Trip_10 | Duty_18: absent
+Trip_10 | Duty_19: absent
+Trip_11 | Duty_00: absent
+Trip_11 | Duty_01: absent
+Trip_11 | Duty_02: (start=435, end=489, size=54, length=54)
+Trip_11 | Duty_03: absent
+Trip_11 | Duty_04: absent
+Trip_11 | Duty_05: absent
+Trip_11 | Duty_06: absent
+Trip_11 | Duty_07: absent
+Trip_11 | Duty_08: absent
+Trip_11 | Duty_09: absent
+Trip_11 | Duty_10: absent
+Trip_11 | Duty_11: absent
+Trip_11 | Duty_12: absent
+Trip_11 | Duty_13: absent
+Trip_11 | Duty_14: absent
+Trip_11 | Duty_15: absent
+Trip_11 | Duty_16: absent
+Trip_11 | Duty_17: absent
+Trip_11 | Duty_18: absent
+Trip_11 | Duty_19: absent
+Trip_12 | Duty_00: absent
+Trip_12 | Duty_01: absent
+Trip_12 | Duty_02: absent
+Trip_12 | Duty_03: absent
+Trip_12 | Duty_04: absent
+Trip_12 | Duty_05: absent
+Trip_12 | Duty_06: absent
+Trip_12 | Duty_07: absent
+Trip_12 | Duty_08: absent
+Trip_12 | Duty_09: absent
+Trip_12 | Duty_10: absent
+Trip_12 | Duty_11: absent
+Trip_12 | Duty_12: (start=440, end=494, size=54, length=54)
+Trip_12 | Duty_13: absent
+Trip_12 | Duty_14: absent
+Trip_12 | Duty_15: absent
+Trip_12 | Duty_16: absent
+Trip_12 | Duty_17: absent
+Trip_12 | Duty_18: absent
+Trip_12 | Duty_19: absent
+Trip_13 | Duty_00: absent
+Trip_13 | Duty_01: absent
+Trip_13 | Duty_02: absent
+Trip_13 | Duty_03: absent
+Trip_13 | Duty_04: absent
+Trip_13 | Duty_05: absent
+Trip_13 | Duty_06: absent
+Trip_13 | Duty_07: absent
+Trip_13 | Duty_08: absent
+Trip_13 | Duty_09: absent
+Trip_13 | Duty_10: absent
+Trip_13 | Duty_11: absent
+Trip_13 | Duty_12: absent
+Trip_13 | Duty_13: (start=445, end=499, size=54, length=54)
+Trip_13 | Duty_14: absent
+Trip_13 | Duty_15: absent
+Trip_13 | Duty_16: absent
+Trip_13 | Duty_17: absent
+Trip_13 | Duty_18: absent
+Trip_13 | Duty_19: absent
+Trip_14 | Duty_00: absent
+Trip_14 | Duty_01: absent
+Trip_14 | Duty_02: absent
+Trip_14 | Duty_03: absent
+Trip_14 | Duty_04: absent
+Trip_14 | Duty_05: absent
+Trip_14 | Duty_06: absent
+Trip_14 | Duty_07: absent
+Trip_14 | Duty_08: absent
+Trip_14 | Duty_09: absent
+Trip_14 | Duty_10: absent
+Trip_14 | Duty_11: absent
+Trip_14 | Duty_12: absent
+Trip_14 | Duty_13: absent
+Trip_14 | Duty_14: (start=450, end=504, size=54, length=54)
+Trip_14 | Duty_15: absent
+Trip_14 | Duty_16: absent
+Trip_14 | Duty_17: absent
+Trip_14 | Duty_18: absent
+Trip_14 | Duty_19: absent
+Trip_15 | Duty_00: absent
+Trip_15 | Duty_01: absent
+Trip_15 | Duty_02: absent
+Trip_15 | Duty_03: absent
+Trip_15 | Duty_04: absent
+Trip_15 | Duty_05: absent
+Trip_15 | Duty_06: absent
+Trip_15 | Duty_07: (start=460, end=514, size=54, length=54)
+Trip_15 | Duty_08: absent
+Trip_15 | Duty_09: absent
+Trip_15 | Duty_10: absent
+Trip_15 | Duty_11: absent
+Trip_15 | Duty_12: absent
+Trip_15 | Duty_13: absent
+Trip_15 | Duty_14: absent
+Trip_15 | Duty_15: absent
+Trip_15 | Duty_16: absent
+Trip_15 | Duty_17: absent
+Trip_15 | Duty_18: absent
+Trip_15 | Duty_19: absent
+Trip_16 | Duty_00: absent
+Trip_16 | Duty_01: absent
+Trip_16 | Duty_02: absent
+Trip_16 | Duty_03: absent
+Trip_16 | Duty_04: absent
+Trip_16 | Duty_05: absent
+Trip_16 | Duty_06: absent
+Trip_16 | Duty_07: absent
+Trip_16 | Duty_08: absent
+Trip_16 | Duty_09: absent
+Trip_16 | Duty_10: absent
+Trip_16 | Duty_11: absent
+Trip_16 | Duty_12: absent
+Trip_16 | Duty_13: absent
+Trip_16 | Duty_14: absent
+Trip_16 | Duty_15: absent
+Trip_16 | Duty_16: (start=460, end=514, size=54, length=54)
+Trip_16 | Duty_17: absent
+Trip_16 | Duty_18: absent
+Trip_16 | Duty_19: absent
+Trip_17 | Duty_00: absent
+Trip_17 | Duty_01: absent
+Trip_17 | Duty_02: absent
+Trip_17 | Duty_03: absent
+Trip_17 | Duty_04: absent
+Trip_17 | Duty_05: absent
+Trip_17 | Duty_06: absent
+Trip_17 | Duty_07: absent
+Trip_17 | Duty_08: absent
+Trip_17 | Duty_09: absent
+Trip_17 | Duty_10: absent
+Trip_17 | Duty_11: absent
+Trip_17 | Duty_12: absent
+Trip_17 | Duty_13: absent
+Trip_17 | Duty_14: absent
+Trip_17 | Duty_15: absent
+Trip_17 | Duty_16: absent
+Trip_17 | Duty_17: absent
+Trip_17 | Duty_18: (start=470, end=524, size=54, length=54)
+Trip_17 | Duty_19: absent
+Trip_18 | Duty_00: absent
+Trip_18 | Duty_01: absent
+Trip_18 | Duty_02: absent
+Trip_18 | Duty_03: absent
+Trip_18 | Duty_04: (start=480, end=534, size=54, length=54)
+Trip_18 | Duty_05: absent
+Trip_18 | Duty_06: absent
+Trip_18 | Duty_07: absent
+Trip_18 | Duty_08: absent
+Trip_18 | Duty_09: absent
+Trip_18 | Duty_10: absent
+Trip_18 | Duty_11: absent
+Trip_18 | Duty_12: absent
+Trip_18 | Duty_13: absent
+Trip_18 | Duty_14: absent
+Trip_18 | Duty_15: absent
+Trip_18 | Duty_16: absent
+Trip_18 | Duty_17: absent
+Trip_18 | Duty_18: absent
+Trip_18 | Duty_19: absent
+Trip_19 | Duty_00: absent
+Trip_19 | Duty_01: absent
+Trip_19 | Duty_02: absent
+Trip_19 | Duty_03: absent
+Trip_19 | Duty_04: absent
+Trip_19 | Duty_05: absent
+Trip_19 | Duty_06: absent
+Trip_19 | Duty_07: absent
+Trip_19 | Duty_08: absent
+Trip_19 | Duty_09: absent
+Trip_19 | Duty_10: absent
+Trip_19 | Duty_11: absent
+Trip_19 | Duty_12: absent
+Trip_19 | Duty_13: absent
+Trip_19 | Duty_14: absent
+Trip_19 | Duty_15: absent
+Trip_19 | Duty_16: absent
+Trip_19 | Duty_17: (start=480, end=534, size=54, length=54)
+Trip_19 | Duty_18: absent
+Trip_19 | Duty_19: absent
+Trip_20 | Duty_00: absent
+Trip_20 | Duty_01: absent
+Trip_20 | Duty_02: absent
+Trip_20 | Duty_03: absent
+Trip_20 | Duty_04: absent
+Trip_20 | Duty_05: absent
+Trip_20 | Duty_06: absent
+Trip_20 | Duty_07: absent
+Trip_20 | Duty_08: absent
+Trip_20 | Duty_09: absent
+Trip_20 | Duty_10: absent
+Trip_20 | Duty_11: (start=490, end=544, size=54, length=54)
+Trip_20 | Duty_12: absent
+Trip_20 | Duty_13: absent
+Trip_20 | Duty_14: absent
+Trip_20 | Duty_15: absent
+Trip_20 | Duty_16: absent
+Trip_20 | Duty_17: absent
+Trip_20 | Duty_18: absent
+Trip_20 | Duty_19: absent
+Trip_21 | Duty_00: absent
+Trip_21 | Duty_01: (start=495, end=549, size=54, length=54)
+Trip_21 | Duty_02: absent
+Trip_21 | Duty_03: absent
+Trip_21 | Duty_04: absent
+Trip_21 | Duty_05: absent
+Trip_21 | Duty_06: absent
+Trip_21 | Duty_07: absent
+Trip_21 | Duty_08: absent
+Trip_21 | Duty_09: absent
+Trip_21 | Duty_10: absent
+Trip_21 | Duty_11: absent
+Trip_21 | Duty_12: absent
+Trip_21 | Duty_13: absent
+Trip_21 | Duty_14: absent
+Trip_21 | Duty_15: absent
+Trip_21 | Duty_16: absent
+Trip_21 | Duty_17: absent
+Trip_21 | Duty_18: absent
+Trip_21 | Duty_19: absent
+Trip_22 | Duty_00: absent
+Trip_22 | Duty_01: absent
+Trip_22 | Duty_02: absent
+Trip_22 | Duty_03: absent
+Trip_22 | Duty_04: absent
+Trip_22 | Duty_05: (start=500, end=554, size=54, length=54)
+Trip_22 | Duty_06: absent
+Trip_22 | Duty_07: absent
+Trip_22 | Duty_08: absent
+Trip_22 | Duty_09: absent
+Trip_22 | Duty_10: absent
+Trip_22 | Duty_11: absent
+Trip_22 | Duty_12: absent
+Trip_22 | Duty_13: absent
+Trip_22 | Duty_14: absent
+Trip_22 | Duty_15: absent
+Trip_22 | Duty_16: absent
+Trip_22 | Duty_17: absent
+Trip_22 | Duty_18: absent
+Trip_22 | Duty_19: absent
+Trip_23 | Duty_00: absent
+Trip_23 | Duty_01: absent
+Trip_23 | Duty_02: absent
+Trip_23 | Duty_03: absent
+Trip_23 | Duty_04: absent
+Trip_23 | Duty_05: absent
+Trip_23 | Duty_06: absent
+Trip_23 | Duty_07: absent
+Trip_23 | Duty_08: absent
+Trip_23 | Duty_09: absent
+Trip_23 | Duty_10: absent
+Trip_23 | Duty_11: absent
+Trip_23 | Duty_12: absent
+Trip_23 | Duty_13: absent
+Trip_23 | Duty_14: (start=505, end=559, size=54, length=54)
+Trip_23 | Duty_15: absent
+Trip_23 | Duty_16: absent
+Trip_23 | Duty_17: absent
+Trip_23 | Duty_18: absent
+Trip_23 | Duty_19: absent
+Trip_24 | Duty_00: absent
+Trip_24 | Duty_01: absent
+Trip_24 | Duty_02: absent
+Trip_24 | Duty_03: absent
+Trip_24 | Duty_04: absent
+Trip_24 | Duty_05: absent
+Trip_24 | Duty_06: absent
+Trip_24 | Duty_07: absent
+Trip_24 | Duty_08: absent
+Trip_24 | Duty_09: absent
+Trip_24 | Duty_10: absent
+Trip_24 | Duty_11: absent
+Trip_24 | Duty_12: absent
+Trip_24 | Duty_13: absent
+Trip_24 | Duty_14: absent
+Trip_24 | Duty_15: absent
+Trip_24 | Duty_16: (start=515, end=569, size=54, length=54)
+Trip_24 | Duty_17: absent
+Trip_24 | Duty_18: absent
+Trip_24 | Duty_19: absent
+Trip_25 | Duty_00: absent
+Trip_25 | Duty_01: absent
+Trip_25 | Duty_02: absent
+Trip_25 | Duty_03: absent
+Trip_25 | Duty_04: absent
+Trip_25 | Duty_05: absent
+Trip_25 | Duty_06: (start=515, end=569, size=54, length=54)
+Trip_25 | Duty_07: absent
+Trip_25 | Duty_08: absent
+Trip_25 | Duty_09: absent
+Trip_25 | Duty_10: absent
+Trip_25 | Duty_11: absent
+Trip_25 | Duty_12: absent
+Trip_25 | Duty_13: absent
+Trip_25 | Duty_14: absent
+Trip_25 | Duty_15: absent
+Trip_25 | Duty_16: absent
+Trip_25 | Duty_17: absent
+Trip_25 | Duty_18: absent
+Trip_25 | Duty_19: absent
+Trip_26 | Duty_00: absent
+Trip_26 | Duty_01: absent
+Trip_26 | Duty_02: (start=525, end=579, size=54, length=54)
+Trip_26 | Duty_03: absent
+Trip_26 | Duty_04: absent
+Trip_26 | Duty_05: absent
+Trip_26 | Duty_06: absent
+Trip_26 | Duty_07: absent
+Trip_26 | Duty_08: absent
+Trip_26 | Duty_09: absent
+Trip_26 | Duty_10: absent
+Trip_26 | Duty_11: absent
+Trip_26 | Duty_12: absent
+Trip_26 | Duty_13: absent
+Trip_26 | Duty_14: absent
+Trip_26 | Duty_15: absent
+Trip_26 | Duty_16: absent
+Trip_26 | Duty_17: absent
+Trip_26 | Duty_18: absent
+Trip_26 | Duty_19: absent
+Trip_27 | Duty_00: absent
+Trip_27 | Duty_01: absent
+Trip_27 | Duty_02: absent
+Trip_27 | Duty_03: absent
+Trip_27 | Duty_04: absent
+Trip_27 | Duty_05: absent
+Trip_27 | Duty_06: absent
+Trip_27 | Duty_07: absent
+Trip_27 | Duty_08: absent
+Trip_27 | Duty_09: absent
+Trip_27 | Duty_10: absent
+Trip_27 | Duty_11: absent
+Trip_27 | Duty_12: absent
+Trip_27 | Duty_13: (start=530, end=584, size=54, length=54)
+Trip_27 | Duty_14: absent
+Trip_27 | Duty_15: absent
+Trip_27 | Duty_16: absent
+Trip_27 | Duty_17: absent
+Trip_27 | Duty_18: absent
+Trip_27 | Duty_19: absent
+Trip_28 | Duty_00: absent
+Trip_28 | Duty_01: absent
+Trip_28 | Duty_02: absent
+Trip_28 | Duty_03: absent
+Trip_28 | Duty_04: absent
+Trip_28 | Duty_05: absent
+Trip_28 | Duty_06: absent
+Trip_28 | Duty_07: (start=535, end=589, size=54, length=54)
+Trip_28 | Duty_08: absent
+Trip_28 | Duty_09: absent
+Trip_28 | Duty_10: absent
+Trip_28 | Duty_11: absent
+Trip_28 | Duty_12: absent
+Trip_28 | Duty_13: absent
+Trip_28 | Duty_14: absent
+Trip_28 | Duty_15: absent
+Trip_28 | Duty_16: absent
+Trip_28 | Duty_17: absent
+Trip_28 | Duty_18: absent
+Trip_28 | Duty_19: absent
+Trip_29 | Duty_00: absent
+Trip_29 | Duty_01: absent
+Trip_29 | Duty_02: absent
+Trip_29 | Duty_03: absent
+Trip_29 | Duty_04: (start=545, end=599, size=54, length=54)
+Trip_29 | Duty_05: absent
+Trip_29 | Duty_06: absent
+Trip_29 | Duty_07: absent
+Trip_29 | Duty_08: absent
+Trip_29 | Duty_09: absent
+Trip_29 | Duty_10: absent
+Trip_29 | Duty_11: absent
+Trip_29 | Duty_12: absent
+Trip_29 | Duty_13: absent
+Trip_29 | Duty_14: absent
+Trip_29 | Duty_15: absent
+Trip_29 | Duty_16: absent
+Trip_29 | Duty_17: absent
+Trip_29 | Duty_18: absent
+Trip_29 | Duty_19: absent
+Trip_30 | Duty_00: absent
+Trip_30 | Duty_01: absent
+Trip_30 | Duty_02: absent
+Trip_30 | Duty_03: absent
+Trip_30 | Duty_04: absent
+Trip_30 | Duty_05: absent
+Trip_30 | Duty_06: absent
+Trip_30 | Duty_07: absent
+Trip_30 | Duty_08: absent
+Trip_30 | Duty_09: absent
+Trip_30 | Duty_10: absent
+Trip_30 | Duty_11: absent
+Trip_30 | Duty_12: absent
+Trip_30 | Duty_13: absent
+Trip_30 | Duty_14: absent
+Trip_30 | Duty_15: absent
+Trip_30 | Duty_16: absent
+Trip_30 | Duty_17: (start=550, end=604, size=54, length=54)
+Trip_30 | Duty_18: absent
+Trip_30 | Duty_19: absent
+Trip_31 | Duty_00: absent
+Trip_31 | Duty_01: absent
+Trip_31 | Duty_02: absent
+Trip_31 | Duty_03: absent
+Trip_31 | Duty_04: absent
+Trip_31 | Duty_05: (start=555, end=609, size=54, length=54)
+Trip_31 | Duty_06: absent
+Trip_31 | Duty_07: absent
+Trip_31 | Duty_08: absent
+Trip_31 | Duty_09: absent
+Trip_31 | Duty_10: absent
+Trip_31 | Duty_11: absent
+Trip_31 | Duty_12: absent
+Trip_31 | Duty_13: absent
+Trip_31 | Duty_14: absent
+Trip_31 | Duty_15: absent
+Trip_31 | Duty_16: absent
+Trip_31 | Duty_17: absent
+Trip_31 | Duty_18: absent
+Trip_31 | Duty_19: absent
+Trip_32 | Duty_00: absent
+Trip_32 | Duty_01: (start=565, end=619, size=54, length=54)
+Trip_32 | Duty_02: absent
+Trip_32 | Duty_03: absent
+Trip_32 | Duty_04: absent
+Trip_32 | Duty_05: absent
+Trip_32 | Duty_06: absent
+Trip_32 | Duty_07: absent
+Trip_32 | Duty_08: absent
+Trip_32 | Duty_09: absent
+Trip_32 | Duty_10: absent
+Trip_32 | Duty_11: absent
+Trip_32 | Duty_12: absent
+Trip_32 | Duty_13: absent
+Trip_32 | Duty_14: absent
+Trip_32 | Duty_15: absent
+Trip_32 | Duty_16: absent
+Trip_32 | Duty_17: absent
+Trip_32 | Duty_18: absent
+Trip_32 | Duty_19: absent
+Trip_33 | Duty_00: absent
+Trip_33 | Duty_01: absent
+Trip_33 | Duty_02: absent
+Trip_33 | Duty_03: absent
+Trip_33 | Duty_04: absent
+Trip_33 | Duty_05: absent
+Trip_33 | Duty_06: absent
+Trip_33 | Duty_07: absent
+Trip_33 | Duty_08: absent
+Trip_33 | Duty_09: absent
+Trip_33 | Duty_10: absent
+Trip_33 | Duty_11: absent
+Trip_33 | Duty_12: absent
+Trip_33 | Duty_13: absent
+Trip_33 | Duty_14: absent
+Trip_33 | Duty_15: absent
+Trip_33 | Duty_16: absent
+Trip_33 | Duty_17: absent
+Trip_33 | Duty_18: (start=565, end=619, size=54, length=54)
+Trip_33 | Duty_19: absent
+Trip_34 | Duty_00: absent
+Trip_34 | Duty_01: absent
+Trip_34 | Duty_02: absent
+Trip_34 | Duty_03: absent
+Trip_34 | Duty_04: absent
+Trip_34 | Duty_05: absent
+Trip_34 | Duty_06: (start=575, end=629, size=54, length=54)
+Trip_34 | Duty_07: absent
+Trip_34 | Duty_08: absent
+Trip_34 | Duty_09: absent
+Trip_34 | Duty_10: absent
+Trip_34 | Duty_11: absent
+Trip_34 | Duty_12: absent
+Trip_34 | Duty_13: absent
+Trip_34 | Duty_14: absent
+Trip_34 | Duty_15: absent
+Trip_34 | Duty_16: absent
+Trip_34 | Duty_17: absent
+Trip_34 | Duty_18: absent
+Trip_34 | Duty_19: absent
+Trip_35 | Duty_00: absent
+Trip_35 | Duty_01: absent
+Trip_35 | Duty_02: absent
+Trip_35 | Duty_03: absent
+Trip_35 | Duty_04: absent
+Trip_35 | Duty_05: absent
+Trip_35 | Duty_06: absent
+Trip_35 | Duty_07: absent
+Trip_35 | Duty_08: absent
+Trip_35 | Duty_09: absent
+Trip_35 | Duty_10: absent
+Trip_35 | Duty_11: absent
+Trip_35 | Duty_12: absent
+Trip_35 | Duty_13: absent
+Trip_35 | Duty_14: absent
+Trip_35 | Duty_15: absent
+Trip_35 | Duty_16: (start=575, end=629, size=54, length=54)
+Trip_35 | Duty_17: absent
+Trip_35 | Duty_18: absent
+Trip_35 | Duty_19: absent
+Trip_36 | Duty_00: absent
+Trip_36 | Duty_01: absent
+Trip_36 | Duty_02: absent
+Trip_36 | Duty_03: absent
+Trip_36 | Duty_04: absent
+Trip_36 | Duty_05: absent
+Trip_36 | Duty_06: absent
+Trip_36 | Duty_07: absent
+Trip_36 | Duty_08: absent
+Trip_36 | Duty_09: absent
+Trip_36 | Duty_10: absent
+Trip_36 | Duty_11: absent
+Trip_36 | Duty_12: absent
+Trip_36 | Duty_13: absent
+Trip_36 | Duty_14: (start=585, end=639, size=54, length=54)
+Trip_36 | Duty_15: absent
+Trip_36 | Duty_16: absent
+Trip_36 | Duty_17: absent
+Trip_36 | Duty_18: absent
+Trip_36 | Duty_19: absent
+Trip_37 | Duty_00: absent
+Trip_37 | Duty_01: absent
+Trip_37 | Duty_02: absent
+Trip_37 | Duty_03: absent
+Trip_37 | Duty_04: absent
+Trip_37 | Duty_05: absent
+Trip_37 | Duty_06: absent
+Trip_37 | Duty_07: absent
+Trip_37 | Duty_08: absent
+Trip_37 | Duty_09: absent
+Trip_37 | Duty_10: absent
+Trip_37 | Duty_11: (start=585, end=639, size=54, length=54)
+Trip_37 | Duty_12: absent
+Trip_37 | Duty_13: absent
+Trip_37 | Duty_14: absent
+Trip_37 | Duty_15: absent
+Trip_37 | Duty_16: absent
+Trip_37 | Duty_17: absent
+Trip_37 | Duty_18: absent
+Trip_37 | Duty_19: absent
+Trip_38 | Duty_00: absent
+Trip_38 | Duty_01: absent
+Trip_38 | Duty_02: absent
+Trip_38 | Duty_03: absent
+Trip_38 | Duty_04: absent
+Trip_38 | Duty_05: absent
+Trip_38 | Duty_06: absent
+Trip_38 | Duty_07: absent
+Trip_38 | Duty_08: absent
+Trip_38 | Duty_09: absent
+Trip_38 | Duty_10: absent
+Trip_38 | Duty_11: absent
+Trip_38 | Duty_12: absent
+Trip_38 | Duty_13: (start=600, end=654, size=54, length=54)
+Trip_38 | Duty_14: absent
+Trip_38 | Duty_15: absent
+Trip_38 | Duty_16: absent
+Trip_38 | Duty_17: absent
+Trip_38 | Duty_18: absent
+Trip_38 | Duty_19: absent
+Trip_39 | Duty_00: absent
+Trip_39 | Duty_01: absent
+Trip_39 | Duty_02: absent
+Trip_39 | Duty_03: absent
+Trip_39 | Duty_04: absent
+Trip_39 | Duty_05: absent
+Trip_39 | Duty_06: absent
+Trip_39 | Duty_07: (start=605, end=659, size=54, length=54)
+Trip_39 | Duty_08: absent
+Trip_39 | Duty_09: absent
+Trip_39 | Duty_10: absent
+Trip_39 | Duty_11: absent
+Trip_39 | Duty_12: absent
+Trip_39 | Duty_13: absent
+Trip_39 | Duty_14: absent
+Trip_39 | Duty_15: absent
+Trip_39 | Duty_16: absent
+Trip_39 | Duty_17: absent
+Trip_39 | Duty_18: absent
+Trip_39 | Duty_19: absent
+Trip_40 | Duty_00: absent
+Trip_40 | Duty_01: absent
+Trip_40 | Duty_02: absent
+Trip_40 | Duty_03: absent
+Trip_40 | Duty_04: absent
+Trip_40 | Duty_05: absent
+Trip_40 | Duty_06: absent
+Trip_40 | Duty_07: absent
+Trip_40 | Duty_08: absent
+Trip_40 | Duty_09: absent
+Trip_40 | Duty_10: absent
+Trip_40 | Duty_11: absent
+Trip_40 | Duty_12: absent
+Trip_40 | Duty_13: absent
+Trip_40 | Duty_14: absent
+Trip_40 | Duty_15: absent
+Trip_40 | Duty_16: absent
+Trip_40 | Duty_17: (start=610, end=664, size=54, length=54)
+Trip_40 | Duty_18: absent
+Trip_40 | Duty_19: absent
+Trip_41 | Duty_00: absent
+Trip_41 | Duty_01: absent
+Trip_41 | Duty_02: (start=615, end=669, size=54, length=54)
+Trip_41 | Duty_03: absent
+Trip_41 | Duty_04: absent
+Trip_41 | Duty_05: absent
+Trip_41 | Duty_06: absent
+Trip_41 | Duty_07: absent
+Trip_41 | Duty_08: absent
+Trip_41 | Duty_09: absent
+Trip_41 | Duty_10: absent
+Trip_41 | Duty_11: absent
+Trip_41 | Duty_12: absent
+Trip_41 | Duty_13: absent
+Trip_41 | Duty_14: absent
+Trip_41 | Duty_15: absent
+Trip_41 | Duty_16: absent
+Trip_41 | Duty_17: absent
+Trip_41 | Duty_18: absent
+Trip_41 | Duty_19: absent
+Trip_42 | Duty_00: absent
+Trip_42 | Duty_01: absent
+Trip_42 | Duty_02: absent
+Trip_42 | Duty_03: absent
+Trip_42 | Duty_04: absent
+Trip_42 | Duty_05: absent
+Trip_42 | Duty_06: absent
+Trip_42 | Duty_07: absent
+Trip_42 | Duty_08: absent
+Trip_42 | Duty_09: absent
+Trip_42 | Duty_10: absent
+Trip_42 | Duty_11: absent
+Trip_42 | Duty_12: (start=620, end=674, size=54, length=54)
+Trip_42 | Duty_13: absent
+Trip_42 | Duty_14: absent
+Trip_42 | Duty_15: absent
+Trip_42 | Duty_16: absent
+Trip_42 | Duty_17: absent
+Trip_42 | Duty_18: absent
+Trip_42 | Duty_19: absent
+Trip_43 | Duty_00: absent
+Trip_43 | Duty_01: absent
+Trip_43 | Duty_02: absent
+Trip_43 | Duty_03: absent
+Trip_43 | Duty_04: absent
+Trip_43 | Duty_05: (start=625, end=679, size=54, length=54)
+Trip_43 | Duty_06: absent
+Trip_43 | Duty_07: absent
+Trip_43 | Duty_08: absent
+Trip_43 | Duty_09: absent
+Trip_43 | Duty_10: absent
+Trip_43 | Duty_11: absent
+Trip_43 | Duty_12: absent
+Trip_43 | Duty_13: absent
+Trip_43 | Duty_14: absent
+Trip_43 | Duty_15: absent
+Trip_43 | Duty_16: absent
+Trip_43 | Duty_17: absent
+Trip_43 | Duty_18: absent
+Trip_43 | Duty_19: absent
+Trip_44 | Duty_00: absent
+Trip_44 | Duty_01: absent
+Trip_44 | Duty_02: absent
+Trip_44 | Duty_03: absent
+Trip_44 | Duty_04: (start=635, end=689, size=54, length=54)
+Trip_44 | Duty_05: absent
+Trip_44 | Duty_06: absent
+Trip_44 | Duty_07: absent
+Trip_44 | Duty_08: absent
+Trip_44 | Duty_09: absent
+Trip_44 | Duty_10: absent
+Trip_44 | Duty_11: absent
+Trip_44 | Duty_12: absent
+Trip_44 | Duty_13: absent
+Trip_44 | Duty_14: absent
+Trip_44 | Duty_15: absent
+Trip_44 | Duty_16: absent
+Trip_44 | Duty_17: absent
+Trip_44 | Duty_18: absent
+Trip_44 | Duty_19: absent
+Trip_45 | Duty_00: absent
+Trip_45 | Duty_01: (start=635, end=689, size=54, length=54)
+Trip_45 | Duty_02: absent
+Trip_45 | Duty_03: absent
+Trip_45 | Duty_04: absent
+Trip_45 | Duty_05: absent
+Trip_45 | Duty_06: absent
+Trip_45 | Duty_07: absent
+Trip_45 | Duty_08: absent
+Trip_45 | Duty_09: absent
+Trip_45 | Duty_10: absent
+Trip_45 | Duty_11: absent
+Trip_45 | Duty_12: absent
+Trip_45 | Duty_13: absent
+Trip_45 | Duty_14: absent
+Trip_45 | Duty_15: absent
+Trip_45 | Duty_16: absent
+Trip_45 | Duty_17: absent
+Trip_45 | Duty_18: absent
+Trip_45 | Duty_19: absent
+Trip_46 | Duty_00: absent
+Trip_46 | Duty_01: absent
+Trip_46 | Duty_02: absent
+Trip_46 | Duty_03: absent
+Trip_46 | Duty_04: absent
+Trip_46 | Duty_05: absent
+Trip_46 | Duty_06: absent
+Trip_46 | Duty_07: absent
+Trip_46 | Duty_08: absent
+Trip_46 | Duty_09: absent
+Trip_46 | Duty_10: absent
+Trip_46 | Duty_11: (start=645, end=699, size=54, length=54)
+Trip_46 | Duty_12: absent
+Trip_46 | Duty_13: absent
+Trip_46 | Duty_14: absent
+Trip_46 | Duty_15: absent
+Trip_46 | Duty_16: absent
+Trip_46 | Duty_17: absent
+Trip_46 | Duty_18: absent
+Trip_46 | Duty_19: absent
+Trip_47 | Duty_00: absent
+Trip_47 | Duty_01: absent
+Trip_47 | Duty_02: absent
+Trip_47 | Duty_03: absent
+Trip_47 | Duty_04: absent
+Trip_47 | Duty_05: absent
+Trip_47 | Duty_06: absent
+Trip_47 | Duty_07: absent
+Trip_47 | Duty_08: absent
+Trip_47 | Duty_09: absent
+Trip_47 | Duty_10: absent
+Trip_47 | Duty_11: absent
+Trip_47 | Duty_12: absent
+Trip_47 | Duty_13: absent
+Trip_47 | Duty_14: (start=650, end=704, size=54, length=54)
+Trip_47 | Duty_15: absent
+Trip_47 | Duty_16: absent
+Trip_47 | Duty_17: absent
+Trip_47 | Duty_18: absent
+Trip_47 | Duty_19: absent
+Trip_48 | Duty_00: absent
+Trip_48 | Duty_01: absent
+Trip_48 | Duty_02: absent
+Trip_48 | Duty_03: absent
+Trip_48 | Duty_04: absent
+Trip_48 | Duty_05: absent
+Trip_48 | Duty_06: absent
+Trip_48 | Duty_07: absent
+Trip_48 | Duty_08: absent
+Trip_48 | Duty_09: absent
+Trip_48 | Duty_10: absent
+Trip_48 | Duty_11: absent
+Trip_48 | Duty_12: absent
+Trip_48 | Duty_13: absent
+Trip_48 | Duty_14: absent
+Trip_48 | Duty_15: absent
+Trip_48 | Duty_16: absent
+Trip_48 | Duty_17: absent
+Trip_48 | Duty_18: (start=655, end=709, size=54, length=54)
+Trip_48 | Duty_19: absent
+Trip_49 | Duty_00: absent
+Trip_49 | Duty_01: absent
+Trip_49 | Duty_02: absent
+Trip_49 | Duty_03: absent
+Trip_49 | Duty_04: absent
+Trip_49 | Duty_05: absent
+Trip_49 | Duty_06: (start=660, end=714, size=54, length=54)
+Trip_49 | Duty_07: absent
+Trip_49 | Duty_08: absent
+Trip_49 | Duty_09: absent
+Trip_49 | Duty_10: absent
+Trip_49 | Duty_11: absent
+Trip_49 | Duty_12: absent
+Trip_49 | Duty_13: absent
+Trip_49 | Duty_14: absent
+Trip_49 | Duty_15: absent
+Trip_49 | Duty_16: absent
+Trip_49 | Duty_17: absent
+Trip_49 | Duty_18: absent
+Trip_49 | Duty_19: absent

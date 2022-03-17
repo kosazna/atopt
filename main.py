@@ -5,8 +5,7 @@ from pathlib import Path
 from docplex.cp.model import *
 
 from atopt.core.plot import log_and_plot
-from atopt.core.sdcsp import single_depot_CSP
-from atopt.core.mdcsp import multiple_depot_CSP
+from atopt.core.model import BusDriverCSP
 from atopt.utilities import CSPModel, DataProvider
 
 my_parser = argparse.ArgumentParser()
@@ -18,6 +17,7 @@ my_parser.add_argument('-v', '--vehicles', action='store', type=int)
 my_parser.add_argument('-s', '--save', action='store', type=str)
 my_parser.add_argument('-a', '--adjust', action='store', type=int, default=1)
 my_parser.add_argument('-b', '--breaks', action='store', type=int, default=1)
+my_parser.add_argument('-o', '--objective', action='store', type=int, default=1)
 my_parser.add_argument('-f', '--filepath',
                        action='store',
                        type=str,
@@ -33,17 +33,18 @@ if __name__ == "__main__":
     BUSES = args.vehicles
     TRAFFIC = bool(args.adjust)
     BREAKS = bool(args.breaks)
+    OBJECTIVE = bool(args.objective)
     DATAFILE = args.filepath
 
     d = DataProvider(filepath=DATAFILE,
                      route=ROUTE,
                      adjust_for_traffic=TRAFFIC)
 
-    model = CSPModel(d)
+    model = CSPModel(data_provider=d, ntrips=NTRIPS)
     model.build_model()
 
     if args.duties is None:
-        NDUTIES = 10
+        NDUTIES = model.minimum_duties
     else:
         NDUTIES = args.duties
 
@@ -55,12 +56,12 @@ if __name__ == "__main__":
     else:
         SAVELOC = Path(args.save)
 
-    cp_model, model_info = single_depot_CSP(model=model,
-                                            nduties=NDUTIES,
-                                            ntrips=NTRIPS,
-                                            add_breaks=BREAKS,
-                                            nbuses=BUSES,
-                                            objective=True)
+    cp_model, model_info = BusDriverCSP(model=model,
+                                        nduties=NDUTIES,
+                                        ntrips=NTRIPS,
+                                        add_breaks=BREAKS,
+                                        nbuses=BUSES,
+                                        objective=OBJECTIVE)
 
     cpsol = cp_model.solve(TimeLimit=TIMELIMIT)
 

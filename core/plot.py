@@ -14,7 +14,7 @@ def log_and_plot(sol: CpoSolveResult,
                  save_folder: Union[str, Path],
                  has_breaks: Optional[bool] = True,
                  has_traffic: Optional[bool] = True):
-    rcParams['figure.figsize'] = 10, 4
+    rcParams['figure.figsize'] = 18, 12
 
     model = model_info.get('model')
     ntrips = model_info.get('ntrips')

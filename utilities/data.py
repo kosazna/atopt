@@ -194,8 +194,7 @@ class CSPModel:
     def __init__(self, data_provider: DataProvider, ntrips:Optional[int] = None) -> None:
         self.data = data_provider.data if ntrips is None else data_provider.data.iloc[:ntrips]
         self.constraints = data_provider.constraints
-        self.trips: List[Trip] = []
-        self.duties: List[Duty] = []
+        
 
         self.start_times = self.data[start_time].values
         self.end_times = self.data[end_time].values
@@ -211,6 +210,11 @@ class CSPModel:
 
         self.minimum_duties = np.ceil(
             sum(self.durations) / self.constraints.shift_span)
+        self.minimum_buses = self.vehicles_boundaries()[1]
+        self.depot_type = self._assert_depot_type()
+
+        self.trips: List[Trip] = []
+        self.duties: List[Duty] = []
 
     def build_model(self) -> list:
         _min = self.data[trip_duration].min()
@@ -224,6 +228,11 @@ class CSPModel:
                                    row.end_time,
                                    row.trip_duration,
                                    _min))
+    
+    def _assert_depot_type(self):
+        depots = set(self.start_locs)
+
+        return "Single Depot" if len(depots) == 1 else "Multiple Depot"
 
     def vehicles_boundaries(self):
         vehicles_per_minute = []
@@ -243,12 +252,11 @@ class CSPModel:
         for t1 in range(ntrips):
             forbidden_sequence = []
             for t2 in range(t1 + 1, ntrips):
-                if self.end_locs[t1] != self.start_locs[t2] and self.start_times[t2] < self.end_times[t1] + self.min_trip_duration:
+                if self.end_locs[t1] != self.start_locs[t2] and self.start_times[t2] < self.end_times[t1]:
                     forbidden_sequence.append(t2)
             
             if forbidden_sequence:
                 forbidden_assignments_per_trip.append(forbidden_sequence)
-                # print(f" {t1} -> {forbidden_sequence}")
 
         return forbidden_assignments_per_trip
 
@@ -267,18 +275,6 @@ class CSPModel:
                 # print(f" {t1} -> {allowed_sequence}")
 
         return allowed_assignments_per_trip
-
-    def multiple_depot_specs(self):
-        unique_locs = sorted(self.data[initial_depot].unique())
-        unique_locs_mapping = {s:i for i,s in enumerate(unique_locs)}
-        ntrips = len(self.durations)
-
-        trip_state = []
-        for t in range(ntrips):
-            state = (t, self.end_locs[t])
-            trip_state.append(state)
-
-        return unique_locs, unique_locs_mapping, trip_state
 
 class Solution:
     def __init__(self,
