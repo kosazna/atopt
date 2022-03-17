@@ -4,8 +4,8 @@ from pathlib import Path
 
 from docplex.cp.model import *
 
-from atopt.core.plot import log_and_plot
 from atopt.core.model import BusDriverCSP
+from atopt.core.plot import log_and_plot
 from atopt.utilities import CSPModel, DataProvider
 
 my_parser = argparse.ArgumentParser()
