@@ -47,6 +47,7 @@ class DataProvider:
         self.constraints = Constraints(filepath=filepath)
         self.traffic_adjusted = adjust_for_traffic
         self._preprocess()
+        self.trips = self.data.shape[0]
 
     def _preprocess(self):
         self.data[start_time] = self.data[time].apply(time2minutes)

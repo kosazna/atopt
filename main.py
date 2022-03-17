@@ -58,6 +58,20 @@ if __name__ == "__main__":
     else:
         SAVELOC = Path(args.save)
 
+    print("\n\n-- Problem Details--\n")
+    print(f"Route:     {ROUTE}")
+    print(f"Depot:     {model.depot_type}")
+    print(f"Duties:    {NDUTIES}")
+    print(f"Trips:     {d.trips}" if NTRIPS is None else f"Trips:     {NTRIPS}")
+    print(f"Traffic:   {TRAFFIC}")
+    print(f"Breaks:    {BREAKS}")
+    print(f"Vehicles:  No limit" if BUSES is None else f"Vehicles:  {BUSES}")
+    print(f"Objective: {OBJECTIVE}")
+    print(f"Timelimit: {TIMELIMIT} seconds\n")
+    print("----------------------")
+
+    print(f"\nInitializing model...\n")
+
     cp_model, model_info = BusDriverCSP(model=model,
                                         nduties=NDUTIES,
                                         ntrips=NTRIPS,
