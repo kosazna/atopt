@@ -58,7 +58,7 @@ if __name__ == "__main__":
     else:
         SAVELOC = Path(args.save)
 
-    print("\n\n-- Problem Details--\n")
+    print("\n\n-- Problem Details --\n")
     print(f"Route:     {ROUTE}")
     print(f"Depot:     {model.depot_type}")
     print(f"Duties:    {NDUTIES}")
