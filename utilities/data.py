@@ -210,7 +210,7 @@ class CSPModel:
         self.min_trip_duration = min(self.durations)
 
         self.minimum_duties = np.ceil(
-            sum(self.durations) / self.constraints.shift_span)
+            sum(self.durations) / self.constraints.total_driving)
         self.minimum_buses = self.vehicles_boundaries()[1]
         self.depot_type = self._assert_depot_type()
 
@@ -273,7 +273,6 @@ class CSPModel:
             
             if allowed_sequence:
                 allowed_assignments_per_trip.append(allowed_sequence)
-                # print(f" {t1} -> {allowed_sequence}")
 
         return allowed_assignments_per_trip
 

@@ -54,7 +54,8 @@ def BusDriverCSP(model: CSPModel,
                           [trip2duty[(t, d)] for t in range(NTRIPS)]))
 
     for d in range(NDUTIES):
-        cp_model.add(no_overlap([trip2duty[(t, d)] for t in range(NTRIPS)]))
+        duty_intervals = [trip2duty[(t, d)] for t in range(NTRIPS)]
+        cp_model.add(no_overlap(duty_intervals))
 
     for t in range(NTRIPS):
         trip_coverage = cp_model.sum([presence_of(trip2duty[(t, d)])
@@ -158,16 +159,16 @@ if __name__ == "__main__":
     DATAFILE = "C:/Users/aznavouridis.k/OneDrive/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
 
-    ROUTE = "A2"
+    ROUTE = "910"
 
     OBJECTIVE = True
-    TIMELIMIT = 30
+    TIMELIMIT = None
 
-    NDUTIES = 20
-    NTRIPS = 50
+    NDUTIES = 8
+    NTRIPS = None
 
-    BREAKS = True
-    TRAFFIC = False
+    BREAKS = False
+    TRAFFIC = True
     NBUSES = None
 
     d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
