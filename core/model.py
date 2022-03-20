@@ -3,6 +3,7 @@ from typing import Optional
 
 import numpy as np
 from atopt.core.plot import log_and_plot
+from atopt.core.initial import Insertions
 from atopt.utilities import CSPModel, DataProvider
 from docplex.cp.model import *
 
@@ -12,7 +13,8 @@ def BusDriverCSP(model: CSPModel,
                  ntrips: Optional[int] = None,
                  add_breaks: Optional[bool] = True,
                  nbuses: Optional[int] = None,
-                 objective: Optional[bool] = True) -> CpoModel:
+                 objective: Optional[bool] = True,
+                 ub: Optional[int] = None) -> CpoModel:
 
     if nbuses is not None and nbuses < model.minimum_buses:
         raise ValueError(
@@ -137,6 +139,10 @@ def BusDriverCSP(model: CSPModel,
     if objective:
         obj = cp_model.sum([presence_of(duty) for duty in duties])
         cp_model.add(obj >= model.minimum_duties)
+
+        if ub is not None:
+            cp_model.add(obj <= ub)
+
         cp_model.add(cp_model.minimize(obj))
 
     model_info = {
@@ -163,6 +169,7 @@ if __name__ == "__main__":
 
     OBJECTIVE = True
     TIMELIMIT = None
+    UPPER_BOUND = True
 
     NDUTIES = 8
     NTRIPS = None
@@ -176,12 +183,20 @@ if __name__ == "__main__":
     model = CSPModel(data_provider=d, ntrips=NTRIPS)
     model.build_model()
 
+    if UPPER_BOUND:
+        initial = Insertions(model)
+        initial.solve()
+        upper_bound = len(initial.duties)
+    else:
+        upper_bound = None
+
     cp_model, model_info = BusDriverCSP(model=model,
                                         nduties=NDUTIES,
                                         ntrips=NTRIPS,
                                         add_breaks=BREAKS,
                                         nbuses=NBUSES,
-                                        objective=OBJECTIVE)
+                                        objective=OBJECTIVE,
+                                        ub=upper_bound)
 
     cp_sol = cp_model.solve(TimeLimit=TIMELIMIT)
 

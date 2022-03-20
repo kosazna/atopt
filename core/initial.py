@@ -41,8 +41,4 @@ if __name__ == "__main__":
     for duty in initial.duties:
         print(duty)
 
-    print(initial.sol.trip_duty_arr)
-    print(initial.sol.start_time_arr)
-    print(initial.sol.end_time_arr)
-    print(initial.sol.duration_arr)
-    print([trip.ID for trip in initial.sol.trips])
+    print(len(initial.duties))

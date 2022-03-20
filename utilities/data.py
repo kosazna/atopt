@@ -306,13 +306,10 @@ if __name__ == "__main__":
 
     DATAFILE = "C:/Users/aznavouridis.k/OneDrive/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
-    ROUTE = 'A2'
+    ROUTE = '910'
     TRAFFIC = False
 
     d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
 
     model = CSPModel(d)
     model.build_model()
-
-    # model.data.to_excel("C:/Users/aznavouridis.k/My Drive/MSc MST-AUEB/_Thesis_/Main Thesis/model_data_fixed.xlsx")
-    print(model.multiple_depot_specs())

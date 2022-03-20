@@ -5,8 +5,10 @@ from pathlib import Path
 from docplex.cp.model import *
 
 from atopt.core.model import BusDriverCSP
+from atopt.core.initial import Insertions
 from atopt.core.plot import log_and_plot
 from atopt.utilities import CSPModel, DataProvider
+from core.model import UPPER_BOUND
 
 my_parser = argparse.ArgumentParser()
 
@@ -18,6 +20,8 @@ my_parser.add_argument('-v', '--vehicles', action='store', type=int)
 my_parser.add_argument('-a', '--adjust', action='store', type=int, default=1)
 my_parser.add_argument('-b', '--breaks', action='store', type=int, default=1)
 my_parser.add_argument('-o', '--objective', action='store', type=int, default=1)
+my_parser.add_argument('-u', '--upperbound',
+                       action='store', type=int, default=1)
 
 my_parser.add_argument('-s', '--save', action='store', type=str)
 my_parser.add_argument('-f', '--filepath',
@@ -36,6 +40,7 @@ if __name__ == "__main__":
     TRAFFIC = bool(args.adjust)
     BREAKS = bool(args.breaks)
     OBJECTIVE = bool(args.objective)
+    UPPER_BOUND = bool(args.upperbound)
     DATAFILE = args.filepath
 
     d = DataProvider(filepath=DATAFILE,
@@ -72,12 +77,20 @@ if __name__ == "__main__":
 
     print(f"\nInitializing model...\n")
 
+    if UPPER_BOUND:
+        initial = Insertions(model)
+        initial.solve()
+        upper_bound = len(initial.duties)
+    else:
+        upper_bound = None
+
     cp_model, model_info = BusDriverCSP(model=model,
                                         nduties=NDUTIES,
                                         ntrips=NTRIPS,
                                         add_breaks=BREAKS,
                                         nbuses=BUSES,
-                                        objective=OBJECTIVE)
+                                        objective=OBJECTIVE,
+                                        ub=UPPER_BOUND)
 
     cpsol = cp_model.solve(TimeLimit=TIMELIMIT)
 
