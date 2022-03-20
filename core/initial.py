@@ -41,4 +41,5 @@ if __name__ == "__main__":
     for duty in initial.duties:
         print(duty)
 
-    print(len(initial.duties))
+    print(f"\nLB/UP: ({int(model.minimum_duties)},{len(initial.duties)})")
+    print(f"Minimum Buses: {model.minimum_buses}")

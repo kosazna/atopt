@@ -8,14 +8,13 @@ from atopt.core.model import BusDriverCSP
 from atopt.core.initial import Insertions
 from atopt.core.plot import log_and_plot
 from atopt.utilities import CSPModel, DataProvider
-from core.model import UPPER_BOUND
 
 my_parser = argparse.ArgumentParser()
 
-my_parser.add_argument('-r', '--route', action='store', type=str, default='910')
-my_parser.add_argument('-d', '--duties', action='store', type=int, default=10)
+my_parser.add_argument('-r', '--route', action='store', type=str)
+my_parser.add_argument('-d', '--duties', action='store', type=int, default=-1)
 my_parser.add_argument('-t', '--trips', action='store', type=int)
-my_parser.add_argument('-l', '--limit', action='store', type=int, default=120)
+my_parser.add_argument('-l', '--limit', action='store', type=int, default=300)
 my_parser.add_argument('-v', '--vehicles', action='store', type=int)
 my_parser.add_argument('-a', '--adjust', action='store', type=int, default=1)
 my_parser.add_argument('-b', '--breaks', action='store', type=int, default=1)
@@ -33,6 +32,9 @@ my_parser.add_argument('-f', '--filepath',
 if __name__ == "__main__":
     args = my_parser.parse_args()
 
+    if args.route is None:
+        raise ValueError("Route must be set with [-r] flag")
+
     ROUTE = args.route
     NTRIPS = args.trips
     TIMELIMIT = args.limit
@@ -47,11 +49,13 @@ if __name__ == "__main__":
                      route=ROUTE,
                      adjust_for_traffic=TRAFFIC)
 
-    model = CSPModel(data_provider=d, ntrips=NTRIPS)
+    model = CSPModel(data_provider=d,
+                     ntrips=NTRIPS)
+
     model.build_model()
 
-    if args.duties is None:
-        NDUTIES = model.minimum_duties
+    if args.duties == -1:
+        NDUTIES = int(model.minimum_duties * 1.5) + 1
     else:
         NDUTIES = args.duties
 
@@ -63,26 +67,32 @@ if __name__ == "__main__":
     else:
         SAVELOC = Path(args.save)
 
-    print("\n\n-- Problem Details --\n")
-    print(f"Route:     {ROUTE}")
-    print(f"Depot:     {model.depot_type}")
-    print(f"Duties:    {NDUTIES}")
-    print(f"Trips:     {d.trips}" if NTRIPS is None else f"Trips:     {NTRIPS}")
-    print(f"Traffic:   {TRAFFIC}")
-    print(f"Breaks:    {BREAKS}")
-    print(f"Vehicles:  No limit" if BUSES is None else f"Vehicles:  {BUSES}")
-    print(f"Objective: {OBJECTIVE}")
-    print(f"Timelimit: {TIMELIMIT} seconds\n")
-    print("----------------------")
-
-    print(f"\nInitializing model...\n")
-
-    if UPPER_BOUND:
+    if UPPER_BOUND and args.duties == -1:
         initial = Insertions(model)
         initial.solve()
         upper_bound = len(initial.duties)
+    elif UPPER_BOUND and args.duties != -1:
+        upper_bound = NDUTIES
+    elif not UPPER_BOUND and args.duties != -1:
+        upper_bound = NDUTIES
     else:
         upper_bound = None
+
+    print("\n\n-- Problem Details --\n")
+    print(f"Route:     {ROUTE}")
+    print(f"Depot:     {model.depot_type}")
+    print(f"Duties:    {NDUTIES} (created variables)")
+    print(f"Trips:     {d.trips}" if NTRIPS is None else f"Trips:     {NTRIPS}")
+    print(f"Traffic:   {TRAFFIC}")
+    print(f"Breaks:    {BREAKS}")
+    print(f"Vehicles:  No limit (min: {model.minimum_buses})" if BUSES is None else f"Vehicles:  {BUSES} (min: {model.minimum_buses})")
+    print(f"Objective: {OBJECTIVE}")
+    print(f"Timelimit: {TIMELIMIT} seconds")
+    print(f"LB:        {int(model.minimum_duties)}")
+    print(f"UB:        {upper_bound}\n" if UPPER_BOUND else "UB:        Not set\n")
+    print("----------------------")
+
+    print(f"\nInitializing model...\n")
 
     cp_model, model_info = BusDriverCSP(model=model,
                                         nduties=NDUTIES,
@@ -90,7 +100,7 @@ if __name__ == "__main__":
                                         add_breaks=BREAKS,
                                         nbuses=BUSES,
                                         objective=OBJECTIVE,
-                                        ub=UPPER_BOUND)
+                                        ub=upper_bound)
 
     cpsol = cp_model.solve(TimeLimit=TIMELIMIT)
 

@@ -165,22 +165,26 @@ if __name__ == "__main__":
     DATAFILE = "C:/Users/aznavouridis.k/OneDrive/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
 
-    ROUTE = "910"
+    ROUTE = "A2"
 
     OBJECTIVE = True
     TIMELIMIT = 120
     UPPER_BOUND = True
 
-    NDUTIES = 8
+    NDUTIES = 24
     NTRIPS = None
 
-    BREAKS = True
+    BREAKS = False
     TRAFFIC = True
     NBUSES = None
 
-    d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
+    d = DataProvider(filepath=DATAFILE,
+                     route=ROUTE,
+                     adjust_for_traffic=TRAFFIC)
 
-    model = CSPModel(data_provider=d, ntrips=NTRIPS)
+    model = CSPModel(data_provider=d,
+                     ntrips=NTRIPS)
+
     model.build_model()
 
     if UPPER_BOUND:
