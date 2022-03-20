@@ -89,7 +89,7 @@ if __name__ == "__main__":
     print(f"Objective: {OBJECTIVE}")
     print(f"Timelimit: {TIMELIMIT} seconds")
     print(f"LB:        {int(model.minimum_duties)}")
-    print(f"UB:        {upper_bound}\n" if UPPER_BOUND else "UB:        Not set\n")
+    print(f"UB:        {upper_bound}\n" if (UPPER_BOUND and OBJECTIVE) else "UB:        Not set\n")
     print("----------------------")
 
     print(f"\nInitializing model...\n")
