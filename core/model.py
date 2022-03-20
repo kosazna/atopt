@@ -168,13 +168,13 @@ if __name__ == "__main__":
     ROUTE = "910"
 
     OBJECTIVE = True
-    TIMELIMIT = None
+    TIMELIMIT = 120
     UPPER_BOUND = True
 
     NDUTIES = 8
     NTRIPS = None
 
-    BREAKS = False
+    BREAKS = True
     TRAFFIC = True
     NBUSES = None
 
