@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from typing import Optional
 
-import numpy as np
 from atopt.core.plot import log_and_plot
 from atopt.core.initial import Insertions
 from atopt.utilities import CSPModel, DataProvider
