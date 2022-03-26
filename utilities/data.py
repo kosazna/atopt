@@ -6,9 +6,9 @@ from typing import List, Optional
 
 import numpy as np
 import pandas as pd
-from pprint import pprint
 
-from atopt.utilities.funcs import (calculate_trip_end_time, time2minutes,
+from atopt.utilities.funcs import (calculate_trip_end_time,
+                                   time2minutes,
                                    weighted_trip_duration)
 
 # Column names
@@ -192,10 +192,10 @@ class Duty:
 
 
 class CSPModel:
-    def __init__(self, data_provider: DataProvider, ntrips:Optional[int] = None) -> None:
-        self.data = data_provider.data if ntrips is None else data_provider.data.iloc[:ntrips]
+    def __init__(self, data_provider: DataProvider, ntrips: Optional[int] = None) -> None:
+        self.data = data_provider.data if ntrips is None else data_provider.data.iloc[
+            :ntrips]
         self.constraints = data_provider.constraints
-        
 
         self.start_times = self.data[start_time].values
         self.end_times = self.data[end_time].values
@@ -229,7 +229,7 @@ class CSPModel:
                                    row.end_time,
                                    row.trip_duration,
                                    _min))
-    
+
     def _assert_depot_type(self):
         depots = set(self.start_locs)
 
@@ -255,7 +255,7 @@ class CSPModel:
             for t2 in range(t1 + 1, ntrips):
                 if self.end_locs[t1] != self.start_locs[t2] and self.start_times[t2] < self.end_times[t1]:
                     forbidden_sequence.append(t2)
-            
+
             if forbidden_sequence:
                 forbidden_assignments_per_trip.append(forbidden_sequence)
 
@@ -270,11 +270,12 @@ class CSPModel:
             for t2 in range(t1 + 1, ntrips):
                 if self.end_locs[t1] == self.start_locs[t2] and self.start_times[t2] >= self.end_times[t1]:
                     allowed_sequence.append(t2)
-            
+
             if allowed_sequence:
                 allowed_assignments_per_trip.append(allowed_sequence)
 
         return allowed_assignments_per_trip
+
 
 class Solution:
     def __init__(self,
