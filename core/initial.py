@@ -33,7 +33,7 @@ class Insertions:
 
 if __name__ == "__main__":
     datafile = "C:/Users/aznavouridis.k/OneDrive/_Thesis_/Main Thesis/Model Data.xlsx"
-    d = DataProvider(filepath=datafile, route='910')
+    d = DataProvider(filepath=datafile, route='A2')
     model = CSPModel(d)
     model.build_model()
     initial = Insertions(model)

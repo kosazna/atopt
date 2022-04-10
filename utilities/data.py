@@ -240,7 +240,7 @@ class CSPModel:
         for minute in range(self.min_start, self.max_start + 1):
             nvehicles = 0
             for trip_start, trip_end in zip(self.start_times, self.end_times):
-                if trip_start <= minute <= trip_end:
+                if trip_start <= minute < trip_end:
                     nvehicles += 1
             vehicles_per_minute.append(nvehicles)
 
@@ -307,7 +307,7 @@ if __name__ == "__main__":
 
     DATAFILE = "C:/Users/aznavouridis.k/OneDrive/_Thesis_/Main Thesis/Model Data.xlsx"
     SAVELOC = "D:/.temp/.dev/.aztool/atopt/sols"
-    ROUTE = '910'
+    ROUTE = 'A2'
     TRAFFIC = False
 
     d = DataProvider(filepath=DATAFILE, route=ROUTE, adjust_for_traffic=TRAFFIC)
