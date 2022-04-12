@@ -14,7 +14,7 @@ my_parser = argparse.ArgumentParser()
 my_parser.add_argument('-r', '--route', action='store', type=str)
 my_parser.add_argument('-d', '--duties', action='store', type=int, default=-1)
 my_parser.add_argument('-t', '--trips', action='store', type=int)
-my_parser.add_argument('-l', '--limit', action='store', type=int, default=300)
+my_parser.add_argument('-l', '--limit', action='store', type=int, default=-1)
 my_parser.add_argument('-v', '--vehicles', action='store', type=int)
 my_parser.add_argument('-a', '--adjust', action='store', type=int, default=1)
 my_parser.add_argument('-b', '--breaks', action='store', type=int, default=1)
@@ -37,7 +37,6 @@ if __name__ == "__main__":
 
     ROUTE = args.route
     NTRIPS = args.trips
-    TIMELIMIT = args.limit
     BUSES = args.vehicles
     TRAFFIC = bool(args.adjust)
     BREAKS = bool(args.breaks)
@@ -77,6 +76,11 @@ if __name__ == "__main__":
         upper_bound = NDUTIES
     else:
         upper_bound = None
+
+    if args.limit == -1:
+        TIMELIMIT = None
+    else:
+        TIMELIMIT = args.limit
 
     print("\n\n-- Problem Details --\n")
     print(f"Route:     {ROUTE}")
